@@ -1,5 +1,5 @@
 /**
- * JSXTransformer v0.13.0
+ * JSXTransformer v0.13.1
  */
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.JSXTransformer = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 /**
@@ -401,8 +401,8 @@ function processOptions(opts) {
   if (opts.es6module) {
     options.sourceType = 'module';
   }
-  if (opts.nonStrictEs6Module) {
-    options.sourceType = 'nonStrict6Module';
+  if (opts.nonStrictEs6module) {
+    options.sourceType = 'nonStrictModule';
   }
 
   // Instead of doing any fancy validation, only look for 'es3'. If we have
@@ -1777,126 +1777,126 @@ function decodeUtf8Char (str) {
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
-    'use strict';
+	'use strict';
 
   var Arr = (typeof Uint8Array !== 'undefined')
     ? Uint8Array
     : Array
 
-    var PLUS   = '+'.charCodeAt(0)
-    var SLASH  = '/'.charCodeAt(0)
-    var NUMBER = '0'.charCodeAt(0)
-    var LOWER  = 'a'.charCodeAt(0)
-    var UPPER  = 'A'.charCodeAt(0)
-    var PLUS_URL_SAFE = '-'.charCodeAt(0)
-    var SLASH_URL_SAFE = '_'.charCodeAt(0)
+	var PLUS   = '+'.charCodeAt(0)
+	var SLASH  = '/'.charCodeAt(0)
+	var NUMBER = '0'.charCodeAt(0)
+	var LOWER  = 'a'.charCodeAt(0)
+	var UPPER  = 'A'.charCodeAt(0)
+	var PLUS_URL_SAFE = '-'.charCodeAt(0)
+	var SLASH_URL_SAFE = '_'.charCodeAt(0)
 
-    function decode (elt) {
-        var code = elt.charCodeAt(0)
-        if (code === PLUS ||
-            code === PLUS_URL_SAFE)
-            return 62 // '+'
-        if (code === SLASH ||
-            code === SLASH_URL_SAFE)
-            return 63 // '/'
-        if (code < NUMBER)
-            return -1 //no match
-        if (code < NUMBER + 10)
-            return code - NUMBER + 26 + 26
-        if (code < UPPER + 26)
-            return code - UPPER
-        if (code < LOWER + 26)
-            return code - LOWER + 26
-    }
+	function decode (elt) {
+		var code = elt.charCodeAt(0)
+		if (code === PLUS ||
+		    code === PLUS_URL_SAFE)
+			return 62 // '+'
+		if (code === SLASH ||
+		    code === SLASH_URL_SAFE)
+			return 63 // '/'
+		if (code < NUMBER)
+			return -1 //no match
+		if (code < NUMBER + 10)
+			return code - NUMBER + 26 + 26
+		if (code < UPPER + 26)
+			return code - UPPER
+		if (code < LOWER + 26)
+			return code - LOWER + 26
+	}
 
-    function b64ToByteArray (b64) {
-        var i, j, l, tmp, placeHolders, arr
+	function b64ToByteArray (b64) {
+		var i, j, l, tmp, placeHolders, arr
 
-        if (b64.length % 4 > 0) {
-            throw new Error('Invalid string. Length must be a multiple of 4')
-        }
+		if (b64.length % 4 > 0) {
+			throw new Error('Invalid string. Length must be a multiple of 4')
+		}
 
-        // the number of equal signs (place holders)
-        // if there are two placeholders, than the two characters before it
-        // represent one byte
-        // if there is only one, then the three characters before it represent 2 bytes
-        // this is just a cheap hack to not do indexOf twice
-        var len = b64.length
-        placeHolders = '=' === b64.charAt(len - 2) ? 2 : '=' === b64.charAt(len - 1) ? 1 : 0
+		// the number of equal signs (place holders)
+		// if there are two placeholders, than the two characters before it
+		// represent one byte
+		// if there is only one, then the three characters before it represent 2 bytes
+		// this is just a cheap hack to not do indexOf twice
+		var len = b64.length
+		placeHolders = '=' === b64.charAt(len - 2) ? 2 : '=' === b64.charAt(len - 1) ? 1 : 0
 
-        // base64 is 4/3 + up to two characters of the original data
-        arr = new Arr(b64.length * 3 / 4 - placeHolders)
+		// base64 is 4/3 + up to two characters of the original data
+		arr = new Arr(b64.length * 3 / 4 - placeHolders)
 
-        // if there are placeholders, only get up to the last complete 4 chars
-        l = placeHolders > 0 ? b64.length - 4 : b64.length
+		// if there are placeholders, only get up to the last complete 4 chars
+		l = placeHolders > 0 ? b64.length - 4 : b64.length
 
-        var L = 0
+		var L = 0
 
-        function push (v) {
-            arr[L++] = v
-        }
+		function push (v) {
+			arr[L++] = v
+		}
 
-        for (i = 0, j = 0; i < l; i += 4, j += 3) {
-            tmp = (decode(b64.charAt(i)) << 18) | (decode(b64.charAt(i + 1)) << 12) | (decode(b64.charAt(i + 2)) << 6) | decode(b64.charAt(i + 3))
-            push((tmp & 0xFF0000) >> 16)
-            push((tmp & 0xFF00) >> 8)
-            push(tmp & 0xFF)
-        }
+		for (i = 0, j = 0; i < l; i += 4, j += 3) {
+			tmp = (decode(b64.charAt(i)) << 18) | (decode(b64.charAt(i + 1)) << 12) | (decode(b64.charAt(i + 2)) << 6) | decode(b64.charAt(i + 3))
+			push((tmp & 0xFF0000) >> 16)
+			push((tmp & 0xFF00) >> 8)
+			push(tmp & 0xFF)
+		}
 
-        if (placeHolders === 2) {
-            tmp = (decode(b64.charAt(i)) << 2) | (decode(b64.charAt(i + 1)) >> 4)
-            push(tmp & 0xFF)
-        } else if (placeHolders === 1) {
-            tmp = (decode(b64.charAt(i)) << 10) | (decode(b64.charAt(i + 1)) << 4) | (decode(b64.charAt(i + 2)) >> 2)
-            push((tmp >> 8) & 0xFF)
-            push(tmp & 0xFF)
-        }
+		if (placeHolders === 2) {
+			tmp = (decode(b64.charAt(i)) << 2) | (decode(b64.charAt(i + 1)) >> 4)
+			push(tmp & 0xFF)
+		} else if (placeHolders === 1) {
+			tmp = (decode(b64.charAt(i)) << 10) | (decode(b64.charAt(i + 1)) << 4) | (decode(b64.charAt(i + 2)) >> 2)
+			push((tmp >> 8) & 0xFF)
+			push(tmp & 0xFF)
+		}
 
-        return arr
-    }
+		return arr
+	}
 
-    function uint8ToBase64 (uint8) {
-        var i,
-            extraBytes = uint8.length % 3, // if we have 1 byte left, pad 2 bytes
-            output = "",
-            temp, length
+	function uint8ToBase64 (uint8) {
+		var i,
+			extraBytes = uint8.length % 3, // if we have 1 byte left, pad 2 bytes
+			output = "",
+			temp, length
 
-        function encode (num) {
-            return lookup.charAt(num)
-        }
+		function encode (num) {
+			return lookup.charAt(num)
+		}
 
-        function tripletToBase64 (num) {
-            return encode(num >> 18 & 0x3F) + encode(num >> 12 & 0x3F) + encode(num >> 6 & 0x3F) + encode(num & 0x3F)
-        }
+		function tripletToBase64 (num) {
+			return encode(num >> 18 & 0x3F) + encode(num >> 12 & 0x3F) + encode(num >> 6 & 0x3F) + encode(num & 0x3F)
+		}
 
-        // go through the array every three bytes, we'll deal with trailing stuff later
-        for (i = 0, length = uint8.length - extraBytes; i < length; i += 3) {
-            temp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
-            output += tripletToBase64(temp)
-        }
+		// go through the array every three bytes, we'll deal with trailing stuff later
+		for (i = 0, length = uint8.length - extraBytes; i < length; i += 3) {
+			temp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
+			output += tripletToBase64(temp)
+		}
 
-        // pad the end with zeros, but make sure to not forget the extra bytes
-        switch (extraBytes) {
-            case 1:
-                temp = uint8[uint8.length - 1]
-                output += encode(temp >> 2)
-                output += encode((temp << 4) & 0x3F)
-                output += '=='
-                break
-            case 2:
-                temp = (uint8[uint8.length - 2] << 8) + (uint8[uint8.length - 1])
-                output += encode(temp >> 10)
-                output += encode((temp >> 4) & 0x3F)
-                output += encode((temp << 2) & 0x3F)
-                output += '='
-                break
-        }
+		// pad the end with zeros, but make sure to not forget the extra bytes
+		switch (extraBytes) {
+			case 1:
+				temp = uint8[uint8.length - 1]
+				output += encode(temp >> 2)
+				output += encode((temp << 4) & 0x3F)
+				output += '=='
+				break
+			case 2:
+				temp = (uint8[uint8.length - 2] << 8) + (uint8[uint8.length - 1])
+				output += encode(temp >> 10)
+				output += encode((temp >> 4) & 0x3F)
+				output += encode((temp << 2) & 0x3F)
+				output += '='
+				break
+		}
 
-        return output
-    }
+		return output
+	}
 
-    exports.toByteArray = b64ToByteArray
-    exports.fromByteArray = uint8ToBase64
+	exports.toByteArray = b64ToByteArray
+	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
 },{}],5:[function(_dereq_,module,exports){
@@ -11159,3 +11159,4766 @@ define(function (_dereq_, exports, module) {
           generated: aGenerated,
           source: aSource,
           orginal: aOriginal,
+          name: aName
+        }));
+      }
+    };
+
+  /**
+   * Serialize the accumulated mappings in to the stream of base 64 VLQs
+   * specified by the source map format.
+   */
+  SourceMapGenerator.prototype._serializeMappings =
+    function SourceMapGenerator_serializeMappings() {
+      var previousGeneratedColumn = 0;
+      var previousGeneratedLine = 1;
+      var previousOriginalColumn = 0;
+      var previousOriginalLine = 0;
+      var previousName = 0;
+      var previousSource = 0;
+      var result = '';
+      var mapping;
+
+      // The mappings must be guaranteed to be in sorted order before we start
+      // serializing them or else the generated line numbers (which are defined
+      // via the ';' separators) will be all messed up. Note: it might be more
+      // performant to maintain the sorting as we insert them, rather than as we
+      // serialize them, but the big O is the same either way.
+      this._mappings.sort(util.compareByGeneratedPositions);
+
+      for (var i = 0, len = this._mappings.length; i < len; i++) {
+        mapping = this._mappings[i];
+
+        if (mapping.generatedLine !== previousGeneratedLine) {
+          previousGeneratedColumn = 0;
+          while (mapping.generatedLine !== previousGeneratedLine) {
+            result += ';';
+            previousGeneratedLine++;
+          }
+        }
+        else {
+          if (i > 0) {
+            if (!util.compareByGeneratedPositions(mapping, this._mappings[i - 1])) {
+              continue;
+            }
+            result += ',';
+          }
+        }
+
+        result += base64VLQ.encode(mapping.generatedColumn
+                                   - previousGeneratedColumn);
+        previousGeneratedColumn = mapping.generatedColumn;
+
+        if (mapping.source) {
+          result += base64VLQ.encode(this._sources.indexOf(mapping.source)
+                                     - previousSource);
+          previousSource = this._sources.indexOf(mapping.source);
+
+          // lines are stored 0-based in SourceMap spec version 3
+          result += base64VLQ.encode(mapping.originalLine - 1
+                                     - previousOriginalLine);
+          previousOriginalLine = mapping.originalLine - 1;
+
+          result += base64VLQ.encode(mapping.originalColumn
+                                     - previousOriginalColumn);
+          previousOriginalColumn = mapping.originalColumn;
+
+          if (mapping.name) {
+            result += base64VLQ.encode(this._names.indexOf(mapping.name)
+                                       - previousName);
+            previousName = this._names.indexOf(mapping.name);
+          }
+        }
+      }
+
+      return result;
+    };
+
+  SourceMapGenerator.prototype._generateSourcesContent =
+    function SourceMapGenerator_generateSourcesContent(aSources, aSourceRoot) {
+      return aSources.map(function (source) {
+        if (!this._sourcesContents) {
+          return null;
+        }
+        if (aSourceRoot) {
+          source = util.relative(aSourceRoot, source);
+        }
+        var key = util.toSetString(source);
+        return Object.prototype.hasOwnProperty.call(this._sourcesContents,
+                                                    key)
+          ? this._sourcesContents[key]
+          : null;
+      }, this);
+    };
+
+  /**
+   * Externalize the source map.
+   */
+  SourceMapGenerator.prototype.toJSON =
+    function SourceMapGenerator_toJSON() {
+      var map = {
+        version: this._version,
+        file: this._file,
+        sources: this._sources.toArray(),
+        names: this._names.toArray(),
+        mappings: this._serializeMappings()
+      };
+      if (this._sourceRoot) {
+        map.sourceRoot = this._sourceRoot;
+      }
+      if (this._sourcesContents) {
+        map.sourcesContent = this._generateSourcesContent(map.sources, map.sourceRoot);
+      }
+
+      return map;
+    };
+
+  /**
+   * Render the source map being generated to a string.
+   */
+  SourceMapGenerator.prototype.toString =
+    function SourceMapGenerator_toString() {
+      return JSON.stringify(this);
+    };
+
+  exports.SourceMapGenerator = SourceMapGenerator;
+
+});
+
+},{"./array-set":12,"./base64-vlq":13,"./util":19,"amdefine":20}],18:[function(_dereq_,module,exports){
+/* -*- Mode: js; js-indent-level: 2; -*- */
+/*
+ * Copyright 2011 Mozilla Foundation and contributors
+ * Licensed under the New BSD license. See LICENSE or:
+ * http://opensource.org/licenses/BSD-3-Clause
+ */
+if (typeof define !== 'function') {
+    var define = _dereq_('amdefine')(module, _dereq_);
+}
+define(function (_dereq_, exports, module) {
+
+  var SourceMapGenerator = _dereq_('./source-map-generator').SourceMapGenerator;
+  var util = _dereq_('./util');
+
+  /**
+   * SourceNodes provide a way to abstract over interpolating/concatenating
+   * snippets of generated JavaScript source code while maintaining the line and
+   * column information associated with the original source code.
+   *
+   * @param aLine The original line number.
+   * @param aColumn The original column number.
+   * @param aSource The original source's filename.
+   * @param aChunks Optional. An array of strings which are snippets of
+   *        generated JS, or other SourceNodes.
+   * @param aName The original identifier.
+   */
+  function SourceNode(aLine, aColumn, aSource, aChunks, aName) {
+    this.children = [];
+    this.sourceContents = {};
+    this.line = aLine === undefined ? null : aLine;
+    this.column = aColumn === undefined ? null : aColumn;
+    this.source = aSource === undefined ? null : aSource;
+    this.name = aName === undefined ? null : aName;
+    if (aChunks != null) this.add(aChunks);
+  }
+
+  /**
+   * Creates a SourceNode from generated code and a SourceMapConsumer.
+   *
+   * @param aGeneratedCode The generated code
+   * @param aSourceMapConsumer The SourceMap for the generated code
+   */
+  SourceNode.fromStringWithSourceMap =
+    function SourceNode_fromStringWithSourceMap(aGeneratedCode, aSourceMapConsumer) {
+      // The SourceNode we want to fill with the generated code
+      // and the SourceMap
+      var node = new SourceNode();
+
+      // The generated code
+      // Processed fragments are removed from this array.
+      var remainingLines = aGeneratedCode.split('\n');
+
+      // We need to remember the position of "remainingLines"
+      var lastGeneratedLine = 1, lastGeneratedColumn = 0;
+
+      // The generate SourceNodes we need a code range.
+      // To extract it current and last mapping is used.
+      // Here we store the last mapping.
+      var lastMapping = null;
+
+      aSourceMapConsumer.eachMapping(function (mapping) {
+        if (lastMapping === null) {
+          // We add the generated code until the first mapping
+          // to the SourceNode without any mapping.
+          // Each line is added as separate string.
+          while (lastGeneratedLine < mapping.generatedLine) {
+            node.add(remainingLines.shift() + "\n");
+            lastGeneratedLine++;
+          }
+          if (lastGeneratedColumn < mapping.generatedColumn) {
+            var nextLine = remainingLines[0];
+            node.add(nextLine.substr(0, mapping.generatedColumn));
+            remainingLines[0] = nextLine.substr(mapping.generatedColumn);
+            lastGeneratedColumn = mapping.generatedColumn;
+          }
+        } else {
+          // We add the code from "lastMapping" to "mapping":
+          // First check if there is a new line in between.
+          if (lastGeneratedLine < mapping.generatedLine) {
+            var code = "";
+            // Associate full lines with "lastMapping"
+            do {
+              code += remainingLines.shift() + "\n";
+              lastGeneratedLine++;
+              lastGeneratedColumn = 0;
+            } while (lastGeneratedLine < mapping.generatedLine);
+            // When we reached the correct line, we add code until we
+            // reach the correct column too.
+            if (lastGeneratedColumn < mapping.generatedColumn) {
+              var nextLine = remainingLines[0];
+              code += nextLine.substr(0, mapping.generatedColumn);
+              remainingLines[0] = nextLine.substr(mapping.generatedColumn);
+              lastGeneratedColumn = mapping.generatedColumn;
+            }
+            // Create the SourceNode.
+            addMappingWithCode(lastMapping, code);
+          } else {
+            // There is no new line in between.
+            // Associate the code between "lastGeneratedColumn" and
+            // "mapping.generatedColumn" with "lastMapping"
+            var nextLine = remainingLines[0];
+            var code = nextLine.substr(0, mapping.generatedColumn -
+                                          lastGeneratedColumn);
+            remainingLines[0] = nextLine.substr(mapping.generatedColumn -
+                                                lastGeneratedColumn);
+            lastGeneratedColumn = mapping.generatedColumn;
+            addMappingWithCode(lastMapping, code);
+          }
+        }
+        lastMapping = mapping;
+      }, this);
+      // We have processed all mappings.
+      // Associate the remaining code in the current line with "lastMapping"
+      // and add the remaining lines without any mapping
+      addMappingWithCode(lastMapping, remainingLines.join("\n"));
+
+      // Copy sourcesContent into SourceNode
+      aSourceMapConsumer.sources.forEach(function (sourceFile) {
+        var content = aSourceMapConsumer.sourceContentFor(sourceFile);
+        if (content) {
+          node.setSourceContent(sourceFile, content);
+        }
+      });
+
+      return node;
+
+      function addMappingWithCode(mapping, code) {
+        if (mapping === null || mapping.source === undefined) {
+          node.add(code);
+        } else {
+          node.add(new SourceNode(mapping.originalLine,
+                                  mapping.originalColumn,
+                                  mapping.source,
+                                  code,
+                                  mapping.name));
+        }
+      }
+    };
+
+  /**
+   * Add a chunk of generated JS to this source node.
+   *
+   * @param aChunk A string snippet of generated JS code, another instance of
+   *        SourceNode, or an array where each member is one of those things.
+   */
+  SourceNode.prototype.add = function SourceNode_add(aChunk) {
+    if (Array.isArray(aChunk)) {
+      aChunk.forEach(function (chunk) {
+        this.add(chunk);
+      }, this);
+    }
+    else if (aChunk instanceof SourceNode || typeof aChunk === "string") {
+      if (aChunk) {
+        this.children.push(aChunk);
+      }
+    }
+    else {
+      throw new TypeError(
+        "Expected a SourceNode, string, or an array of SourceNodes and strings. Got " + aChunk
+      );
+    }
+    return this;
+  };
+
+  /**
+   * Add a chunk of generated JS to the beginning of this source node.
+   *
+   * @param aChunk A string snippet of generated JS code, another instance of
+   *        SourceNode, or an array where each member is one of those things.
+   */
+  SourceNode.prototype.prepend = function SourceNode_prepend(aChunk) {
+    if (Array.isArray(aChunk)) {
+      for (var i = aChunk.length-1; i >= 0; i--) {
+        this.prepend(aChunk[i]);
+      }
+    }
+    else if (aChunk instanceof SourceNode || typeof aChunk === "string") {
+      this.children.unshift(aChunk);
+    }
+    else {
+      throw new TypeError(
+        "Expected a SourceNode, string, or an array of SourceNodes and strings. Got " + aChunk
+      );
+    }
+    return this;
+  };
+
+  /**
+   * Walk over the tree of JS snippets in this node and its children. The
+   * walking function is called once for each snippet of JS and is passed that
+   * snippet and the its original associated source's line/column location.
+   *
+   * @param aFn The traversal function.
+   */
+  SourceNode.prototype.walk = function SourceNode_walk(aFn) {
+    var chunk;
+    for (var i = 0, len = this.children.length; i < len; i++) {
+      chunk = this.children[i];
+      if (chunk instanceof SourceNode) {
+        chunk.walk(aFn);
+      }
+      else {
+        if (chunk !== '') {
+          aFn(chunk, { source: this.source,
+                       line: this.line,
+                       column: this.column,
+                       name: this.name });
+        }
+      }
+    }
+  };
+
+  /**
+   * Like `String.prototype.join` except for SourceNodes. Inserts `aStr` between
+   * each of `this.children`.
+   *
+   * @param aSep The separator.
+   */
+  SourceNode.prototype.join = function SourceNode_join(aSep) {
+    var newChildren;
+    var i;
+    var len = this.children.length;
+    if (len > 0) {
+      newChildren = [];
+      for (i = 0; i < len-1; i++) {
+        newChildren.push(this.children[i]);
+        newChildren.push(aSep);
+      }
+      newChildren.push(this.children[i]);
+      this.children = newChildren;
+    }
+    return this;
+  };
+
+  /**
+   * Call String.prototype.replace on the very right-most source snippet. Useful
+   * for trimming whitespace from the end of a source node, etc.
+   *
+   * @param aPattern The pattern to replace.
+   * @param aReplacement The thing to replace the pattern with.
+   */
+  SourceNode.prototype.replaceRight = function SourceNode_replaceRight(aPattern, aReplacement) {
+    var lastChild = this.children[this.children.length - 1];
+    if (lastChild instanceof SourceNode) {
+      lastChild.replaceRight(aPattern, aReplacement);
+    }
+    else if (typeof lastChild === 'string') {
+      this.children[this.children.length - 1] = lastChild.replace(aPattern, aReplacement);
+    }
+    else {
+      this.children.push(''.replace(aPattern, aReplacement));
+    }
+    return this;
+  };
+
+  /**
+   * Set the source content for a source file. This will be added to the SourceMapGenerator
+   * in the sourcesContent field.
+   *
+   * @param aSourceFile The filename of the source file
+   * @param aSourceContent The content of the source file
+   */
+  SourceNode.prototype.setSourceContent =
+    function SourceNode_setSourceContent(aSourceFile, aSourceContent) {
+      this.sourceContents[util.toSetString(aSourceFile)] = aSourceContent;
+    };
+
+  /**
+   * Walk over the tree of SourceNodes. The walking function is called for each
+   * source file content and is passed the filename and source content.
+   *
+   * @param aFn The traversal function.
+   */
+  SourceNode.prototype.walkSourceContents =
+    function SourceNode_walkSourceContents(aFn) {
+      for (var i = 0, len = this.children.length; i < len; i++) {
+        if (this.children[i] instanceof SourceNode) {
+          this.children[i].walkSourceContents(aFn);
+        }
+      }
+
+      var sources = Object.keys(this.sourceContents);
+      for (var i = 0, len = sources.length; i < len; i++) {
+        aFn(util.fromSetString(sources[i]), this.sourceContents[sources[i]]);
+      }
+    };
+
+  /**
+   * Return the string representation of this source node. Walks over the tree
+   * and concatenates all the various snippets together to one string.
+   */
+  SourceNode.prototype.toString = function SourceNode_toString() {
+    var str = "";
+    this.walk(function (chunk) {
+      str += chunk;
+    });
+    return str;
+  };
+
+  /**
+   * Returns the string representation of this source node along with a source
+   * map.
+   */
+  SourceNode.prototype.toStringWithSourceMap = function SourceNode_toStringWithSourceMap(aArgs) {
+    var generated = {
+      code: "",
+      line: 1,
+      column: 0
+    };
+    var map = new SourceMapGenerator(aArgs);
+    var sourceMappingActive = false;
+    var lastOriginalSource = null;
+    var lastOriginalLine = null;
+    var lastOriginalColumn = null;
+    var lastOriginalName = null;
+    this.walk(function (chunk, original) {
+      generated.code += chunk;
+      if (original.source !== null
+          && original.line !== null
+          && original.column !== null) {
+        if(lastOriginalSource !== original.source
+           || lastOriginalLine !== original.line
+           || lastOriginalColumn !== original.column
+           || lastOriginalName !== original.name) {
+          map.addMapping({
+            source: original.source,
+            original: {
+              line: original.line,
+              column: original.column
+            },
+            generated: {
+              line: generated.line,
+              column: generated.column
+            },
+            name: original.name
+          });
+        }
+        lastOriginalSource = original.source;
+        lastOriginalLine = original.line;
+        lastOriginalColumn = original.column;
+        lastOriginalName = original.name;
+        sourceMappingActive = true;
+      } else if (sourceMappingActive) {
+        map.addMapping({
+          generated: {
+            line: generated.line,
+            column: generated.column
+          }
+        });
+        lastOriginalSource = null;
+        sourceMappingActive = false;
+      }
+      chunk.split('').forEach(function (ch) {
+        if (ch === '\n') {
+          generated.line++;
+          generated.column = 0;
+        } else {
+          generated.column++;
+        }
+      });
+    });
+    this.walkSourceContents(function (sourceFile, sourceContent) {
+      map.setSourceContent(sourceFile, sourceContent);
+    });
+
+    return { code: generated.code, map: map };
+  };
+
+  exports.SourceNode = SourceNode;
+
+});
+
+},{"./source-map-generator":17,"./util":19,"amdefine":20}],19:[function(_dereq_,module,exports){
+/* -*- Mode: js; js-indent-level: 2; -*- */
+/*
+ * Copyright 2011 Mozilla Foundation and contributors
+ * Licensed under the New BSD license. See LICENSE or:
+ * http://opensource.org/licenses/BSD-3-Clause
+ */
+if (typeof define !== 'function') {
+    var define = _dereq_('amdefine')(module, _dereq_);
+}
+define(function (_dereq_, exports, module) {
+
+  /**
+   * This is a helper function for getting values from parameter/options
+   * objects.
+   *
+   * @param args The object we are extracting values from
+   * @param name The name of the property we are getting.
+   * @param defaultValue An optional value to return if the property is missing
+   * from the object. If this is not specified and the property is missing, an
+   * error will be thrown.
+   */
+  function getArg(aArgs, aName, aDefaultValue) {
+    if (aName in aArgs) {
+      return aArgs[aName];
+    } else if (arguments.length === 3) {
+      return aDefaultValue;
+    } else {
+      throw new Error('"' + aName + '" is a required argument.');
+    }
+  }
+  exports.getArg = getArg;
+
+  var urlRegexp = /([\w+\-.]+):\/\/((\w+:\w+)@)?([\w.]+)?(:(\d+))?(\S+)?/;
+  var dataUrlRegexp = /^data:.+\,.+/;
+
+  function urlParse(aUrl) {
+    var match = aUrl.match(urlRegexp);
+    if (!match) {
+      return null;
+    }
+    return {
+      scheme: match[1],
+      auth: match[3],
+      host: match[4],
+      port: match[6],
+      path: match[7]
+    };
+  }
+  exports.urlParse = urlParse;
+
+  function urlGenerate(aParsedUrl) {
+    var url = aParsedUrl.scheme + "://";
+    if (aParsedUrl.auth) {
+      url += aParsedUrl.auth + "@"
+    }
+    if (aParsedUrl.host) {
+      url += aParsedUrl.host;
+    }
+    if (aParsedUrl.port) {
+      url += ":" + aParsedUrl.port
+    }
+    if (aParsedUrl.path) {
+      url += aParsedUrl.path;
+    }
+    return url;
+  }
+  exports.urlGenerate = urlGenerate;
+
+  function join(aRoot, aPath) {
+    var url;
+
+    if (aPath.match(urlRegexp) || aPath.match(dataUrlRegexp)) {
+      return aPath;
+    }
+
+    if (aPath.charAt(0) === '/' && (url = urlParse(aRoot))) {
+      url.path = aPath;
+      return urlGenerate(url);
+    }
+
+    return aRoot.replace(/\/$/, '') + '/' + aPath;
+  }
+  exports.join = join;
+
+  /**
+   * Because behavior goes wacky when you set `__proto__` on objects, we
+   * have to prefix all the strings in our set with an arbitrary character.
+   *
+   * See https://github.com/mozilla/source-map/pull/31 and
+   * https://github.com/mozilla/source-map/issues/30
+   *
+   * @param String aStr
+   */
+  function toSetString(aStr) {
+    return '$' + aStr;
+  }
+  exports.toSetString = toSetString;
+
+  function fromSetString(aStr) {
+    return aStr.substr(1);
+  }
+  exports.fromSetString = fromSetString;
+
+  function relative(aRoot, aPath) {
+    aRoot = aRoot.replace(/\/$/, '');
+
+    var url = urlParse(aRoot);
+    if (aPath.charAt(0) == "/" && url && url.path == "/") {
+      return aPath.slice(1);
+    }
+
+    return aPath.indexOf(aRoot + '/') === 0
+      ? aPath.substr(aRoot.length + 1)
+      : aPath;
+  }
+  exports.relative = relative;
+
+  function strcmp(aStr1, aStr2) {
+    var s1 = aStr1 || "";
+    var s2 = aStr2 || "";
+    return (s1 > s2) - (s1 < s2);
+  }
+
+  /**
+   * Comparator between two mappings where the original positions are compared.
+   *
+   * Optionally pass in `true` as `onlyCompareGenerated` to consider two
+   * mappings with the same original source/line/column, but different generated
+   * line and column the same. Useful when searching for a mapping with a
+   * stubbed out mapping.
+   */
+  function compareByOriginalPositions(mappingA, mappingB, onlyCompareOriginal) {
+    var cmp;
+
+    cmp = strcmp(mappingA.source, mappingB.source);
+    if (cmp) {
+      return cmp;
+    }
+
+    cmp = mappingA.originalLine - mappingB.originalLine;
+    if (cmp) {
+      return cmp;
+    }
+
+    cmp = mappingA.originalColumn - mappingB.originalColumn;
+    if (cmp || onlyCompareOriginal) {
+      return cmp;
+    }
+
+    cmp = strcmp(mappingA.name, mappingB.name);
+    if (cmp) {
+      return cmp;
+    }
+
+    cmp = mappingA.generatedLine - mappingB.generatedLine;
+    if (cmp) {
+      return cmp;
+    }
+
+    return mappingA.generatedColumn - mappingB.generatedColumn;
+  };
+  exports.compareByOriginalPositions = compareByOriginalPositions;
+
+  /**
+   * Comparator between two mappings where the generated positions are
+   * compared.
+   *
+   * Optionally pass in `true` as `onlyCompareGenerated` to consider two
+   * mappings with the same generated line and column, but different
+   * source/name/original line and column the same. Useful when searching for a
+   * mapping with a stubbed out mapping.
+   */
+  function compareByGeneratedPositions(mappingA, mappingB, onlyCompareGenerated) {
+    var cmp;
+
+    cmp = mappingA.generatedLine - mappingB.generatedLine;
+    if (cmp) {
+      return cmp;
+    }
+
+    cmp = mappingA.generatedColumn - mappingB.generatedColumn;
+    if (cmp || onlyCompareGenerated) {
+      return cmp;
+    }
+
+    cmp = strcmp(mappingA.source, mappingB.source);
+    if (cmp) {
+      return cmp;
+    }
+
+    cmp = mappingA.originalLine - mappingB.originalLine;
+    if (cmp) {
+      return cmp;
+    }
+
+    cmp = mappingA.originalColumn - mappingB.originalColumn;
+    if (cmp) {
+      return cmp;
+    }
+
+    return strcmp(mappingA.name, mappingB.name);
+  };
+  exports.compareByGeneratedPositions = compareByGeneratedPositions;
+
+});
+
+},{"amdefine":20}],20:[function(_dereq_,module,exports){
+(function (process,__filename){
+/** vim: et:ts=4:sw=4:sts=4
+ * @license amdefine 0.1.0 Copyright (c) 2011, The Dojo Foundation All Rights Reserved.
+ * Available via the MIT or new BSD license.
+ * see: http://github.com/jrburke/amdefine for details
+ */
+
+/*jslint node: true */
+/*global module, process */
+'use strict';
+
+/**
+ * Creates a define for node.
+ * @param {Object} module the "module" object that is defined by Node for the
+ * current module.
+ * @param {Function} [requireFn]. Node's require function for the current module.
+ * It only needs to be passed in Node versions before 0.5, when module.require
+ * did not exist.
+ * @returns {Function} a define function that is usable for the current node
+ * module.
+ */
+function amdefine(module, requireFn) {
+    'use strict';
+    var defineCache = {},
+        loaderCache = {},
+        alreadyCalled = false,
+        path = _dereq_('path'),
+        makeRequire, stringRequire;
+
+    /**
+     * Trims the . and .. from an array of path segments.
+     * It will keep a leading path segment if a .. will become
+     * the first path segment, to help with module name lookups,
+     * which act like paths, but can be remapped. But the end result,
+     * all paths that use this function should look normalized.
+     * NOTE: this method MODIFIES the input array.
+     * @param {Array} ary the array of path segments.
+     */
+    function trimDots(ary) {
+        var i, part;
+        for (i = 0; ary[i]; i+= 1) {
+            part = ary[i];
+            if (part === '.') {
+                ary.splice(i, 1);
+                i -= 1;
+            } else if (part === '..') {
+                if (i === 1 && (ary[2] === '..' || ary[0] === '..')) {
+                    //End of the line. Keep at least one non-dot
+                    //path segment at the front so it can be mapped
+                    //correctly to disk. Otherwise, there is likely
+                    //no path mapping for a path starting with '..'.
+                    //This can still fail, but catches the most reasonable
+                    //uses of ..
+                    break;
+                } else if (i > 0) {
+                    ary.splice(i - 1, 2);
+                    i -= 2;
+                }
+            }
+        }
+    }
+
+    function normalize(name, baseName) {
+        var baseParts;
+
+        //Adjust any relative paths.
+        if (name && name.charAt(0) === '.') {
+            //If have a base name, try to normalize against it,
+            //otherwise, assume it is a top-level require that will
+            //be relative to baseUrl in the end.
+            if (baseName) {
+                baseParts = baseName.split('/');
+                baseParts = baseParts.slice(0, baseParts.length - 1);
+                baseParts = baseParts.concat(name.split('/'));
+                trimDots(baseParts);
+                name = baseParts.join('/');
+            }
+        }
+
+        return name;
+    }
+
+    /**
+     * Create the normalize() function passed to a loader plugin's
+     * normalize method.
+     */
+    function makeNormalize(relName) {
+        return function (name) {
+            return normalize(name, relName);
+        };
+    }
+
+    function makeLoad(id) {
+        function load(value) {
+            loaderCache[id] = value;
+        }
+
+        load.fromText = function (id, text) {
+            //This one is difficult because the text can/probably uses
+            //define, and any relative paths and requires should be relative
+            //to that id was it would be found on disk. But this would require
+            //bootstrapping a module/require fairly deeply from node core.
+            //Not sure how best to go about that yet.
+            throw new Error('amdefine does not implement load.fromText');
+        };
+
+        return load;
+    }
+
+    makeRequire = function (systemRequire, exports, module, relId) {
+        function amdRequire(deps, callback) {
+            if (typeof deps === 'string') {
+                //Synchronous, single module require('')
+                return stringRequire(systemRequire, exports, module, deps, relId);
+            } else {
+                //Array of dependencies with a callback.
+
+                //Convert the dependencies to modules.
+                deps = deps.map(function (depName) {
+                    return stringRequire(systemRequire, exports, module, depName, relId);
+                });
+
+                //Wait for next tick to call back the require call.
+                process.nextTick(function () {
+                    callback.apply(null, deps);
+                });
+            }
+        }
+
+        amdRequire.toUrl = function (filePath) {
+            if (filePath.indexOf('.') === 0) {
+                return normalize(filePath, path.dirname(module.filename));
+            } else {
+                return filePath;
+            }
+        };
+
+        return amdRequire;
+    };
+
+    //Favor explicit value, passed in if the module wants to support Node 0.4.
+    requireFn = requireFn || function req() {
+        return module.require.apply(module, arguments);
+    };
+
+    function runFactory(id, deps, factory) {
+        var r, e, m, result;
+
+        if (id) {
+            e = loaderCache[id] = {};
+            m = {
+                id: id,
+                uri: __filename,
+                exports: e
+            };
+            r = makeRequire(requireFn, e, m, id);
+        } else {
+            //Only support one define call per file
+            if (alreadyCalled) {
+                throw new Error('amdefine with no module ID cannot be called more than once per file.');
+            }
+            alreadyCalled = true;
+
+            //Use the real variables from node
+            //Use module.exports for exports, since
+            //the exports in here is amdefine exports.
+            e = module.exports;
+            m = module;
+            r = makeRequire(requireFn, e, m, module.id);
+        }
+
+        //If there are dependencies, they are strings, so need
+        //to convert them to dependency values.
+        if (deps) {
+            deps = deps.map(function (depName) {
+                return r(depName);
+            });
+        }
+
+        //Call the factory with the right dependencies.
+        if (typeof factory === 'function') {
+            result = factory.apply(m.exports, deps);
+        } else {
+            result = factory;
+        }
+
+        if (result !== undefined) {
+            m.exports = result;
+            if (id) {
+                loaderCache[id] = m.exports;
+            }
+        }
+    }
+
+    stringRequire = function (systemRequire, exports, module, id, relId) {
+        //Split the ID by a ! so that
+        var index = id.indexOf('!'),
+            originalId = id,
+            prefix, plugin;
+
+        if (index === -1) {
+            id = normalize(id, relId);
+
+            //Straight module lookup. If it is one of the special dependencies,
+            //deal with it, otherwise, delegate to node.
+            if (id === 'require') {
+                return makeRequire(systemRequire, exports, module, relId);
+            } else if (id === 'exports') {
+                return exports;
+            } else if (id === 'module') {
+                return module;
+            } else if (loaderCache.hasOwnProperty(id)) {
+                return loaderCache[id];
+            } else if (defineCache[id]) {
+                runFactory.apply(null, defineCache[id]);
+                return loaderCache[id];
+            } else {
+                if(systemRequire) {
+                    return systemRequire(originalId);
+                } else {
+                    throw new Error('No module with ID: ' + id);
+                }
+            }
+        } else {
+            //There is a plugin in play.
+            prefix = id.substring(0, index);
+            id = id.substring(index + 1, id.length);
+
+            plugin = stringRequire(systemRequire, exports, module, prefix, relId);
+
+            if (plugin.normalize) {
+                id = plugin.normalize(id, makeNormalize(relId));
+            } else {
+                //Normalize the ID normally.
+                id = normalize(id, relId);
+            }
+
+            if (loaderCache[id]) {
+                return loaderCache[id];
+            } else {
+                plugin.load(id, makeRequire(systemRequire, exports, module, relId), makeLoad(id), {});
+
+                return loaderCache[id];
+            }
+        }
+    };
+
+    //Create a define function specific to the module asking for amdefine.
+    function define(id, deps, factory) {
+        if (Array.isArray(id)) {
+            factory = deps;
+            deps = id;
+            id = undefined;
+        } else if (typeof id !== 'string') {
+            factory = id;
+            id = deps = undefined;
+        }
+
+        if (deps && !Array.isArray(deps)) {
+            factory = deps;
+            deps = undefined;
+        }
+
+        if (!deps) {
+            deps = ['require', 'exports', 'module'];
+        }
+
+        //Set up properties for this module. If an ID, then use
+        //internal cache. If no ID, then use the external variables
+        //for this node module.
+        if (id) {
+            //Put the module in deep freeze until there is a
+            //require call for it.
+            defineCache[id] = [id, deps, factory];
+        } else {
+            runFactory(id, deps, factory);
+        }
+    }
+
+    //define.require, which has access to all the values in the
+    //cache. Useful for AMD modules that all have IDs in the file,
+    //but need to finally export a value to node based on one of those
+    //IDs.
+    define.require = function (id) {
+        if (loaderCache[id]) {
+            return loaderCache[id];
+        }
+
+        if (defineCache[id]) {
+            runFactory.apply(null, defineCache[id]);
+            return loaderCache[id];
+        }
+    };
+
+    define.amd = {};
+
+    return define;
+}
+
+module.exports = amdefine;
+
+}).call(this,_dereq_('_process'),"/node_modules/jstransform/node_modules/source-map/node_modules/amdefine/amdefine.js")
+},{"_process":8,"path":7}],21:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+var docblockRe = /^\s*(\/\*\*(.|\r?\n)*?\*\/)/;
+var ltrimRe = /^\s*/;
+/**
+ * @param {String} contents
+ * @return {String}
+ */
+function extract(contents) {
+  var match = contents.match(docblockRe);
+  if (match) {
+    return match[0].replace(ltrimRe, '') || '';
+  }
+  return '';
+}
+
+
+var commentStartRe = /^\/\*\*?/;
+var commentEndRe = /\*+\/$/;
+var wsRe = /[\t ]+/g;
+var stringStartRe = /(\r?\n|^) *\*/g;
+var multilineRe = /(?:^|\r?\n) *(@[^\r\n]*?) *\r?\n *([^@\r\n\s][^@\r\n]+?) *\r?\n/g;
+var propertyRe = /(?:^|\r?\n) *@(\S+) *([^\r\n]*)/g;
+
+/**
+ * @param {String} contents
+ * @return {Array}
+ */
+function parse(docblock) {
+  docblock = docblock
+    .replace(commentStartRe, '')
+    .replace(commentEndRe, '')
+    .replace(wsRe, ' ')
+    .replace(stringStartRe, '$1');
+
+  // Normalize multi-line directives
+  var prev = '';
+  while (prev != docblock) {
+    prev = docblock;
+    docblock = docblock.replace(multilineRe, "\n$1 $2\n");
+  }
+  docblock = docblock.trim();
+
+  var result = [];
+  var match;
+  while (match = propertyRe.exec(docblock)) {
+    result.push([match[1], match[2]]);
+  }
+
+  return result;
+}
+
+/**
+ * Same as parse but returns an object of prop: value instead of array of paris
+ * If a property appers more than once the last one will be returned
+ *
+ * @param {String} contents
+ * @return {Object}
+ */
+function parseAsObject(docblock) {
+  var pairs = parse(docblock);
+  var result = {};
+  for (var i = 0; i < pairs.length; i++) {
+    result[pairs[i][0]] = pairs[i][1];
+  }
+  return result;
+}
+
+
+exports.extract = extract;
+exports.parse = parse;
+exports.parseAsObject = parseAsObject;
+
+},{}],22:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+/*jslint node: true*/
+"use strict";
+
+var esprima = _dereq_('esprima-fb');
+var utils = _dereq_('./utils');
+
+var getBoundaryNode = utils.getBoundaryNode;
+var declareIdentInScope = utils.declareIdentInLocalScope;
+var initScopeMetadata = utils.initScopeMetadata;
+var Syntax = esprima.Syntax;
+
+/**
+ * @param {object} node
+ * @param {object} parentNode
+ * @return {boolean}
+ */
+function _nodeIsClosureScopeBoundary(node, parentNode) {
+  if (node.type === Syntax.Program) {
+    return true;
+  }
+
+  var parentIsFunction =
+    parentNode.type === Syntax.FunctionDeclaration
+    || parentNode.type === Syntax.FunctionExpression
+    || parentNode.type === Syntax.ArrowFunctionExpression;
+
+  var parentIsCurlylessArrowFunc =
+    parentNode.type === Syntax.ArrowFunctionExpression
+    && node === parentNode.body;
+
+  return parentIsFunction
+         && (node.type === Syntax.BlockStatement || parentIsCurlylessArrowFunc);
+}
+
+function _nodeIsBlockScopeBoundary(node, parentNode) {
+  if (node.type === Syntax.Program) {
+    return false;
+  }
+
+  return node.type === Syntax.BlockStatement
+         && parentNode.type === Syntax.CatchClause;
+}
+
+/**
+ * @param {object} node
+ * @param {array} path
+ * @param {object} state
+ */
+function traverse(node, path, state) {
+  /*jshint -W004*/
+  // Create a scope stack entry if this is the first node we've encountered in
+  // its local scope
+  var startIndex = null;
+  var parentNode = path[0];
+  if (!Array.isArray(node) && state.localScope.parentNode !== parentNode) {
+    if (_nodeIsClosureScopeBoundary(node, parentNode)) {
+      var scopeIsStrict = state.scopeIsStrict;
+      if (!scopeIsStrict
+          && (node.type === Syntax.BlockStatement
+              || node.type === Syntax.Program)) {
+          scopeIsStrict =
+            node.body.length > 0
+            && node.body[0].type === Syntax.ExpressionStatement
+            && node.body[0].expression.type === Syntax.Literal
+            && node.body[0].expression.value === 'use strict';
+      }
+
+      if (node.type === Syntax.Program) {
+        startIndex = state.g.buffer.length;
+        state = utils.updateState(state, {
+          scopeIsStrict: scopeIsStrict
+        });
+      } else {
+        startIndex = state.g.buffer.length + 1;
+        state = utils.updateState(state, {
+          localScope: {
+            parentNode: parentNode,
+            parentScope: state.localScope,
+            identifiers: {},
+            tempVarIndex: 0,
+            tempVars: []
+          },
+          scopeIsStrict: scopeIsStrict
+        });
+
+        // All functions have an implicit 'arguments' object in scope
+        declareIdentInScope('arguments', initScopeMetadata(node), state);
+
+        // Include function arg identifiers in the scope boundaries of the
+        // function
+        if (parentNode.params.length > 0) {
+          var param;
+          var metadata = initScopeMetadata(parentNode, path.slice(1), path[0]);
+          for (var i = 0; i < parentNode.params.length; i++) {
+            param = parentNode.params[i];
+            if (param.type === Syntax.Identifier) {
+              declareIdentInScope(param.name, metadata, state);
+            }
+          }
+        }
+
+        // Include rest arg identifiers in the scope boundaries of their
+        // functions
+        if (parentNode.rest) {
+          var metadata = initScopeMetadata(
+            parentNode,
+            path.slice(1),
+            path[0]
+          );
+          declareIdentInScope(parentNode.rest.name, metadata, state);
+        }
+
+        // Named FunctionExpressions scope their name within the body block of
+        // themselves only
+        if (parentNode.type === Syntax.FunctionExpression && parentNode.id) {
+          var metaData =
+            initScopeMetadata(parentNode, path.parentNodeslice, parentNode);
+          declareIdentInScope(parentNode.id.name, metaData, state);
+        }
+      }
+
+      // Traverse and find all local identifiers in this closure first to
+      // account for function/variable declaration hoisting
+      collectClosureIdentsAndTraverse(node, path, state);
+    }
+
+    if (_nodeIsBlockScopeBoundary(node, parentNode)) {
+      startIndex = state.g.buffer.length;
+      state = utils.updateState(state, {
+        localScope: {
+          parentNode: parentNode,
+          parentScope: state.localScope,
+          identifiers: {},
+          tempVarIndex: 0,
+          tempVars: []
+        }
+      });
+
+      if (parentNode.type === Syntax.CatchClause) {
+        var metadata = initScopeMetadata(
+          parentNode,
+          path.slice(1),
+          parentNode
+        );
+        declareIdentInScope(parentNode.param.name, metadata, state);
+      }
+      collectBlockIdentsAndTraverse(node, path, state);
+    }
+  }
+
+  // Only catchup() before and after traversing a child node
+  function traverser(node, path, state) {
+    node.range && utils.catchup(node.range[0], state);
+    traverse(node, path, state);
+    node.range && utils.catchup(node.range[1], state);
+  }
+
+  utils.analyzeAndTraverse(walker, traverser, node, path, state);
+
+  // Inject temp variables into the scope.
+  if (startIndex !== null) {
+    utils.injectTempVarDeclarations(state, startIndex);
+  }
+}
+
+function collectClosureIdentsAndTraverse(node, path, state) {
+  utils.analyzeAndTraverse(
+    visitLocalClosureIdentifiers,
+    collectClosureIdentsAndTraverse,
+    node,
+    path,
+    state
+  );
+}
+
+function collectBlockIdentsAndTraverse(node, path, state) {
+  utils.analyzeAndTraverse(
+    visitLocalBlockIdentifiers,
+    collectBlockIdentsAndTraverse,
+    node,
+    path,
+    state
+  );
+}
+
+function visitLocalClosureIdentifiers(node, path, state) {
+  var metaData;
+  switch (node.type) {
+    case Syntax.ArrowFunctionExpression:
+    case Syntax.FunctionExpression:
+      // Function expressions don't get their names (if there is one) added to
+      // the closure scope they're defined in
+      return false;
+    case Syntax.ClassDeclaration:
+    case Syntax.ClassExpression:
+    case Syntax.FunctionDeclaration:
+      if (node.id) {
+        metaData = initScopeMetadata(getBoundaryNode(path), path.slice(), node);
+        declareIdentInScope(node.id.name, metaData, state);
+      }
+      return false;
+    case Syntax.VariableDeclarator:
+      // Variables have function-local scope
+      if (path[0].kind === 'var') {
+        metaData = initScopeMetadata(getBoundaryNode(path), path.slice(), node);
+        declareIdentInScope(node.id.name, metaData, state);
+      }
+      break;
+  }
+}
+
+function visitLocalBlockIdentifiers(node, path, state) {
+  // TODO: Support 'let' here...maybe...one day...or something...
+  if (node.type === Syntax.CatchClause) {
+    return false;
+  }
+}
+
+function walker(node, path, state) {
+  var visitors = state.g.visitors;
+  for (var i = 0; i < visitors.length; i++) {
+    if (visitors[i].test(node, path, state)) {
+      return visitors[i](traverse, node, path, state);
+    }
+  }
+}
+
+var _astCache = {};
+
+function getAstForSource(source, options) {
+  if (_astCache[source] && !options.disableAstCache) {
+    return _astCache[source];
+  }
+  var ast = esprima.parse(source, {
+    comment: true,
+    loc: true,
+    range: true,
+    sourceType: options.sourceType
+  });
+  if (!options.disableAstCache) {
+    _astCache[source] = ast;
+  }
+  return ast;
+}
+
+/**
+ * Applies all available transformations to the source
+ * @param {array} visitors
+ * @param {string} source
+ * @param {?object} options
+ * @return {object}
+ */
+function transform(visitors, source, options) {
+  options = options || {};
+  var ast;
+  try {
+    ast = getAstForSource(source, options);
+    } catch (e) {
+    e.message = 'Parse Error: ' + e.message;
+    throw e;
+  }
+  var state = utils.createState(source, ast, options);
+  state.g.visitors = visitors;
+
+  if (options.sourceMap) {
+    var SourceMapGenerator = _dereq_('source-map').SourceMapGenerator;
+    state.g.sourceMap = new SourceMapGenerator({file: options.filename || 'transformed.js'});
+  }
+
+  traverse(ast, [], state);
+  utils.catchup(source.length, state);
+
+  var ret = {code: state.g.buffer, extra: state.g.extra};
+  if (options.sourceMap) {
+    ret.sourceMap = state.g.sourceMap;
+    ret.sourceMapFilename =  options.filename || 'source.js';
+  }
+  return ret;
+}
+
+exports.transform = transform;
+exports.Syntax = Syntax;
+
+},{"./utils":23,"esprima-fb":9,"source-map":11}],23:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+/*jslint node: true*/
+var Syntax = _dereq_('esprima-fb').Syntax;
+var leadingIndentRegexp = /(^|\n)( {2}|\t)/g;
+var nonWhiteRegexp = /(\S)/g;
+
+/**
+ * A `state` object represents the state of the parser. It has "local" and
+ * "global" parts. Global contains parser position, source, etc. Local contains
+ * scope based properties like current class name. State should contain all the
+ * info required for transformation. It's the only mandatory object that is
+ * being passed to every function in transform chain.
+ *
+ * @param  {string} source
+ * @param  {object} transformOptions
+ * @return {object}
+ */
+function createState(source, rootNode, transformOptions) {
+  return {
+    /**
+     * A tree representing the current local scope (and its lexical scope chain)
+     * Useful for tracking identifiers from parent scopes, etc.
+     * @type {Object}
+     */
+    localScope: {
+      parentNode: rootNode,
+      parentScope: null,
+      identifiers: {},
+      tempVarIndex: 0,
+      tempVars: []
+    },
+    /**
+     * The name (and, if applicable, expression) of the super class
+     * @type {Object}
+     */
+    superClass: null,
+    /**
+     * The namespace to use when munging identifiers
+     * @type {String}
+     */
+    mungeNamespace: '',
+    /**
+     * Ref to the node for the current MethodDefinition
+     * @type {Object}
+     */
+    methodNode: null,
+    /**
+     * Ref to the node for the FunctionExpression of the enclosing
+     * MethodDefinition
+     * @type {Object}
+     */
+    methodFuncNode: null,
+    /**
+     * Name of the enclosing class
+     * @type {String}
+     */
+    className: null,
+    /**
+     * Whether we're currently within a `strict` scope
+     * @type {Bool}
+     */
+    scopeIsStrict: null,
+    /**
+     * Indentation offset
+     * @type {Number}
+     */
+    indentBy: 0,
+    /**
+     * Global state (not affected by updateState)
+     * @type {Object}
+     */
+    g: {
+      /**
+       * A set of general options that transformations can consider while doing
+       * a transformation:
+       *
+       * - minify
+       *   Specifies that transformation steps should do their best to minify
+       *   the output source when possible. This is useful for places where
+       *   minification optimizations are possible with higher-level context
+       *   info than what jsxmin can provide.
+       *
+       *   For example, the ES6 class transform will minify munged private
+       *   variables if this flag is set.
+       */
+      opts: transformOptions,
+      /**
+       * Current position in the source code
+       * @type {Number}
+       */
+      position: 0,
+      /**
+       * Auxiliary data to be returned by transforms
+       * @type {Object}
+       */
+      extra: {},
+      /**
+       * Buffer containing the result
+       * @type {String}
+       */
+      buffer: '',
+      /**
+       * Source that is being transformed
+       * @type {String}
+       */
+      source: source,
+
+      /**
+       * Cached parsed docblock (see getDocblock)
+       * @type {object}
+       */
+      docblock: null,
+
+      /**
+       * Whether the thing was used
+       * @type {Boolean}
+       */
+      tagNamespaceUsed: false,
+
+      /**
+       * If using bolt xjs transformation
+       * @type {Boolean}
+       */
+      isBolt: undefined,
+
+      /**
+       * Whether to record source map (expensive) or not
+       * @type {SourceMapGenerator|null}
+       */
+      sourceMap: null,
+
+      /**
+       * Filename of the file being processed. Will be returned as a source
+       * attribute in the source map
+       */
+      sourceMapFilename: 'source.js',
+
+      /**
+       * Only when source map is used: last line in the source for which
+       * source map was generated
+       * @type {Number}
+       */
+      sourceLine: 1,
+
+      /**
+       * Only when source map is used: last line in the buffer for which
+       * source map was generated
+       * @type {Number}
+       */
+      bufferLine: 1,
+
+      /**
+       * The top-level Program AST for the original file.
+       */
+      originalProgramAST: null,
+
+      sourceColumn: 0,
+      bufferColumn: 0
+    }
+  };
+}
+
+/**
+ * Updates a copy of a given state with "update" and returns an updated state.
+ *
+ * @param  {object} state
+ * @param  {object} update
+ * @return {object}
+ */
+function updateState(state, update) {
+  var ret = Object.create(state);
+  Object.keys(update).forEach(function(updatedKey) {
+    ret[updatedKey] = update[updatedKey];
+  });
+  return ret;
+}
+
+/**
+ * Given a state fill the resulting buffer from the original source up to
+ * the end
+ *
+ * @param {number} end
+ * @param {object} state
+ * @param {?function} contentTransformer Optional callback to transform newly
+ *                                       added content.
+ */
+function catchup(end, state, contentTransformer) {
+  if (end < state.g.position) {
+    // cannot move backwards
+    return;
+  }
+  var source = state.g.source.substring(state.g.position, end);
+  var transformed = updateIndent(source, state);
+  if (state.g.sourceMap && transformed) {
+    // record where we are
+    state.g.sourceMap.addMapping({
+      generated: { line: state.g.bufferLine, column: state.g.bufferColumn },
+      original: { line: state.g.sourceLine, column: state.g.sourceColumn },
+      source: state.g.sourceMapFilename
+    });
+
+    // record line breaks in transformed source
+    var sourceLines = source.split('\n');
+    var transformedLines = transformed.split('\n');
+    // Add line break mappings between last known mapping and the end of the
+    // added piece. So for the code piece
+    //  (foo, bar);
+    // > var x = 2;
+    // > var b = 3;
+    //   var c =
+    // only add lines marked with ">": 2, 3.
+    for (var i = 1; i < sourceLines.length - 1; i++) {
+      state.g.sourceMap.addMapping({
+        generated: { line: state.g.bufferLine, column: 0 },
+        original: { line: state.g.sourceLine, column: 0 },
+        source: state.g.sourceMapFilename
+      });
+      state.g.sourceLine++;
+      state.g.bufferLine++;
+    }
+    // offset for the last piece
+    if (sourceLines.length > 1) {
+      state.g.sourceLine++;
+      state.g.bufferLine++;
+      state.g.sourceColumn = 0;
+      state.g.bufferColumn = 0;
+    }
+    state.g.sourceColumn += sourceLines[sourceLines.length - 1].length;
+    state.g.bufferColumn +=
+      transformedLines[transformedLines.length - 1].length;
+  }
+  state.g.buffer +=
+    contentTransformer ? contentTransformer(transformed) : transformed;
+  state.g.position = end;
+}
+
+/**
+ * Returns original source for an AST node.
+ * @param {object} node
+ * @param {object} state
+ * @return {string}
+ */
+function getNodeSourceText(node, state) {
+  return state.g.source.substring(node.range[0], node.range[1]);
+}
+
+function _replaceNonWhite(value) {
+  return value.replace(nonWhiteRegexp, ' ');
+}
+
+/**
+ * Removes all non-whitespace characters
+ */
+function _stripNonWhite(value) {
+  return value.replace(nonWhiteRegexp, '');
+}
+
+/**
+ * Finds the position of the next instance of the specified syntactic char in
+ * the pending source.
+ *
+ * NOTE: This will skip instances of the specified char if they sit inside a
+ *       comment body.
+ *
+ * NOTE: This function also assumes that the buffer's current position is not
+ *       already within a comment or a string. This is rarely the case since all
+ *       of the buffer-advancement utility methods tend to be used on syntactic
+ *       nodes' range values -- but it's a small gotcha that's worth mentioning.
+ */
+function getNextSyntacticCharOffset(char, state) {
+  var pendingSource = state.g.source.substring(state.g.position);
+  var pendingSourceLines = pendingSource.split('\n');
+
+  var charOffset = 0;
+  var line;
+  var withinBlockComment = false;
+  var withinString = false;
+  lineLoop: while ((line = pendingSourceLines.shift()) !== undefined) {
+    var lineEndPos = charOffset + line.length;
+    charLoop: for (; charOffset < lineEndPos; charOffset++) {
+      var currChar = pendingSource[charOffset];
+      if (currChar === '"' || currChar === '\'') {
+        withinString = !withinString;
+        continue charLoop;
+      } else if (withinString) {
+        continue charLoop;
+      } else if (charOffset + 1 < lineEndPos) {
+        var nextTwoChars = currChar + line[charOffset + 1];
+        if (nextTwoChars === '//') {
+          charOffset = lineEndPos + 1;
+          continue lineLoop;
+        } else if (nextTwoChars === '/*') {
+          withinBlockComment = true;
+          charOffset += 1;
+          continue charLoop;
+        } else if (nextTwoChars === '*/') {
+          withinBlockComment = false;
+          charOffset += 1;
+          continue charLoop;
+        }
+      }
+
+      if (!withinBlockComment && currChar === char) {
+        return charOffset + state.g.position;
+      }
+    }
+
+    // Account for '\n'
+    charOffset++;
+    withinString = false;
+  }
+
+  throw new Error('`' + char + '` not found!');
+}
+
+/**
+ * Catches up as `catchup` but replaces non-whitespace chars with spaces.
+ */
+function catchupWhiteOut(end, state) {
+  catchup(end, state, _replaceNonWhite);
+}
+
+/**
+ * Catches up as `catchup` but removes all non-whitespace characters.
+ */
+function catchupWhiteSpace(end, state) {
+  catchup(end, state, _stripNonWhite);
+}
+
+/**
+ * Removes all non-newline characters
+ */
+var reNonNewline = /[^\n]/g;
+function stripNonNewline(value) {
+  return value.replace(reNonNewline, function() {
+    return '';
+  });
+}
+
+/**
+ * Catches up as `catchup` but removes all non-newline characters.
+ *
+ * Equivalent to appending as many newlines as there are in the original source
+ * between the current position and `end`.
+ */
+function catchupNewlines(end, state) {
+  catchup(end, state, stripNonNewline);
+}
+
+
+/**
+ * Same as catchup but does not touch the buffer
+ *
+ * @param  {number} end
+ * @param  {object} state
+ */
+function move(end, state) {
+  // move the internal cursors
+  if (state.g.sourceMap) {
+    if (end < state.g.position) {
+      state.g.position = 0;
+      state.g.sourceLine = 1;
+      state.g.sourceColumn = 0;
+    }
+
+    var source = state.g.source.substring(state.g.position, end);
+    var sourceLines = source.split('\n');
+    if (sourceLines.length > 1) {
+      state.g.sourceLine += sourceLines.length - 1;
+      state.g.sourceColumn = 0;
+    }
+    state.g.sourceColumn += sourceLines[sourceLines.length - 1].length;
+  }
+  state.g.position = end;
+}
+
+/**
+ * Appends a string of text to the buffer
+ *
+ * @param {string} str
+ * @param {object} state
+ */
+function append(str, state) {
+  if (state.g.sourceMap && str) {
+    state.g.sourceMap.addMapping({
+      generated: { line: state.g.bufferLine, column: state.g.bufferColumn },
+      original: { line: state.g.sourceLine, column: state.g.sourceColumn },
+      source: state.g.sourceMapFilename
+    });
+    var transformedLines = str.split('\n');
+    if (transformedLines.length > 1) {
+      state.g.bufferLine += transformedLines.length - 1;
+      state.g.bufferColumn = 0;
+    }
+    state.g.bufferColumn +=
+      transformedLines[transformedLines.length - 1].length;
+  }
+  state.g.buffer += str;
+}
+
+/**
+ * Update indent using state.indentBy property. Indent is measured in
+ * double spaces. Updates a single line only.
+ *
+ * @param {string} str
+ * @param {object} state
+ * @return {string}
+ */
+function updateIndent(str, state) {
+  /*jshint -W004*/
+  var indentBy = state.indentBy;
+  if (indentBy < 0) {
+    for (var i = 0; i < -indentBy; i++) {
+      str = str.replace(leadingIndentRegexp, '$1');
+    }
+  } else {
+    for (var i = 0; i < indentBy; i++) {
+      str = str.replace(leadingIndentRegexp, '$1$2$2');
+    }
+  }
+  return str;
+}
+
+/**
+ * Calculates indent from the beginning of the line until "start" or the first
+ * character before start.
+ * @example
+ *   "  foo.bar()"
+ *         ^
+ *       start
+ *   indent will be "  "
+ *
+ * @param  {number} start
+ * @param  {object} state
+ * @return {string}
+ */
+function indentBefore(start, state) {
+  var end = start;
+  start = start - 1;
+
+  while (start > 0 && state.g.source[start] != '\n') {
+    if (!state.g.source[start].match(/[ \t]/)) {
+      end = start;
+    }
+    start--;
+  }
+  return state.g.source.substring(start + 1, end);
+}
+
+function getDocblock(state) {
+  if (!state.g.docblock) {
+    var docblock = _dereq_('./docblock');
+    state.g.docblock =
+      docblock.parseAsObject(docblock.extract(state.g.source));
+  }
+  return state.g.docblock;
+}
+
+function identWithinLexicalScope(identName, state, stopBeforeNode) {
+  var currScope = state.localScope;
+  while (currScope) {
+    if (currScope.identifiers[identName] !== undefined) {
+      return true;
+    }
+
+    if (stopBeforeNode && currScope.parentNode === stopBeforeNode) {
+      break;
+    }
+
+    currScope = currScope.parentScope;
+  }
+  return false;
+}
+
+function identInLocalScope(identName, state) {
+  return state.localScope.identifiers[identName] !== undefined;
+}
+
+/**
+ * @param {object} boundaryNode
+ * @param {?array} path
+ * @return {?object} node
+ */
+function initScopeMetadata(boundaryNode, path, node) {
+  return {
+    boundaryNode: boundaryNode,
+    bindingPath: path,
+    bindingNode: node
+  };
+}
+
+function declareIdentInLocalScope(identName, metaData, state) {
+  state.localScope.identifiers[identName] = {
+    boundaryNode: metaData.boundaryNode,
+    path: metaData.bindingPath,
+    node: metaData.bindingNode,
+    state: Object.create(state)
+  };
+}
+
+function getLexicalBindingMetadata(identName, state) {
+  var currScope = state.localScope;
+  while (currScope) {
+    if (currScope.identifiers[identName] !== undefined) {
+      return currScope.identifiers[identName];
+    }
+
+    currScope = currScope.parentScope;
+  }
+}
+
+function getLocalBindingMetadata(identName, state) {
+  return state.localScope.identifiers[identName];
+}
+
+/**
+ * Apply the given analyzer function to the current node. If the analyzer
+ * doesn't return false, traverse each child of the current node using the given
+ * traverser function.
+ *
+ * @param {function} analyzer
+ * @param {function} traverser
+ * @param {object} node
+ * @param {array} path
+ * @param {object} state
+ */
+function analyzeAndTraverse(analyzer, traverser, node, path, state) {
+  if (node.type) {
+    if (analyzer(node, path, state) === false) {
+      return;
+    }
+    path.unshift(node);
+  }
+
+  getOrderedChildren(node).forEach(function(child) {
+    traverser(child, path, state);
+  });
+
+  node.type && path.shift();
+}
+
+/**
+ * It is crucial that we traverse in order, or else catchup() on a later
+ * node that is processed out of order can move the buffer past a node
+ * that we haven't handled yet, preventing us from modifying that node.
+ *
+ * This can happen when a node has multiple properties containing children.
+ * For example, XJSElement nodes have `openingElement`, `closingElement` and
+ * `children`. If we traverse `openingElement`, then `closingElement`, then
+ * when we get to `children`, the buffer has already caught up to the end of
+ * the closing element, after the children.
+ *
+ * This is basically a Schwartzian transform. Collects an array of children,
+ * each one represented as [child, startIndex]; sorts the array by start
+ * index; then traverses the children in that order.
+ */
+function getOrderedChildren(node) {
+  var queue = [];
+  for (var key in node) {
+    if (node.hasOwnProperty(key)) {
+      enqueueNodeWithStartIndex(queue, node[key]);
+    }
+  }
+  queue.sort(function(a, b) { return a[1] - b[1]; });
+  return queue.map(function(pair) { return pair[0]; });
+}
+
+/**
+ * Helper function for analyzeAndTraverse which queues up all of the children
+ * of the given node.
+ *
+ * Children can also be found in arrays, so we basically want to merge all of
+ * those arrays together so we can sort them and then traverse the children
+ * in order.
+ *
+ * One example is the Program node. It contains `body` and `comments`, both
+ * arrays. Lexographically, comments are interspersed throughout the body
+ * nodes, but esprima's AST groups them together.
+ */
+function enqueueNodeWithStartIndex(queue, node) {
+  if (typeof node !== 'object' || node === null) {
+    return;
+  }
+  if (node.range) {
+    queue.push([node, node.range[0]]);
+  } else if (Array.isArray(node)) {
+    for (var ii = 0; ii < node.length; ii++) {
+      enqueueNodeWithStartIndex(queue, node[ii]);
+    }
+  }
+}
+
+/**
+ * Checks whether a node or any of its sub-nodes contains
+ * a syntactic construct of the passed type.
+ * @param {object} node - AST node to test.
+ * @param {string} type - node type to lookup.
+ */
+function containsChildOfType(node, type) {
+  return containsChildMatching(node, function(node) {
+    return node.type === type;
+  });
+}
+
+function containsChildMatching(node, matcher) {
+  var foundMatchingChild = false;
+  function nodeTypeAnalyzer(node) {
+    if (matcher(node) === true) {
+      foundMatchingChild = true;
+      return false;
+    }
+  }
+  function nodeTypeTraverser(child, path, state) {
+    if (!foundMatchingChild) {
+      foundMatchingChild = containsChildMatching(child, matcher);
+    }
+  }
+  analyzeAndTraverse(
+    nodeTypeAnalyzer,
+    nodeTypeTraverser,
+    node,
+    []
+  );
+  return foundMatchingChild;
+}
+
+var scopeTypes = {};
+scopeTypes[Syntax.ArrowFunctionExpression] = true;
+scopeTypes[Syntax.FunctionExpression] = true;
+scopeTypes[Syntax.FunctionDeclaration] = true;
+scopeTypes[Syntax.Program] = true;
+
+function getBoundaryNode(path) {
+  for (var ii = 0; ii < path.length; ++ii) {
+    if (scopeTypes[path[ii].type]) {
+      return path[ii];
+    }
+  }
+  throw new Error(
+    'Expected to find a node with one of the following types in path:\n' +
+    JSON.stringify(Object.keys(scopeTypes))
+  );
+}
+
+function getTempVar(tempVarIndex) {
+  return '$__' + tempVarIndex;
+}
+
+function injectTempVar(state) {
+  var tempVar = '$__' + (state.localScope.tempVarIndex++);
+  state.localScope.tempVars.push(tempVar);
+  return tempVar;
+}
+
+function injectTempVarDeclarations(state, index) {
+  if (state.localScope.tempVars.length) {
+    state.g.buffer =
+      state.g.buffer.slice(0, index) +
+      'var ' + state.localScope.tempVars.join(', ') + ';' +
+      state.g.buffer.slice(index);
+    state.localScope.tempVars = [];
+  }
+}
+
+exports.analyzeAndTraverse = analyzeAndTraverse;
+exports.append = append;
+exports.catchup = catchup;
+exports.catchupNewlines = catchupNewlines;
+exports.catchupWhiteOut = catchupWhiteOut;
+exports.catchupWhiteSpace = catchupWhiteSpace;
+exports.containsChildMatching = containsChildMatching;
+exports.containsChildOfType = containsChildOfType;
+exports.createState = createState;
+exports.declareIdentInLocalScope = declareIdentInLocalScope;
+exports.getBoundaryNode = getBoundaryNode;
+exports.getDocblock = getDocblock;
+exports.getLexicalBindingMetadata = getLexicalBindingMetadata;
+exports.getLocalBindingMetadata = getLocalBindingMetadata;
+exports.getNextSyntacticCharOffset = getNextSyntacticCharOffset;
+exports.getNodeSourceText = getNodeSourceText;
+exports.getOrderedChildren = getOrderedChildren;
+exports.getTempVar = getTempVar;
+exports.identInLocalScope = identInLocalScope;
+exports.identWithinLexicalScope = identWithinLexicalScope;
+exports.indentBefore = indentBefore;
+exports.initScopeMetadata = initScopeMetadata;
+exports.injectTempVar = injectTempVar;
+exports.injectTempVarDeclarations = injectTempVarDeclarations;
+exports.move = move;
+exports.scopeTypes = scopeTypes;
+exports.updateIndent = updateIndent;
+exports.updateState = updateState;
+
+},{"./docblock":21,"esprima-fb":9}],24:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*global exports:true*/
+
+/**
+ * Desugars ES6 Arrow functions to ES3 function expressions.
+ * If the function contains `this` expression -- automatically
+ * binds the function to current value of `this`.
+ *
+ * Single parameter, simple expression:
+ *
+ * [1, 2, 3].map(x => x * x);
+ *
+ * [1, 2, 3].map(function(x) { return x * x; });
+ *
+ * Several parameters, complex block:
+ *
+ * this.users.forEach((user, idx) => {
+ *   return this.isActive(idx) && this.send(user);
+ * });
+ *
+ * this.users.forEach(function(user, idx) {
+ *   return this.isActive(idx) && this.send(user);
+ * }.bind(this));
+ *
+ */
+var restParamVisitors = _dereq_('./es6-rest-param-visitors');
+var destructuringVisitors = _dereq_('./es6-destructuring-visitors');
+
+var Syntax = _dereq_('esprima-fb').Syntax;
+var utils = _dereq_('../src/utils');
+
+/**
+ * @public
+ */
+function visitArrowFunction(traverse, node, path, state) {
+  var notInExpression = (path[0].type === Syntax.ExpressionStatement);
+
+  // Wrap a function into a grouping operator, if it's not
+  // in the expression position.
+  if (notInExpression) {
+    utils.append('(', state);
+  }
+
+  utils.append('function', state);
+  renderParams(traverse, node, path, state);
+
+  // Skip arrow.
+  utils.catchupWhiteSpace(node.body.range[0], state);
+
+  var renderBody = node.body.type == Syntax.BlockStatement
+    ? renderStatementBody
+    : renderExpressionBody;
+
+  path.unshift(node);
+  renderBody(traverse, node, path, state);
+  path.shift();
+
+  // Bind the function only if `this` value is used
+  // inside it or inside any sub-expression.
+  var containsBindingSyntax =
+    utils.containsChildMatching(node.body, function(node) {
+      return node.type === Syntax.ThisExpression
+             || (node.type === Syntax.Identifier
+                 && node.name === "super");
+    });
+
+  if (containsBindingSyntax) {
+    utils.append('.bind(this)', state);
+  }
+
+  utils.catchupWhiteSpace(node.range[1], state);
+
+  // Close wrapper if not in the expression.
+  if (notInExpression) {
+    utils.append(')', state);
+  }
+
+  return false;
+}
+
+function renderParams(traverse, node, path, state) {
+  // To preserve inline typechecking directives, we
+  // distinguish between parens-free and paranthesized single param.
+  if (isParensFreeSingleParam(node, state) || !node.params.length) {
+    utils.append('(', state);
+  }
+  if (node.params.length !== 0) {
+    path.unshift(node);
+    traverse(node.params, path, state);
+    path.unshift();
+  }
+  utils.append(')', state);
+}
+
+function isParensFreeSingleParam(node, state) {
+  return node.params.length === 1 &&
+    state.g.source[state.g.position] !== '(';
+}
+
+function renderExpressionBody(traverse, node, path, state) {
+  // Wrap simple expression bodies into a block
+  // with explicit return statement.
+  utils.append('{', state);
+
+  // Special handling of rest param.
+  if (node.rest) {
+    utils.append(
+      restParamVisitors.renderRestParamSetup(node, state),
+      state
+    );
+  }
+
+  // Special handling of destructured params.
+  destructuringVisitors.renderDestructuredComponents(
+    node,
+    utils.updateState(state, {
+      localScope: {
+        parentNode: state.parentNode,
+        parentScope: state.parentScope,
+        identifiers: state.identifiers,
+        tempVarIndex: 0
+      }
+    })
+  );
+
+  utils.append('return ', state);
+  renderStatementBody(traverse, node, path, state);
+  utils.append(';}', state);
+}
+
+function renderStatementBody(traverse, node, path, state) {
+  traverse(node.body, path, state);
+  utils.catchup(node.body.range[1], state);
+}
+
+visitArrowFunction.test = function(node, path, state) {
+  return node.type === Syntax.ArrowFunctionExpression;
+};
+
+exports.visitorList = [
+  visitArrowFunction
+];
+
+
+},{"../src/utils":23,"./es6-destructuring-visitors":27,"./es6-rest-param-visitors":30,"esprima-fb":9}],25:[function(_dereq_,module,exports){
+/**
+ * Copyright 2004-present Facebook. All Rights Reserved.
+ */
+/*global exports:true*/
+
+/**
+ * Implements ES6 call spread.
+ *
+ * instance.method(a, b, c, ...d)
+ *
+ * instance.method.apply(instance, [a, b, c].concat(d))
+ *
+ */
+
+var Syntax = _dereq_('esprima-fb').Syntax;
+var utils = _dereq_('../src/utils');
+
+function process(traverse, node, path, state) {
+  utils.move(node.range[0], state);
+  traverse(node, path, state);
+  utils.catchup(node.range[1], state);
+}
+
+function visitCallSpread(traverse, node, path, state) {
+  utils.catchup(node.range[0], state);
+
+  if (node.type === Syntax.NewExpression) {
+    // Input  = new Set(1, 2, ...list)
+    // Output = new (Function.prototype.bind.apply(Set, [null, 1, 2].concat(list)))
+    utils.append('new (Function.prototype.bind.apply(', state);
+    process(traverse, node.callee, path, state);
+  } else if (node.callee.type === Syntax.MemberExpression) {
+    // Input  = get().fn(1, 2, ...more)
+    // Output = (_ = get()).fn.apply(_, [1, 2].apply(more))
+    var tempVar = utils.injectTempVar(state);
+    utils.append('(' + tempVar + ' = ', state);
+    process(traverse, node.callee.object, path, state);
+    utils.append(')', state);
+    if (node.callee.property.type === Syntax.Identifier) {
+      utils.append('.', state);
+      process(traverse, node.callee.property, path, state);
+    } else {
+      utils.append('[', state);
+      process(traverse, node.callee.property, path, state);
+      utils.append(']', state);
+    }
+    utils.append('.apply(' + tempVar, state);
+  } else {
+    // Input  = max(1, 2, ...list)
+    // Output = max.apply(null, [1, 2].concat(list))
+    var needsToBeWrappedInParenthesis =
+      node.callee.type === Syntax.FunctionDeclaration ||
+      node.callee.type === Syntax.FunctionExpression;
+    if (needsToBeWrappedInParenthesis) {
+      utils.append('(', state);
+    }
+    process(traverse, node.callee, path, state);
+    if (needsToBeWrappedInParenthesis) {
+      utils.append(')', state);
+    }
+    utils.append('.apply(null', state);
+  }
+  utils.append(', ', state);
+
+  var args = node.arguments.slice();
+  var spread = args.pop();
+  if (args.length || node.type === Syntax.NewExpression) {
+    utils.append('[', state);
+    if (node.type === Syntax.NewExpression) {
+      utils.append('null' + (args.length ? ', ' : ''), state);
+    }
+    while (args.length) {
+      var arg = args.shift();
+      utils.move(arg.range[0], state);
+      traverse(arg, path, state);
+      if (args.length) {
+        utils.catchup(args[0].range[0], state);
+      } else {
+        utils.catchup(arg.range[1], state);
+      }
+    }
+    utils.append('].concat(', state);
+    process(traverse, spread.argument, path, state);
+    utils.append(')', state);
+  } else {
+    process(traverse, spread.argument, path, state);
+  }
+  utils.append(node.type === Syntax.NewExpression ? '))' : ')', state);
+
+  utils.move(node.range[1], state);
+  return false;
+}
+
+visitCallSpread.test = function(node, path, state) {
+  return (
+    (
+      node.type === Syntax.CallExpression ||
+      node.type === Syntax.NewExpression
+    ) &&
+    node.arguments.length > 0 &&
+    node.arguments[node.arguments.length - 1].type === Syntax.SpreadElement
+  );
+};
+
+exports.visitorList = [
+  visitCallSpread
+];
+
+},{"../src/utils":23,"esprima-fb":9}],26:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*jslint node:true*/
+
+/**
+ * @typechecks
+ */
+'use strict';
+
+var base62 = _dereq_('base62');
+var Syntax = _dereq_('esprima-fb').Syntax;
+var utils = _dereq_('../src/utils');
+var reservedWordsHelper = _dereq_('./reserved-words-helper');
+
+var declareIdentInLocalScope = utils.declareIdentInLocalScope;
+var initScopeMetadata = utils.initScopeMetadata;
+
+var SUPER_PROTO_IDENT_PREFIX = '____SuperProtoOf';
+
+var _anonClassUUIDCounter = 0;
+var _mungedSymbolMaps = {};
+
+function resetSymbols() {
+  _anonClassUUIDCounter = 0;
+  _mungedSymbolMaps = {};
+}
+
+/**
+ * Used to generate a unique class for use with code-gens for anonymous class
+ * expressions.
+ *
+ * @param {object} state
+ * @return {string}
+ */
+function _generateAnonymousClassName(state) {
+  var mungeNamespace = state.mungeNamespace || '';
+  return '____Class' + mungeNamespace + base62.encode(_anonClassUUIDCounter++);
+}
+
+/**
+ * Given an identifier name, munge it using the current state's mungeNamespace.
+ *
+ * @param {string} identName
+ * @param {object} state
+ * @return {string}
+ */
+function _getMungedName(identName, state) {
+  var mungeNamespace = state.mungeNamespace;
+  var shouldMinify = state.g.opts.minify;
+
+  if (shouldMinify) {
+    if (!_mungedSymbolMaps[mungeNamespace]) {
+      _mungedSymbolMaps[mungeNamespace] = {
+        symbolMap: {},
+        identUUIDCounter: 0
+      };
+    }
+
+    var symbolMap = _mungedSymbolMaps[mungeNamespace].symbolMap;
+    if (!symbolMap[identName]) {
+      symbolMap[identName] =
+        base62.encode(_mungedSymbolMaps[mungeNamespace].identUUIDCounter++);
+    }
+    identName = symbolMap[identName];
+  }
+  return '$' + mungeNamespace + identName;
+}
+
+/**
+ * Extracts super class information from a class node.
+ *
+ * Information includes name of the super class and/or the expression string
+ * (if extending from an expression)
+ *
+ * @param {object} node
+ * @param {object} state
+ * @return {object}
+ */
+function _getSuperClassInfo(node, state) {
+  var ret = {
+    name: null,
+    expression: null
+  };
+  if (node.superClass) {
+    if (node.superClass.type === Syntax.Identifier) {
+      ret.name = node.superClass.name;
+    } else {
+      // Extension from an expression
+      ret.name = _generateAnonymousClassName(state);
+      ret.expression = state.g.source.substring(
+        node.superClass.range[0],
+        node.superClass.range[1]
+      );
+    }
+  }
+  return ret;
+}
+
+/**
+ * Used with .filter() to find the constructor method in a list of
+ * MethodDefinition nodes.
+ *
+ * @param {object} classElement
+ * @return {boolean}
+ */
+function _isConstructorMethod(classElement) {
+  return classElement.type === Syntax.MethodDefinition &&
+         classElement.key.type === Syntax.Identifier &&
+         classElement.key.name === 'constructor';
+}
+
+/**
+ * @param {object} node
+ * @param {object} state
+ * @return {boolean}
+ */
+function _shouldMungeIdentifier(node, state) {
+  return (
+    !!state.methodFuncNode &&
+    !utils.getDocblock(state).hasOwnProperty('preventMunge') &&
+    /^_(?!_)/.test(node.name)
+  );
+}
+
+/**
+ * @param {function} traverse
+ * @param {object} node
+ * @param {array} path
+ * @param {object} state
+ */
+function visitClassMethod(traverse, node, path, state) {
+  if (!state.g.opts.es5 && (node.kind === 'get' || node.kind === 'set')) {
+    throw new Error(
+      'This transform does not support ' + node.kind + 'ter methods for ES6 ' +
+      'classes. (line: ' + node.loc.start.line + ', col: ' +
+      node.loc.start.column + ')'
+    );
+  }
+  state = utils.updateState(state, {
+    methodNode: node
+  });
+  utils.catchup(node.range[0], state);
+  path.unshift(node);
+  traverse(node.value, path, state);
+  path.shift();
+  return false;
+}
+visitClassMethod.test = function(node, path, state) {
+  return node.type === Syntax.MethodDefinition;
+};
+
+/**
+ * @param {function} traverse
+ * @param {object} node
+ * @param {array} path
+ * @param {object} state
+ */
+function visitClassFunctionExpression(traverse, node, path, state) {
+  var methodNode = path[0];
+  var isGetter = methodNode.kind === 'get';
+  var isSetter = methodNode.kind === 'set';
+
+  state = utils.updateState(state, {
+    methodFuncNode: node
+  });
+
+  if (methodNode.key.name === 'constructor') {
+    utils.append('function ' + state.className, state);
+  } else {
+    var methodAccessorComputed = false;
+    var methodAccessor;
+    var prototypeOrStatic = methodNode["static"] ? '' : '.prototype';
+    var objectAccessor = state.className + prototypeOrStatic;
+
+    if (methodNode.key.type === Syntax.Identifier) {
+      // foo() {}
+      methodAccessor = methodNode.key.name;
+      if (_shouldMungeIdentifier(methodNode.key, state)) {
+        methodAccessor = _getMungedName(methodAccessor, state);
+      }
+      if (isGetter || isSetter) {
+        methodAccessor = JSON.stringify(methodAccessor);
+      } else if (reservedWordsHelper.isReservedWord(methodAccessor)) {
+        methodAccessorComputed = true;
+        methodAccessor = JSON.stringify(methodAccessor);
+      }
+    } else if (methodNode.key.type === Syntax.Literal) {
+      // 'foo bar'() {}  | get 'foo bar'() {} | set 'foo bar'() {}
+      methodAccessor = JSON.stringify(methodNode.key.value);
+      methodAccessorComputed = true;
+    }
+
+    if (isSetter || isGetter) {
+      utils.append(
+        'Object.defineProperty(' +
+          objectAccessor + ',' +
+          methodAccessor + ',' +
+          '{configurable:true,' +
+          methodNode.kind + ':function',
+        state
+      );
+    } else {
+      if (state.g.opts.es3) {
+        if (methodAccessorComputed) {
+          methodAccessor = '[' + methodAccessor + ']';
+        } else {
+          methodAccessor = '.' + methodAccessor;
+        }
+        utils.append(
+          objectAccessor +
+          methodAccessor + '=function' + (node.generator ? '*' : ''),
+          state
+        );
+      } else {
+        if (!methodAccessorComputed) {
+          methodAccessor = JSON.stringify(methodAccessor);
+        }
+        utils.append(
+          'Object.defineProperty(' +
+            objectAccessor + ',' +
+            methodAccessor + ',' +
+            '{writable:true,configurable:true,' +
+            'value:function' + (node.generator ? '*' : ''),
+          state
+        );
+      }
+    }
+  }
+  utils.move(methodNode.key.range[1], state);
+  utils.append('(', state);
+
+  var params = node.params;
+  if (params.length > 0) {
+    utils.catchupNewlines(params[0].range[0], state);
+    for (var i = 0; i < params.length; i++) {
+      utils.catchup(node.params[i].range[0], state);
+      path.unshift(node);
+      traverse(params[i], path, state);
+      path.shift();
+    }
+  }
+
+  var closingParenPosition = utils.getNextSyntacticCharOffset(')', state);
+  utils.catchupWhiteSpace(closingParenPosition, state);
+
+  var openingBracketPosition = utils.getNextSyntacticCharOffset('{', state);
+  utils.catchup(openingBracketPosition + 1, state);
+
+  if (!state.scopeIsStrict) {
+    utils.append('"use strict";', state);
+    state = utils.updateState(state, {
+      scopeIsStrict: true
+    });
+  }
+  utils.move(node.body.range[0] + '{'.length, state);
+
+  path.unshift(node);
+  traverse(node.body, path, state);
+  path.shift();
+  utils.catchup(node.body.range[1], state);
+
+  if (methodNode.key.name !== 'constructor') {
+    if (isGetter || isSetter || !state.g.opts.es3) {
+      utils.append('})', state);
+    }
+    utils.append(';', state);
+  }
+  return false;
+}
+visitClassFunctionExpression.test = function(node, path, state) {
+  return node.type === Syntax.FunctionExpression
+         && path[0].type === Syntax.MethodDefinition;
+};
+
+function visitClassMethodParam(traverse, node, path, state) {
+  var paramName = node.name;
+  if (_shouldMungeIdentifier(node, state)) {
+    paramName = _getMungedName(node.name, state);
+  }
+  utils.append(paramName, state);
+  utils.move(node.range[1], state);
+}
+visitClassMethodParam.test = function(node, path, state) {
+  if (!path[0] || !path[1]) {
+    return;
+  }
+
+  var parentFuncExpr = path[0];
+  var parentClassMethod = path[1];
+
+  return parentFuncExpr.type === Syntax.FunctionExpression
+         && parentClassMethod.type === Syntax.MethodDefinition
+         && node.type === Syntax.Identifier;
+};
+
+/**
+ * @param {function} traverse
+ * @param {object} node
+ * @param {array} path
+ * @param {object} state
+ */
+function _renderClassBody(traverse, node, path, state) {
+  var className = state.className;
+  var superClass = state.superClass;
+
+  // Set up prototype of constructor on same line as `extends` for line-number
+  // preservation. This relies on function-hoisting if a constructor function is
+  // defined in the class body.
+  if (superClass.name) {
+    // If the super class is an expression, we need to memoize the output of the
+    // expression into the generated class name variable and use that to refer
+    // to the super class going forward. Example:
+    //
+    //   class Foo extends mixin(Bar, Baz) {}
+    //     --transforms to--
+    //   function Foo() {} var ____Class0Blah = mixin(Bar, Baz);
+    if (superClass.expression !== null) {
+      utils.append(
+        'var ' + superClass.name + '=' + superClass.expression + ';',
+        state
+      );
+    }
+
+    var keyName = superClass.name + '____Key';
+    var keyNameDeclarator = '';
+    if (!utils.identWithinLexicalScope(keyName, state)) {
+      keyNameDeclarator = 'var ';
+      declareIdentInLocalScope(keyName, initScopeMetadata(node), state);
+    }
+    utils.append(
+      'for(' + keyNameDeclarator + keyName + ' in ' + superClass.name + '){' +
+        'if(' + superClass.name + '.hasOwnProperty(' + keyName + ')){' +
+          className + '[' + keyName + ']=' +
+            superClass.name + '[' + keyName + '];' +
+        '}' +
+      '}',
+      state
+    );
+
+    var superProtoIdentStr = SUPER_PROTO_IDENT_PREFIX + superClass.name;
+    if (!utils.identWithinLexicalScope(superProtoIdentStr, state)) {
+      utils.append(
+        'var ' + superProtoIdentStr + '=' + superClass.name + '===null?' +
+        'null:' + superClass.name + '.prototype;',
+        state
+      );
+      declareIdentInLocalScope(superProtoIdentStr, initScopeMetadata(node), state);
+    }
+
+    utils.append(
+      className + '.prototype=Object.create(' + superProtoIdentStr + ');',
+      state
+    );
+    utils.append(
+      className + '.prototype.constructor=' + className + ';',
+      state
+    );
+    utils.append(
+      className + '.__superConstructor__=' + superClass.name + ';',
+      state
+    );
+  }
+
+  // If there's no constructor method specified in the class body, create an
+  // empty constructor function at the top (same line as the class keyword)
+  if (!node.body.body.filter(_isConstructorMethod).pop()) {
+    utils.append('function ' + className + '(){', state);
+    if (!state.scopeIsStrict) {
+      utils.append('"use strict";', state);
+    }
+    if (superClass.name) {
+      utils.append(
+        'if(' + superClass.name + '!==null){' +
+        superClass.name + '.apply(this,arguments);}',
+        state
+      );
+    }
+    utils.append('}', state);
+  }
+
+  utils.move(node.body.range[0] + '{'.length, state);
+  traverse(node.body, path, state);
+  utils.catchupWhiteSpace(node.range[1], state);
+}
+
+/**
+ * @param {function} traverse
+ * @param {object} node
+ * @param {array} path
+ * @param {object} state
+ */
+function visitClassDeclaration(traverse, node, path, state) {
+  var className = node.id.name;
+  var superClass = _getSuperClassInfo(node, state);
+
+  state = utils.updateState(state, {
+    mungeNamespace: className,
+    className: className,
+    superClass: superClass
+  });
+
+  _renderClassBody(traverse, node, path, state);
+
+  return false;
+}
+visitClassDeclaration.test = function(node, path, state) {
+  return node.type === Syntax.ClassDeclaration;
+};
+
+/**
+ * @param {function} traverse
+ * @param {object} node
+ * @param {array} path
+ * @param {object} state
+ */
+function visitClassExpression(traverse, node, path, state) {
+  var className = node.id && node.id.name || _generateAnonymousClassName(state);
+  var superClass = _getSuperClassInfo(node, state);
+
+  utils.append('(function(){', state);
+
+  state = utils.updateState(state, {
+    mungeNamespace: className,
+    className: className,
+    superClass: superClass
+  });
+
+  _renderClassBody(traverse, node, path, state);
+
+  utils.append('return ' + className + ';})()', state);
+  return false;
+}
+visitClassExpression.test = function(node, path, state) {
+  return node.type === Syntax.ClassExpression;
+};
+
+/**
+ * @param {function} traverse
+ * @param {object} node
+ * @param {array} path
+ * @param {object} state
+ */
+function visitPrivateIdentifier(traverse, node, path, state) {
+  utils.append(_getMungedName(node.name, state), state);
+  utils.move(node.range[1], state);
+}
+visitPrivateIdentifier.test = function(node, path, state) {
+  if (node.type === Syntax.Identifier && _shouldMungeIdentifier(node, state)) {
+    // Always munge non-computed properties of MemberExpressions
+    // (a la preventing access of properties of unowned objects)
+    if (path[0].type === Syntax.MemberExpression && path[0].object !== node
+        && path[0].computed === false) {
+      return true;
+    }
+
+    // Always munge identifiers that were declared within the method function
+    // scope
+    if (utils.identWithinLexicalScope(node.name, state, state.methodFuncNode)) {
+      return true;
+    }
+
+    // Always munge private keys on object literals defined within a method's
+    // scope.
+    if (path[0].type === Syntax.Property
+        && path[1].type === Syntax.ObjectExpression) {
+      return true;
+    }
+
+    // Always munge function parameters
+    if (path[0].type === Syntax.FunctionExpression
+        || path[0].type === Syntax.FunctionDeclaration
+        || path[0].type === Syntax.ArrowFunctionExpression) {
+      for (var i = 0; i < path[0].params.length; i++) {
+        if (path[0].params[i] === node) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+};
+
+/**
+ * @param {function} traverse
+ * @param {object} node
+ * @param {array} path
+ * @param {object} state
+ */
+function visitSuperCallExpression(traverse, node, path, state) {
+  var superClassName = state.superClass.name;
+
+  if (node.callee.type === Syntax.Identifier) {
+    if (_isConstructorMethod(state.methodNode)) {
+      utils.append(superClassName + '.call(', state);
+    } else {
+      var protoProp = SUPER_PROTO_IDENT_PREFIX + superClassName;
+      if (state.methodNode.key.type === Syntax.Identifier) {
+        protoProp += '.' + state.methodNode.key.name;
+      } else if (state.methodNode.key.type === Syntax.Literal) {
+        protoProp += '[' + JSON.stringify(state.methodNode.key.value) + ']';
+      }
+      utils.append(protoProp + ".call(", state);
+    }
+    utils.move(node.callee.range[1], state);
+  } else if (node.callee.type === Syntax.MemberExpression) {
+    utils.append(SUPER_PROTO_IDENT_PREFIX + superClassName, state);
+    utils.move(node.callee.object.range[1], state);
+
+    if (node.callee.computed) {
+      // ["a" + "b"]
+      utils.catchup(node.callee.property.range[1] + ']'.length, state);
+    } else {
+      // .ab
+      utils.append('.' + node.callee.property.name, state);
+    }
+
+    utils.append('.call(', state);
+    utils.move(node.callee.range[1], state);
+  }
+
+  utils.append('this', state);
+  if (node.arguments.length > 0) {
+    utils.append(',', state);
+    utils.catchupWhiteSpace(node.arguments[0].range[0], state);
+    traverse(node.arguments, path, state);
+  }
+
+  utils.catchupWhiteSpace(node.range[1], state);
+  utils.append(')', state);
+  return false;
+}
+visitSuperCallExpression.test = function(node, path, state) {
+  if (state.superClass && node.type === Syntax.CallExpression) {
+    var callee = node.callee;
+    if (callee.type === Syntax.Identifier && callee.name === 'super'
+        || callee.type == Syntax.MemberExpression
+           && callee.object.name === 'super') {
+      return true;
+    }
+  }
+  return false;
+};
+
+/**
+ * @param {function} traverse
+ * @param {object} node
+ * @param {array} path
+ * @param {object} state
+ */
+function visitSuperMemberExpression(traverse, node, path, state) {
+  var superClassName = state.superClass.name;
+
+  utils.append(SUPER_PROTO_IDENT_PREFIX + superClassName, state);
+  utils.move(node.object.range[1], state);
+}
+visitSuperMemberExpression.test = function(node, path, state) {
+  return state.superClass
+         && node.type === Syntax.MemberExpression
+         && node.object.type === Syntax.Identifier
+         && node.object.name === 'super';
+};
+
+exports.resetSymbols = resetSymbols;
+
+exports.visitorList = [
+  visitClassDeclaration,
+  visitClassExpression,
+  visitClassFunctionExpression,
+  visitClassMethod,
+  visitClassMethodParam,
+  visitPrivateIdentifier,
+  visitSuperCallExpression,
+  visitSuperMemberExpression
+];
+
+},{"../src/utils":23,"./reserved-words-helper":34,"base62":10,"esprima-fb":9}],27:[function(_dereq_,module,exports){
+/**
+ * Copyright 2014 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/*global exports:true*/
+
+/**
+ * Implements ES6 destructuring assignment and pattern matchng.
+ *
+ * function init({port, ip, coords: [x, y]}) {
+ *   return (x && y) ? {id, port} : {ip};
+ * };
+ *
+ * function init($__0) {
+ *   var
+ *    port = $__0.port,
+ *    ip = $__0.ip,
+ *    $__1 = $__0.coords,
+ *    x = $__1[0],
+ *    y = $__1[1];
+ *   return (x && y) ? {id, port} : {ip};
+ * }
+ *
+ * var x, {ip, port} = init({ip, port});
+ *
+ * var x, $__0 = init({ip, port}), ip = $__0.ip, port = $__0.port;
+ *
+ */
+var Syntax = _dereq_('esprima-fb').Syntax;
+var utils = _dereq_('../src/utils');
+
+var reservedWordsHelper = _dereq_('./reserved-words-helper');
+var restParamVisitors = _dereq_('./es6-rest-param-visitors');
+var restPropertyHelpers = _dereq_('./es7-rest-property-helpers');
+
+// -------------------------------------------------------
+// 1. Structured variable declarations.
+//
+// var [a, b] = [b, a];
+// var {x, y} = {y, x};
+// -------------------------------------------------------
+
+function visitStructuredVariable(traverse, node, path, state) {
+  // Allocate new temp for the pattern.
+  utils.append(utils.getTempVar(state.localScope.tempVarIndex) + '=', state);
+  // Skip the pattern and assign the init to the temp.
+  utils.catchupWhiteSpace(node.init.range[0], state);
+  traverse(node.init, path, state);
+  utils.catchup(node.init.range[1], state);
+  // Render the destructured data.
+  utils.append(',' + getDestructuredComponents(node.id, state), state);
+  state.localScope.tempVarIndex++;
+  return false;
+}
+
+visitStructuredVariable.test = function(node, path, state) {
+  return node.type === Syntax.VariableDeclarator &&
+    isStructuredPattern(node.id);
+};
+
+function isStructuredPattern(node) {
+  return node.type === Syntax.ObjectPattern ||
+    node.type === Syntax.ArrayPattern;
+}
+
+// Main function which does actual recursive destructuring
+// of nested complex structures.
+function getDestructuredComponents(node, state) {
+  var tmpIndex = state.localScope.tempVarIndex;
+  var components = [];
+  var patternItems = getPatternItems(node);
+
+  for (var idx = 0; idx < patternItems.length; idx++) {
+    var item = patternItems[idx];
+    if (!item) {
+      continue;
+    }
+
+    if (item.type === Syntax.SpreadElement) {
+      // Spread/rest of an array.
+      // TODO(dmitrys): support spread in the middle of a pattern
+      // and also for function param patterns: [x, ...xs, y]
+      components.push(item.argument.name +
+        '=Array.prototype.slice.call(' +
+        utils.getTempVar(tmpIndex) + ',' + idx + ')'
+      );
+      continue;
+    }
+
+    if (item.type === Syntax.SpreadProperty) {
+      var restExpression = restPropertyHelpers.renderRestExpression(
+        utils.getTempVar(tmpIndex),
+        patternItems
+      );
+      components.push(item.argument.name + '=' + restExpression);
+      continue;
+    }
+
+    // Depending on pattern type (Array or Object), we get
+    // corresponding pattern item parts.
+    var accessor = getPatternItemAccessor(node, item, tmpIndex, idx);
+    var value = getPatternItemValue(node, item);
+
+    // TODO(dmitrys): implement default values: {x, y=5}
+    if (value.type === Syntax.Identifier) {
+      // Simple pattern item.
+      components.push(value.name + '=' + accessor);
+    } else {
+      // Complex sub-structure.
+      components.push(
+        utils.getTempVar(++state.localScope.tempVarIndex) + '=' + accessor +
+        ',' + getDestructuredComponents(value, state)
+      );
+    }
+  }
+
+  return components.join(',');
+}
+
+function getPatternItems(node) {
+  return node.properties || node.elements;
+}
+
+function getPatternItemAccessor(node, patternItem, tmpIndex, idx) {
+  var tmpName = utils.getTempVar(tmpIndex);
+  if (node.type === Syntax.ObjectPattern) {
+    if (reservedWordsHelper.isReservedWord(patternItem.key.name)) {
+      return tmpName + '["' + patternItem.key.name + '"]';
+    } else if (patternItem.key.type === Syntax.Literal) {
+      return tmpName + '[' + JSON.stringify(patternItem.key.value) + ']';
+    } else if (patternItem.key.type === Syntax.Identifier) {
+      return tmpName + '.' + patternItem.key.name;
+    }
+  } else if (node.type === Syntax.ArrayPattern) {
+    return tmpName + '[' + idx + ']';
+  }
+}
+
+function getPatternItemValue(node, patternItem) {
+  return node.type === Syntax.ObjectPattern
+    ? patternItem.value
+    : patternItem;
+}
+
+// -------------------------------------------------------
+// 2. Assignment expression.
+//
+// [a, b] = [b, a];
+// ({x, y} = {y, x});
+// -------------------------------------------------------
+
+function visitStructuredAssignment(traverse, node, path, state) {
+  var exprNode = node.expression;
+  utils.append('var ' + utils.getTempVar(state.localScope.tempVarIndex) + '=', state);
+
+  utils.catchupWhiteSpace(exprNode.right.range[0], state);
+  traverse(exprNode.right, path, state);
+  utils.catchup(exprNode.right.range[1], state);
+
+  utils.append(
+    ';' + getDestructuredComponents(exprNode.left, state) + ';',
+    state
+  );
+
+  utils.catchupWhiteSpace(node.range[1], state);
+  state.localScope.tempVarIndex++;
+  return false;
+}
+
+visitStructuredAssignment.test = function(node, path, state) {
+  // We consider the expression statement rather than just assignment
+  // expression to cover case with object patters which should be
+  // wrapped in grouping operator: ({x, y} = {y, x});
+  return node.type === Syntax.ExpressionStatement &&
+    node.expression.type === Syntax.AssignmentExpression &&
+    isStructuredPattern(node.expression.left);
+};
+
+// -------------------------------------------------------
+// 3. Structured parameter.
+//
+// function foo({x, y}) { ... }
+// -------------------------------------------------------
+
+function visitStructuredParameter(traverse, node, path, state) {
+  utils.append(utils.getTempVar(getParamIndex(node, path)), state);
+  utils.catchupWhiteSpace(node.range[1], state);
+  return true;
+}
+
+function getParamIndex(paramNode, path) {
+  var funcNode = path[0];
+  var tmpIndex = 0;
+  for (var k = 0; k < funcNode.params.length; k++) {
+    var param = funcNode.params[k];
+    if (param === paramNode) {
+      break;
+    }
+    if (isStructuredPattern(param)) {
+      tmpIndex++;
+    }
+  }
+  return tmpIndex;
+}
+
+visitStructuredParameter.test = function(node, path, state) {
+  return isStructuredPattern(node) && isFunctionNode(path[0]);
+};
+
+function isFunctionNode(node) {
+  return (node.type == Syntax.FunctionDeclaration ||
+    node.type == Syntax.FunctionExpression ||
+    node.type == Syntax.MethodDefinition ||
+    node.type == Syntax.ArrowFunctionExpression);
+}
+
+// -------------------------------------------------------
+// 4. Function body for structured parameters.
+//
+// function foo({x, y}) { x; y; }
+// -------------------------------------------------------
+
+function visitFunctionBodyForStructuredParameter(traverse, node, path, state) {
+  var funcNode = path[0];
+
+  utils.catchup(funcNode.body.range[0] + 1, state);
+  renderDestructuredComponents(funcNode, state);
+
+  if (funcNode.rest) {
+    utils.append(
+      restParamVisitors.renderRestParamSetup(funcNode, state),
+      state
+    );
+  }
+
+  return true;
+}
+
+function renderDestructuredComponents(funcNode, state) {
+  var destructuredComponents = [];
+
+  for (var k = 0; k < funcNode.params.length; k++) {
+    var param = funcNode.params[k];
+    if (isStructuredPattern(param)) {
+      destructuredComponents.push(
+        getDestructuredComponents(param, state)
+      );
+      state.localScope.tempVarIndex++;
+    }
+  }
+
+  if (destructuredComponents.length) {
+    utils.append('var ' + destructuredComponents.join(',') + ';', state);
+  }
+}
+
+visitFunctionBodyForStructuredParameter.test = function(node, path, state) {
+  return node.type === Syntax.BlockStatement && isFunctionNode(path[0]);
+};
+
+exports.visitorList = [
+  visitStructuredVariable,
+  visitStructuredAssignment,
+  visitStructuredParameter,
+  visitFunctionBodyForStructuredParameter
+];
+
+exports.renderDestructuredComponents = renderDestructuredComponents;
+
+
+},{"../src/utils":23,"./es6-rest-param-visitors":30,"./es7-rest-property-helpers":32,"./reserved-words-helper":34,"esprima-fb":9}],28:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*jslint node:true*/
+
+/**
+ * Desugars concise methods of objects to function expressions.
+ *
+ * var foo = {
+ *   method(x, y) { ... }
+ * };
+ *
+ * var foo = {
+ *   method: function(x, y) { ... }
+ * };
+ *
+ */
+
+var Syntax = _dereq_('esprima-fb').Syntax;
+var utils = _dereq_('../src/utils');
+var reservedWordsHelper = _dereq_('./reserved-words-helper');
+
+function visitObjectConciseMethod(traverse, node, path, state) {
+  var isGenerator = node.value.generator;
+  if (isGenerator) {
+    utils.catchupWhiteSpace(node.range[0] + 1, state);
+  }
+  if (node.computed) { // [<expr>]() { ...}
+    utils.catchup(node.key.range[1] + 1, state);
+  } else if (reservedWordsHelper.isReservedWord(node.key.name)) {
+    utils.catchup(node.key.range[0], state);
+    utils.append('"', state);
+    utils.catchup(node.key.range[1], state);
+    utils.append('"', state);
+  }
+
+  utils.catchup(node.key.range[1], state);
+  utils.append(
+    ':function' + (isGenerator ? '*' : ''),
+    state
+  );
+  path.unshift(node);
+  traverse(node.value, path, state);
+  path.shift();
+  return false;
+}
+
+visitObjectConciseMethod.test = function(node, path, state) {
+  return node.type === Syntax.Property &&
+    node.value.type === Syntax.FunctionExpression &&
+    node.method === true;
+};
+
+exports.visitorList = [
+  visitObjectConciseMethod
+];
+
+},{"../src/utils":23,"./reserved-words-helper":34,"esprima-fb":9}],29:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*jslint node: true*/
+
+/**
+ * Desugars ES6 Object Literal short notations into ES3 full notation.
+ *
+ * // Easier return values.
+ * function foo(x, y) {
+ *   return {x, y}; // {x: x, y: y}
+ * };
+ *
+ * // Destructuring.
+ * function init({port, ip, coords: {x, y}}) { ... }
+ *
+ */
+var Syntax = _dereq_('esprima-fb').Syntax;
+var utils = _dereq_('../src/utils');
+
+/**
+ * @public
+ */
+function visitObjectLiteralShortNotation(traverse, node, path, state) {
+  utils.catchup(node.key.range[1], state);
+  utils.append(':' + node.key.name, state);
+  return false;
+}
+
+visitObjectLiteralShortNotation.test = function(node, path, state) {
+  return node.type === Syntax.Property &&
+    node.kind === 'init' &&
+    node.shorthand === true &&
+    path[0].type !== Syntax.ObjectPattern;
+};
+
+exports.visitorList = [
+  visitObjectLiteralShortNotation
+];
+
+
+},{"../src/utils":23,"esprima-fb":9}],30:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*jslint node:true*/
+
+/**
+ * Desugars ES6 rest parameters into an ES3 arguments array.
+ *
+ * function printf(template, ...args) {
+ *   args.forEach(...);
+ * }
+ *
+ * We could use `Array.prototype.slice.call`, but that usage of arguments causes
+ * functions to be deoptimized in V8, so instead we use a for-loop.
+ *
+ * function printf(template) {
+ *   for (var args = [], $__0 = 1, $__1 = arguments.length; $__0 < $__1; $__0++)
+ *     args.push(arguments[$__0]);
+ *   args.forEach(...);
+ * }
+ *
+ */
+var Syntax = _dereq_('esprima-fb').Syntax;
+var utils = _dereq_('../src/utils');
+
+
+
+function _nodeIsFunctionWithRestParam(node) {
+  return (node.type === Syntax.FunctionDeclaration
+          || node.type === Syntax.FunctionExpression
+          || node.type === Syntax.ArrowFunctionExpression)
+         && node.rest;
+}
+
+function visitFunctionParamsWithRestParam(traverse, node, path, state) {
+  if (node.parametricType) {
+    utils.catchup(node.parametricType.range[0], state);
+    path.unshift(node);
+    traverse(node.parametricType, path, state);
+    path.shift();
+  }
+
+  // Render params.
+  if (node.params.length) {
+    path.unshift(node);
+    traverse(node.params, path, state);
+    path.shift();
+  } else {
+    // -3 is for ... of the rest.
+    utils.catchup(node.rest.range[0] - 3, state);
+  }
+  utils.catchupWhiteSpace(node.rest.range[1], state);
+
+  path.unshift(node);
+  traverse(node.body, path, state);
+  path.shift();
+
+  return false;
+}
+
+visitFunctionParamsWithRestParam.test = function(node, path, state) {
+  return _nodeIsFunctionWithRestParam(node);
+};
+
+function renderRestParamSetup(functionNode, state) {
+  var idx = state.localScope.tempVarIndex++;
+  var len = state.localScope.tempVarIndex++;
+
+  return 'for (var ' + functionNode.rest.name + '=[],' +
+    utils.getTempVar(idx) + '=' + functionNode.params.length + ',' +
+    utils.getTempVar(len) + '=arguments.length;' +
+    utils.getTempVar(idx) + '<' +  utils.getTempVar(len) + ';' +
+    utils.getTempVar(idx) + '++) ' +
+    functionNode.rest.name + '.push(arguments[' + utils.getTempVar(idx) + ']);';
+}
+
+function visitFunctionBodyWithRestParam(traverse, node, path, state) {
+  utils.catchup(node.range[0] + 1, state);
+  var parentNode = path[0];
+  utils.append(renderRestParamSetup(parentNode, state), state);
+  return true;
+}
+
+visitFunctionBodyWithRestParam.test = function(node, path, state) {
+  return node.type === Syntax.BlockStatement
+         && _nodeIsFunctionWithRestParam(path[0]);
+};
+
+exports.renderRestParamSetup = renderRestParamSetup;
+exports.visitorList = [
+  visitFunctionParamsWithRestParam,
+  visitFunctionBodyWithRestParam
+];
+
+},{"../src/utils":23,"esprima-fb":9}],31:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*jslint node:true*/
+
+/**
+ * @typechecks
+ */
+'use strict';
+
+var Syntax = _dereq_('esprima-fb').Syntax;
+var utils = _dereq_('../src/utils');
+
+/**
+ * http://people.mozilla.org/~jorendorff/es6-draft.html#sec-12.1.9
+ */
+function visitTemplateLiteral(traverse, node, path, state) {
+  var templateElements = node.quasis;
+
+  utils.append('(', state);
+  for (var ii = 0; ii < templateElements.length; ii++) {
+    var templateElement = templateElements[ii];
+    if (templateElement.value.raw !== '') {
+      utils.append(getCookedValue(templateElement), state);
+      if (!templateElement.tail) {
+        // + between element and substitution
+        utils.append(' + ', state);
+      }
+      // maintain line numbers
+      utils.move(templateElement.range[0], state);
+      utils.catchupNewlines(templateElement.range[1], state);
+    } else {  // templateElement.value.raw === ''
+      // Concatenat adjacent substitutions, e.g. `${x}${y}`. Empty templates
+      // appear before the first and after the last element - nothing to add in
+      // those cases.
+      if (ii > 0 && !templateElement.tail) {
+        // + between substitution and substitution
+        utils.append(' + ', state);
+      }
+    }
+
+    utils.move(templateElement.range[1], state);
+    if (!templateElement.tail) {
+      var substitution = node.expressions[ii];
+      if (substitution.type === Syntax.Identifier ||
+          substitution.type === Syntax.MemberExpression ||
+          substitution.type === Syntax.CallExpression) {
+        utils.catchup(substitution.range[1], state);
+      } else {
+        utils.append('(', state);
+        traverse(substitution, path, state);
+        utils.catchup(substitution.range[1], state);
+        utils.append(')', state);
+      }
+      // if next templateElement isn't empty...
+      if (templateElements[ii + 1].value.cooked !== '') {
+        utils.append(' + ', state);
+      }
+    }
+  }
+  utils.move(node.range[1], state);
+  utils.append(')', state);
+  return false;
+}
+
+visitTemplateLiteral.test = function(node, path, state) {
+  return node.type === Syntax.TemplateLiteral;
+};
+
+/**
+ * http://people.mozilla.org/~jorendorff/es6-draft.html#sec-12.2.6
+ */
+function visitTaggedTemplateExpression(traverse, node, path, state) {
+  var template = node.quasi;
+  var numQuasis = template.quasis.length;
+
+  // print the tag
+  utils.move(node.tag.range[0], state);
+  traverse(node.tag, path, state);
+  utils.catchup(node.tag.range[1], state);
+
+  // print array of template elements
+  utils.append('(function() { var siteObj = [', state);
+  for (var ii = 0; ii < numQuasis; ii++) {
+    utils.append(getCookedValue(template.quasis[ii]), state);
+    if (ii !== numQuasis - 1) {
+      utils.append(', ', state);
+    }
+  }
+  utils.append(']; siteObj.raw = [', state);
+  for (ii = 0; ii < numQuasis; ii++) {
+    utils.append(getRawValue(template.quasis[ii]), state);
+    if (ii !== numQuasis - 1) {
+      utils.append(', ', state);
+    }
+  }
+  utils.append(
+    ']; Object.freeze(siteObj.raw); Object.freeze(siteObj); return siteObj; }()',
+    state
+  );
+
+  // print substitutions
+  if (numQuasis > 1) {
+    for (ii = 0; ii < template.expressions.length; ii++) {
+      var expression = template.expressions[ii];
+      utils.append(', ', state);
+
+      // maintain line numbers by calling catchupWhiteSpace over the whole
+      // previous TemplateElement
+      utils.move(template.quasis[ii].range[0], state);
+      utils.catchupNewlines(template.quasis[ii].range[1], state);
+
+      utils.move(expression.range[0], state);
+      traverse(expression, path, state);
+      utils.catchup(expression.range[1], state);
+    }
+  }
+
+  // print blank lines to push the closing ) down to account for the final
+  // TemplateElement.
+  utils.catchupNewlines(node.range[1], state);
+
+  utils.append(')', state);
+
+  return false;
+}
+
+visitTaggedTemplateExpression.test = function(node, path, state) {
+  return node.type === Syntax.TaggedTemplateExpression;
+};
+
+function getCookedValue(templateElement) {
+  return JSON.stringify(templateElement.value.cooked);
+}
+
+function getRawValue(templateElement) {
+  return JSON.stringify(templateElement.value.raw);
+}
+
+exports.visitorList = [
+  visitTemplateLiteral,
+  visitTaggedTemplateExpression
+];
+
+},{"../src/utils":23,"esprima-fb":9}],32:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*jslint node:true*/
+
+/**
+ * Desugars ES7 rest properties into ES5 object iteration.
+ */
+
+var Syntax = _dereq_('esprima-fb').Syntax;
+
+// TODO: This is a pretty massive helper, it should only be defined once, in the
+// transform's runtime environment. We don't currently have a runtime though.
+var restFunction =
+  '(function(source, exclusion) {' +
+    'var rest = {};' +
+    'var hasOwn = Object.prototype.hasOwnProperty;' +
+    'if (source == null) {' +
+      'throw new TypeError();' +
+    '}' +
+    'for (var key in source) {' +
+      'if (hasOwn.call(source, key) && !hasOwn.call(exclusion, key)) {' +
+        'rest[key] = source[key];' +
+      '}' +
+    '}' +
+    'return rest;' +
+  '})';
+
+function getPropertyNames(properties) {
+  var names = [];
+  for (var i = 0; i < properties.length; i++) {
+    var property = properties[i];
+    if (property.type === Syntax.SpreadProperty) {
+      continue;
+    }
+    if (property.type === Syntax.Identifier) {
+      names.push(property.name);
+    } else {
+      names.push(property.key.name);
+    }
+  }
+  return names;
+}
+
+function getRestFunctionCall(source, exclusion) {
+  return restFunction + '(' + source + ',' + exclusion + ')';
+}
+
+function getSimpleShallowCopy(accessorExpression) {
+  // This could be faster with 'Object.assign({}, ' + accessorExpression + ')'
+  // but to unify code paths and avoid a ES6 dependency we use the same
+  // helper as for the exclusion case.
+  return getRestFunctionCall(accessorExpression, '{}');
+}
+
+function renderRestExpression(accessorExpression, excludedProperties) {
+  var excludedNames = getPropertyNames(excludedProperties);
+  if (!excludedNames.length) {
+    return getSimpleShallowCopy(accessorExpression);
+  }
+  return getRestFunctionCall(
+    accessorExpression,
+    '{' + excludedNames.join(':1,') + ':1}'
+  );
+}
+
+exports.renderRestExpression = renderRestExpression;
+
+},{"esprima-fb":9}],33:[function(_dereq_,module,exports){
+/**
+ * Copyright 2004-present Facebook. All Rights Reserved.
+ */
+/*global exports:true*/
+
+/**
+ * Implements ES7 object spread property.
+ * https://gist.github.com/sebmarkbage/aa849c7973cb4452c547
+ *
+ * { ...a, x: 1 }
+ *
+ * Object.assign({}, a, {x: 1 })
+ *
+ */
+
+var Syntax = _dereq_('esprima-fb').Syntax;
+var utils = _dereq_('../src/utils');
+
+function visitObjectLiteralSpread(traverse, node, path, state) {
+  utils.catchup(node.range[0], state);
+
+  utils.append('Object.assign({', state);
+
+  // Skip the original {
+  utils.move(node.range[0] + 1, state);
+
+  var previousWasSpread = false;
+
+  for (var i = 0; i < node.properties.length; i++) {
+    var property = node.properties[i];
+    if (property.type === Syntax.SpreadProperty) {
+
+      // Close the previous object or initial object
+      if (!previousWasSpread) {
+        utils.append('}', state);
+      }
+
+      if (i === 0) {
+        // Normally there will be a comma when we catch up, but not before
+        // the first property.
+        utils.append(',', state);
+      }
+
+      utils.catchup(property.range[0], state);
+
+      // skip ...
+      utils.move(property.range[0] + 3, state);
+
+      traverse(property.argument, path, state);
+
+      utils.catchup(property.range[1], state);
+
+      previousWasSpread = true;
+
+    } else {
+
+      utils.catchup(property.range[0], state);
+
+      if (previousWasSpread) {
+        utils.append('{', state);
+      }
+
+      traverse(property, path, state);
+
+      utils.catchup(property.range[1], state);
+
+      previousWasSpread = false;
+
+    }
+  }
+
+  // Strip any non-whitespace between the last item and the end.
+  // We only catch up on whitespace so that we ignore any trailing commas which
+  // are stripped out for IE8 support. Unfortunately, this also strips out any
+  // trailing comments.
+  utils.catchupWhiteSpace(node.range[1] - 1, state);
+
+  // Skip the trailing }
+  utils.move(node.range[1], state);
+
+  if (!previousWasSpread) {
+    utils.append('}', state);
+  }
+
+  utils.append(')', state);
+  return false;
+}
+
+visitObjectLiteralSpread.test = function(node, path, state) {
+  if (node.type !== Syntax.ObjectExpression) {
+    return false;
+  }
+  // Tight loop optimization
+  var hasAtLeastOneSpreadProperty = false;
+  for (var i = 0; i < node.properties.length; i++) {
+    var property = node.properties[i];
+    if (property.type === Syntax.SpreadProperty) {
+      hasAtLeastOneSpreadProperty = true;
+    } else if (property.kind !== 'init') {
+      return false;
+    }
+  }
+  return hasAtLeastOneSpreadProperty;
+};
+
+exports.visitorList = [
+  visitObjectLiteralSpread
+];
+
+},{"../src/utils":23,"esprima-fb":9}],34:[function(_dereq_,module,exports){
+/**
+ * Copyright 2014 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+var KEYWORDS = [
+  'break', 'do', 'in', 'typeof', 'case', 'else', 'instanceof', 'var', 'catch',
+  'export', 'new', 'void', 'class', 'extends', 'return', 'while', 'const',
+  'finally', 'super', 'with', 'continue', 'for', 'switch', 'yield', 'debugger',
+  'function', 'this', 'default', 'if', 'throw', 'delete', 'import', 'try'
+];
+
+var FUTURE_RESERVED_WORDS = [
+  'enum', 'await', 'implements', 'package', 'protected', 'static', 'interface',
+  'private', 'public'
+];
+
+var LITERALS = [
+  'null',
+  'true',
+  'false'
+];
+
+// https://people.mozilla.org/~jorendorff/es6-draft.html#sec-reserved-words
+var RESERVED_WORDS = [].concat(
+  KEYWORDS,
+  FUTURE_RESERVED_WORDS,
+  LITERALS
+);
+
+var reservedWordsMap = Object.create(null);
+RESERVED_WORDS.forEach(function(k) {
+    reservedWordsMap[k] = true;
+});
+
+/**
+ * This list should not grow as new reserved words are introdued. This list is
+ * of words that need to be quoted because ES3-ish browsers do not allow their
+ * use as identifier names.
+ */
+var ES3_FUTURE_RESERVED_WORDS = [
+  'enum', 'implements', 'package', 'protected', 'static', 'interface',
+  'private', 'public'
+];
+
+var ES3_RESERVED_WORDS = [].concat(
+  KEYWORDS,
+  ES3_FUTURE_RESERVED_WORDS,
+  LITERALS
+);
+
+var es3ReservedWordsMap = Object.create(null);
+ES3_RESERVED_WORDS.forEach(function(k) {
+    es3ReservedWordsMap[k] = true;
+});
+
+exports.isReservedWord = function(word) {
+  return !!reservedWordsMap[word];
+};
+
+exports.isES3ReservedWord = function(word) {
+  return !!es3ReservedWordsMap[word];
+};
+
+},{}],35:[function(_dereq_,module,exports){
+/**
+ * Copyright 2014 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+/*global exports:true*/
+
+var Syntax = _dereq_('esprima-fb').Syntax;
+var utils = _dereq_('../src/utils');
+var reserverdWordsHelper = _dereq_('./reserved-words-helper');
+
+/**
+ * Code adapted from https://github.com/spicyj/es3ify
+ * The MIT License (MIT)
+ * Copyright (c) 2014 Ben Alpert
+ */
+
+function visitProperty(traverse, node, path, state) {
+  utils.catchup(node.key.range[0], state);
+  utils.append('"', state);
+  utils.catchup(node.key.range[1], state);
+  utils.append('"', state);
+  utils.catchup(node.value.range[0], state);
+  traverse(node.value, path, state);
+  return false;
+}
+
+visitProperty.test = function(node) {
+  return node.type === Syntax.Property &&
+    node.key.type === Syntax.Identifier &&
+    !node.method &&
+    !node.shorthand &&
+    !node.computed &&
+    reserverdWordsHelper.isES3ReservedWord(node.key.name);
+};
+
+function visitMemberExpression(traverse, node, path, state) {
+  traverse(node.object, path, state);
+  utils.catchup(node.property.range[0] - 1, state);
+  utils.append('[', state);
+  utils.catchupWhiteSpace(node.property.range[0], state);
+  utils.append('"', state);
+  utils.catchup(node.property.range[1], state);
+  utils.append('"]', state);
+  return false;
+}
+
+visitMemberExpression.test = function(node) {
+  return node.type === Syntax.MemberExpression &&
+    node.property.type === Syntax.Identifier &&
+    reserverdWordsHelper.isES3ReservedWord(node.property.name);
+};
+
+exports.visitorList = [
+  visitProperty,
+  visitMemberExpression
+];
+
+},{"../src/utils":23,"./reserved-words-helper":34,"esprima-fb":9}],36:[function(_dereq_,module,exports){
+var esprima = _dereq_('esprima-fb');
+var utils = _dereq_('../src/utils');
+
+var Syntax = esprima.Syntax;
+
+function _isFunctionNode(node) {
+  return node.type === Syntax.FunctionDeclaration
+         || node.type === Syntax.FunctionExpression
+         || node.type === Syntax.ArrowFunctionExpression;
+}
+
+function visitClassProperty(traverse, node, path, state) {
+  utils.catchup(node.range[0], state);
+  utils.catchupWhiteOut(node.range[1], state);
+  return false;
+}
+visitClassProperty.test = function(node, path, state) {
+  return node.type === Syntax.ClassProperty;
+};
+
+function visitTypeAlias(traverse, node, path, state) {
+  utils.catchupWhiteOut(node.range[1], state);
+  return false;
+}
+visitTypeAlias.test = function(node, path, state) {
+  return node.type === Syntax.TypeAlias;
+};
+
+function visitTypeCast(traverse, node, path, state) {
+  path.unshift(node);
+  traverse(node.expression, path, state);
+  path.shift();
+
+  utils.catchup(node.typeAnnotation.range[0], state);
+  utils.catchupWhiteOut(node.typeAnnotation.range[1], state);
+  return false;
+}
+visitTypeCast.test = function(node, path, state) {
+  return node.type === Syntax.TypeCastExpression;
+};
+
+function visitInterfaceDeclaration(traverse, node, path, state) {
+  utils.catchupWhiteOut(node.range[1], state);
+  return false;
+}
+visitInterfaceDeclaration.test = function(node, path, state) {
+  return node.type === Syntax.InterfaceDeclaration;
+};
+
+function visitDeclare(traverse, node, path, state) {
+  utils.catchupWhiteOut(node.range[1], state);
+  return false;
+}
+visitDeclare.test = function(node, path, state) {
+  switch (node.type) {
+    case Syntax.DeclareVariable:
+    case Syntax.DeclareFunction:
+    case Syntax.DeclareClass:
+    case Syntax.DeclareModule:
+      return true;
+  }
+  return false;
+};
+
+function visitFunctionParametricAnnotation(traverse, node, path, state) {
+  utils.catchup(node.range[0], state);
+  utils.catchupWhiteOut(node.range[1], state);
+  return false;
+}
+visitFunctionParametricAnnotation.test = function(node, path, state) {
+  return node.type === Syntax.TypeParameterDeclaration
+         && path[0]
+         && _isFunctionNode(path[0])
+         && node === path[0].typeParameters;
+};
+
+function visitFunctionReturnAnnotation(traverse, node, path, state) {
+  utils.catchup(node.range[0], state);
+  utils.catchupWhiteOut(node.range[1], state);
+  return false;
+}
+visitFunctionReturnAnnotation.test = function(node, path, state) {
+  return path[0] && _isFunctionNode(path[0]) && node === path[0].returnType;
+};
+
+function visitOptionalFunctionParameterAnnotation(traverse, node, path, state) {
+  utils.catchup(node.range[0] + node.name.length, state);
+  utils.catchupWhiteOut(node.range[1], state);
+  return false;
+}
+visitOptionalFunctionParameterAnnotation.test = function(node, path, state) {
+  return node.type === Syntax.Identifier
+         && node.optional
+         && path[0]
+         && _isFunctionNode(path[0]);
+};
+
+function visitTypeAnnotatedIdentifier(traverse, node, path, state) {
+  utils.catchup(node.typeAnnotation.range[0], state);
+  utils.catchupWhiteOut(node.typeAnnotation.range[1], state);
+  return false;
+}
+visitTypeAnnotatedIdentifier.test = function(node, path, state) {
+  return node.type === Syntax.Identifier && node.typeAnnotation;
+};
+
+function visitTypeAnnotatedObjectOrArrayPattern(traverse, node, path, state) {
+  utils.catchup(node.typeAnnotation.range[0], state);
+  utils.catchupWhiteOut(node.typeAnnotation.range[1], state);
+  return false;
+}
+visitTypeAnnotatedObjectOrArrayPattern.test = function(node, path, state) {
+  var rightType = node.type === Syntax.ObjectPattern
+                || node.type === Syntax.ArrayPattern;
+  return rightType && node.typeAnnotation;
+};
+
+/**
+ * Methods cause trouble, since esprima parses them as a key/value pair, where
+ * the location of the value starts at the method body. For example
+ * { bar(x:number,...y:Array<number>):number {} }
+ * is parsed as
+ * { bar: function(x: number, ...y:Array<number>): number {} }
+ * except that the location of the FunctionExpression value is 40-something,
+ * which is the location of the function body. This means that by the time we
+ * visit the params, rest param, and return type organically, we've already
+ * catchup()'d passed them.
+ */
+function visitMethod(traverse, node, path, state) {
+  path.unshift(node);
+  traverse(node.key, path, state);
+
+  path.unshift(node.value);
+  traverse(node.value.params, path, state);
+  node.value.rest && traverse(node.value.rest, path, state);
+  node.value.returnType && traverse(node.value.returnType, path, state);
+  traverse(node.value.body, path, state);
+
+  path.shift();
+
+  path.shift();
+  return false;
+}
+
+visitMethod.test = function(node, path, state) {
+  return (node.type === "Property" && (node.method || node.kind === "set" || node.kind === "get"))
+      || (node.type === "MethodDefinition");
+};
+
+function visitImportType(traverse, node, path, state) {
+  utils.catchupWhiteOut(node.range[1], state);
+  return false;
+}
+visitImportType.test = function(node, path, state) {
+  return node.type === 'ImportDeclaration'
+         && node.isType;
+};
+
+exports.visitorList = [
+  visitClassProperty,
+  visitDeclare,
+  visitImportType,
+  visitInterfaceDeclaration,
+  visitFunctionParametricAnnotation,
+  visitFunctionReturnAnnotation,
+  visitMethod,
+  visitOptionalFunctionParameterAnnotation,
+  visitTypeAlias,
+  visitTypeCast,
+  visitTypeAnnotatedIdentifier,
+  visitTypeAnnotatedObjectOrArrayPattern
+];
+
+},{"../src/utils":23,"esprima-fb":9}],37:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+/*global exports:true*/
+'use strict';
+var Syntax = _dereq_('jstransform').Syntax;
+var utils = _dereq_('jstransform/src/utils');
+
+function renderJSXLiteral(object, isLast, state, start, end) {
+  var lines = object.value.split(/\r\n|\n|\r/);
+
+  if (start) {
+    utils.append(start, state);
+  }
+
+  var lastNonEmptyLine = 0;
+
+  lines.forEach(function(line, index) {
+    if (line.match(/[^ \t]/)) {
+      lastNonEmptyLine = index;
+    }
+  });
+
+  lines.forEach(function(line, index) {
+    var isFirstLine = index === 0;
+    var isLastLine = index === lines.length - 1;
+    var isLastNonEmptyLine = index === lastNonEmptyLine;
+
+    // replace rendered whitespace tabs with spaces
+    var trimmedLine = line.replace(/\t/g, ' ');
+
+    // trim whitespace touching a newline
+    if (!isFirstLine) {
+      trimmedLine = trimmedLine.replace(/^[ ]+/, '');
+    }
+    if (!isLastLine) {
+      trimmedLine = trimmedLine.replace(/[ ]+$/, '');
+    }
+
+    if (!isFirstLine) {
+      utils.append(line.match(/^[ \t]*/)[0], state);
+    }
+
+    if (trimmedLine || isLastNonEmptyLine) {
+      utils.append(
+        JSON.stringify(trimmedLine) +
+        (!isLastNonEmptyLine ? ' + \' \' +' : ''),
+        state);
+
+      if (isLastNonEmptyLine) {
+        if (end) {
+          utils.append(end, state);
+        }
+        if (!isLast) {
+          utils.append(', ', state);
+        }
+      }
+
+      // only restore tail whitespace if line had literals
+      if (trimmedLine && !isLastLine) {
+        utils.append(line.match(/[ \t]*$/)[0], state);
+      }
+    }
+
+    if (!isLastLine) {
+      utils.append('\n', state);
+    }
+  });
+
+  utils.move(object.range[1], state);
+}
+
+function renderJSXExpressionContainer(traverse, object, isLast, path, state) {
+  // Plus 1 to skip `{`.
+  utils.move(object.range[0] + 1, state);
+  utils.catchup(object.expression.range[0], state);
+  traverse(object.expression, path, state);
+
+  if (!isLast && object.expression.type !== Syntax.JSXEmptyExpression) {
+    // If we need to append a comma, make sure to do so after the expression.
+    utils.catchup(object.expression.range[1], state, trimLeft);
+    utils.append(', ', state);
+  }
+
+  // Minus 1 to skip `}`.
+  utils.catchup(object.range[1] - 1, state, trimLeft);
+  utils.move(object.range[1], state);
+  return false;
+}
+
+function quoteAttrName(attr) {
+  // Quote invalid JS identifiers.
+  if (!/^[a-z_$][a-z\d_$]*$/i.test(attr)) {
+    return '"' + attr + '"';
+  }
+  return attr;
+}
+
+function trimLeft(value) {
+  return value.replace(/^[ ]+/, '');
+}
+
+exports.renderJSXExpressionContainer = renderJSXExpressionContainer;
+exports.renderJSXLiteral = renderJSXLiteral;
+exports.quoteAttrName = quoteAttrName;
+exports.trimLeft = trimLeft;
+
+},{"jstransform":22,"jstransform/src/utils":23}],38:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+/*global exports:true*/
+'use strict';
+
+var Syntax = _dereq_('jstransform').Syntax;
+var utils = _dereq_('jstransform/src/utils');
+
+var renderJSXExpressionContainer =
+  _dereq_('./jsx').renderJSXExpressionContainer;
+var renderJSXLiteral = _dereq_('./jsx').renderJSXLiteral;
+var quoteAttrName = _dereq_('./jsx').quoteAttrName;
+
+var trimLeft = _dereq_('./jsx').trimLeft;
+
+/**
+ * Customized desugar processor for React JSX. Currently:
+ *
+ * <X> </X> => React.createElement(X, null)
+ * <X prop="1" /> => React.createElement(X, {prop: '1'}, null)
+ * <X prop="2"><Y /></X> => React.createElement(X, {prop:'2'},
+ *   React.createElement(Y, null)
+ * )
+ * <div /> => React.createElement("div", null)
+ */
+
+/**
+ * Removes all non-whitespace/parenthesis characters
+ */
+var reNonWhiteParen = /([^\s\(\)])/g;
+function stripNonWhiteParen(value) {
+  return value.replace(reNonWhiteParen, '');
+}
+
+var tagConvention = /^[a-z]|\-/;
+function isTagName(name) {
+  return tagConvention.test(name);
+}
+
+function visitReactTag(traverse, object, path, state) {
+  var openingElement = object.openingElement;
+  var nameObject = openingElement.name;
+  var attributesObject = openingElement.attributes;
+
+  utils.catchup(openingElement.range[0], state, trimLeft);
+
+  if (nameObject.type === Syntax.JSXNamespacedName && nameObject.namespace) {
+    throw new Error('Namespace tags are not supported. ReactJSX is not XML.');
+  }
+
+  // We assume that the React runtime is already in scope
+  utils.append('React.createElement(', state);
+
+  if (nameObject.type === Syntax.JSXIdentifier && isTagName(nameObject.name)) {
+    utils.append('"' + nameObject.name + '"', state);
+    utils.move(nameObject.range[1], state);
+  } else {
+    // Use utils.catchup in this case so we can easily handle
+    // JSXMemberExpressions which look like Foo.Bar.Baz. This also handles
+    // JSXIdentifiers that aren't fallback tags.
+    utils.move(nameObject.range[0], state);
+    utils.catchup(nameObject.range[1], state);
+  }
+
+  utils.append(', ', state);
+
+  var hasAttributes = attributesObject.length;
+
+  var hasAtLeastOneSpreadProperty = attributesObject.some(function(attr) {
+    return attr.type === Syntax.JSXSpreadAttribute;
+  });
+
+  // if we don't have any attributes, pass in null
+  if (hasAtLeastOneSpreadProperty) {
+    utils.append('React.__spread({', state);
+  } else if (hasAttributes) {
+    utils.append('{', state);
+  } else {
+    utils.append('null', state);
+  }
+
+  // keep track of if the previous attribute was a spread attribute
+  var previousWasSpread = false;
+
+  // write attributes
+  attributesObject.forEach(function(attr, index) {
+    var isLast = index === attributesObject.length - 1;
+
+    if (attr.type === Syntax.JSXSpreadAttribute) {
+      // Close the previous object or initial object
+      if (!previousWasSpread) {
+        utils.append('}, ', state);
+      }
+
+      // Move to the expression start, ignoring everything except parenthesis
+      // and whitespace.
+      utils.catchup(attr.range[0], state, stripNonWhiteParen);
+      // Plus 1 to skip `{`.
+      utils.move(attr.range[0] + 1, state);
+      utils.catchup(attr.argument.range[0], state, stripNonWhiteParen);
+
+      traverse(attr.argument, path, state);
+
+      utils.catchup(attr.argument.range[1], state);
+
+      // Move to the end, ignoring parenthesis and the closing `}`
+      utils.catchup(attr.range[1] - 1, state, stripNonWhiteParen);
+
+      if (!isLast) {
+        utils.append(', ', state);
+      }
+
+      utils.move(attr.range[1], state);
+
+      previousWasSpread = true;
+
+      return;
+    }
+
+    // If the next attribute is a spread, we're effective last in this object
+    if (!isLast) {
+      isLast = attributesObject[index + 1].type === Syntax.JSXSpreadAttribute;
+    }
+
+    if (attr.name.namespace) {
+      throw new Error(
+         'Namespace attributes are not supported. ReactJSX is not XML.');
+    }
+    var name = attr.name.name;
+
+    utils.catchup(attr.range[0], state, trimLeft);
+
+    if (previousWasSpread) {
+      utils.append('{', state);
+    }
+
+    utils.append(quoteAttrName(name), state);
+    utils.append(': ', state);
+
+    if (!attr.value) {
+      state.g.buffer += 'true';
+      state.g.position = attr.name.range[1];
+      if (!isLast) {
+        utils.append(', ', state);
+      }
+    } else {
+      utils.move(attr.name.range[1], state);
+      // Use catchupNewlines to skip over the '=' in the attribute
+      utils.catchupNewlines(attr.value.range[0], state);
+      if (attr.value.type === Syntax.Literal) {
+        renderJSXLiteral(attr.value, isLast, state);
+      } else {
+        renderJSXExpressionContainer(traverse, attr.value, isLast, path, state);
+      }
+    }
+
+    utils.catchup(attr.range[1], state, trimLeft);
+
+    previousWasSpread = false;
+
+  });
+
+  if (!openingElement.selfClosing) {
+    utils.catchup(openingElement.range[1] - 1, state, trimLeft);
+    utils.move(openingElement.range[1], state);
+  }
+
+  if (hasAttributes && !previousWasSpread) {
+    utils.append('}', state);
+  }
+
+  if (hasAtLeastOneSpreadProperty) {
+    utils.append(')', state);
+  }
+
+  // filter out whitespace
+  var childrenToRender = object.children.filter(function(child) {
+    return !(child.type === Syntax.Literal
+             && typeof child.value === 'string'
+             && child.value.match(/^[ \t]*[\r\n][ \t\r\n]*$/));
+  });
+  if (childrenToRender.length > 0) {
+    var lastRenderableIndex;
+
+    childrenToRender.forEach(function(child, index) {
+      if (child.type !== Syntax.JSXExpressionContainer ||
+          child.expression.type !== Syntax.JSXEmptyExpression) {
+        lastRenderableIndex = index;
+      }
+    });
+
+    if (lastRenderableIndex !== undefined) {
+      utils.append(', ', state);
+    }
+
+    childrenToRender.forEach(function(child, index) {
+      utils.catchup(child.range[0], state, trimLeft);
+
+      var isLast = index >= lastRenderableIndex;
+
+      if (child.type === Syntax.Literal) {
+        renderJSXLiteral(child, isLast, state);
+      } else if (child.type === Syntax.JSXExpressionContainer) {
+        renderJSXExpressionContainer(traverse, child, isLast, path, state);
+      } else {
+        traverse(child, path, state);
+        if (!isLast) {
+          utils.append(', ', state);
+        }
+      }
+
+      utils.catchup(child.range[1], state, trimLeft);
+    });
+  }
+
+  if (openingElement.selfClosing) {
+    // everything up to />
+    utils.catchup(openingElement.range[1] - 2, state, trimLeft);
+    utils.move(openingElement.range[1], state);
+  } else {
+    // everything up to </ sdflksjfd>
+    utils.catchup(object.closingElement.range[0], state, trimLeft);
+    utils.move(object.closingElement.range[1], state);
+  }
+
+  utils.append(')', state);
+  return false;
+}
+
+visitReactTag.test = function(object, path, state) {
+  return object.type === Syntax.JSXElement;
+};
+
+exports.visitorList = [
+  visitReactTag
+];
+
+},{"./jsx":37,"jstransform":22,"jstransform/src/utils":23}],39:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+/*global exports:true*/
+'use strict';
+
+var Syntax = _dereq_('jstransform').Syntax;
+var utils = _dereq_('jstransform/src/utils');
+
+function addDisplayName(displayName, object, state) {
+  if (object &&
+      object.type === Syntax.CallExpression &&
+      object.callee.type === Syntax.MemberExpression &&
+      object.callee.object.type === Syntax.Identifier &&
+      object.callee.object.name === 'React' &&
+      object.callee.property.type === Syntax.Identifier &&
+      object.callee.property.name === 'createClass' &&
+      object.arguments.length === 1 &&
+      object.arguments[0].type === Syntax.ObjectExpression) {
+    // Verify that the displayName property isn't already set
+    var properties = object.arguments[0].properties;
+    var safe = properties.every(function(property) {
+      var value = property.key.type === Syntax.Identifier ?
+        property.key.name :
+        property.key.value;
+      return value !== 'displayName';
+    });
+
+    if (safe) {
+      utils.catchup(object.arguments[0].range[0] + 1, state);
+      utils.append('displayName: "' + displayName + '",', state);
+    }
+  }
+}
+
+/**
+ * Transforms the following:
+ *
+ * var MyComponent = React.createClass({
+ *    render: ...
+ * });
+ *
+ * into:
+ *
+ * var MyComponent = React.createClass({
+ *    displayName: 'MyComponent',
+ *    render: ...
+ * });
+ *
+ * Also catches:
+ *
+ * MyComponent = React.createClass(...);
+ * exports.MyComponent = React.createClass(...);
+ * module.exports = {MyComponent: React.createClass(...)};
+ */
+function visitReactDisplayName(traverse, object, path, state) {
+  var left, right;
+
+  if (object.type === Syntax.AssignmentExpression) {
+    left = object.left;
+    right = object.right;
+  } else if (object.type === Syntax.Property) {
+    left = object.key;
+    right = object.value;
+  } else if (object.type === Syntax.VariableDeclarator) {
+    left = object.id;
+    right = object.init;
+  }
+
+  if (left && left.type === Syntax.MemberExpression) {
+    left = left.property;
+  }
+  if (left && left.type === Syntax.Identifier) {
+    addDisplayName(left.name, right, state);
+  }
+}
+
+visitReactDisplayName.test = function(object, path, state) {
+  return (
+    object.type === Syntax.AssignmentExpression ||
+    object.type === Syntax.Property ||
+    object.type === Syntax.VariableDeclarator
+  );
+};
+
+exports.visitorList = [
+  visitReactDisplayName
+];
+
+},{"jstransform":22,"jstransform/src/utils":23}],40:[function(_dereq_,module,exports){
+/*global exports:true*/
+
+'use strict';
+
+var es6ArrowFunctions =
+  _dereq_('jstransform/visitors/es6-arrow-function-visitors');
+var es6Classes = _dereq_('jstransform/visitors/es6-class-visitors');
+var es6Destructuring =
+  _dereq_('jstransform/visitors/es6-destructuring-visitors');
+var es6ObjectConciseMethod =
+  _dereq_('jstransform/visitors/es6-object-concise-method-visitors');
+var es6ObjectShortNotation =
+  _dereq_('jstransform/visitors/es6-object-short-notation-visitors');
+var es6RestParameters = _dereq_('jstransform/visitors/es6-rest-param-visitors');
+var es6Templates = _dereq_('jstransform/visitors/es6-template-visitors');
+var es6CallSpread =
+  _dereq_('jstransform/visitors/es6-call-spread-visitors');
+var es7SpreadProperty =
+  _dereq_('jstransform/visitors/es7-spread-property-visitors');
+var react = _dereq_('./transforms/react');
+var reactDisplayName = _dereq_('./transforms/reactDisplayName');
+var reservedWords = _dereq_('jstransform/visitors/reserved-words-visitors');
+
+/**
+ * Map from transformName => orderedListOfVisitors.
+ */
+var transformVisitors = {
+  'es6-arrow-functions': es6ArrowFunctions.visitorList,
+  'es6-classes': es6Classes.visitorList,
+  'es6-destructuring': es6Destructuring.visitorList,
+  'es6-object-concise-method': es6ObjectConciseMethod.visitorList,
+  'es6-object-short-notation': es6ObjectShortNotation.visitorList,
+  'es6-rest-params': es6RestParameters.visitorList,
+  'es6-templates': es6Templates.visitorList,
+  'es6-call-spread': es6CallSpread.visitorList,
+  'es7-spread-property': es7SpreadProperty.visitorList,
+  'react': react.visitorList.concat(reactDisplayName.visitorList),
+  'reserved-words': reservedWords.visitorList
+};
+
+var transformSets = {
+  'harmony': [
+    'es6-arrow-functions',
+    'es6-object-concise-method',
+    'es6-object-short-notation',
+    'es6-classes',
+    'es6-rest-params',
+    'es6-templates',
+    'es6-destructuring',
+    'es6-call-spread',
+    'es7-spread-property'
+  ],
+  'es3': [
+    'reserved-words'
+  ],
+  'react': [
+    'react'
+  ]
+};
+
+/**
+ * Specifies the order in which each transform should run.
+ */
+var transformRunOrder = [
+  'reserved-words',
+  'es6-arrow-functions',
+  'es6-object-concise-method',
+  'es6-object-short-notation',
+  'es6-classes',
+  'es6-rest-params',
+  'es6-templates',
+  'es6-destructuring',
+  'es6-call-spread',
+  'es7-spread-property',
+  'react'
+];
+
+/**
+ * Given a list of transform names, return the ordered list of visitors to be
+ * passed to the transform() function.
+ *
+ * @param {array?} excludes
+ * @return {array}
+ */
+function getAllVisitors(excludes) {
+  var ret = [];
+  for (var i = 0, il = transformRunOrder.length; i < il; i++) {
+    if (!excludes || excludes.indexOf(transformRunOrder[i]) === -1) {
+      ret = ret.concat(transformVisitors[transformRunOrder[i]]);
+    }
+  }
+  return ret;
+}
+
+/**
+ * Given a list of visitor set names, return the ordered list of visitors to be
+ * passed to jstransform.
+ *
+ * @param {array}
+ * @return {array}
+ */
+function getVisitorsBySet(sets) {
+  var visitorsToInclude = sets.reduce(function(visitors, set) {
+    if (!transformSets.hasOwnProperty(set)) {
+      throw new Error('Unknown visitor set: ' + set);
+    }
+    transformSets[set].forEach(function(visitor) {
+      visitors[visitor] = true;
+    });
+    return visitors;
+  }, {});
+
+  var visitorList = [];
+  for (var i = 0; i < transformRunOrder.length; i++) {
+    if (visitorsToInclude.hasOwnProperty(transformRunOrder[i])) {
+      visitorList = visitorList.concat(transformVisitors[transformRunOrder[i]]);
+    }
+  }
+
+  return visitorList;
+}
+
+exports.getVisitorsBySet = getVisitorsBySet;
+exports.getAllVisitors = getAllVisitors;
+exports.transformVisitors = transformVisitors;
+
+},{"./transforms/react":38,"./transforms/reactDisplayName":39,"jstransform/visitors/es6-arrow-function-visitors":24,"jstransform/visitors/es6-call-spread-visitors":25,"jstransform/visitors/es6-class-visitors":26,"jstransform/visitors/es6-destructuring-visitors":27,"jstransform/visitors/es6-object-concise-method-visitors":28,"jstransform/visitors/es6-object-short-notation-visitors":29,"jstransform/visitors/es6-rest-param-visitors":30,"jstransform/visitors/es6-template-visitors":31,"jstransform/visitors/es7-spread-property-visitors":33,"jstransform/visitors/reserved-words-visitors":35}],41:[function(_dereq_,module,exports){
+/**
+ * Copyright 2013-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+'use strict';
+/*eslint-disable no-undef*/
+var Buffer = _dereq_('buffer').Buffer;
+
+function inlineSourceMap(sourceMap, sourceCode, sourceFilename) {
+  // This can be used with a sourcemap that has already has toJSON called on it.
+  // Check first.
+  var json = sourceMap;
+  if (typeof sourceMap.toJSON === 'function') {
+    json = sourceMap.toJSON();
+  }
+  json.sources = [sourceFilename];
+  json.sourcesContent = [sourceCode];
+  var base64 = Buffer(JSON.stringify(json)).toString('base64');
+  return '//# sourceMappingURL=data:application/json;base64,' + base64;
+}
+
+module.exports = inlineSourceMap;
+
+},{"buffer":3}]},{},[1])(1)
+});
