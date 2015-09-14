@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zn">
+<head>
+    <meta charset="UTF-8">
+    <title>React State</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="react.min.js"></script>
+	<script src="JSXTransformer.js"></script>
+	<script type="text/jsx">
+		var stateRecordMixin = {
+			componentWillMount: function(){
+				this.oldStates = [];
+			},
+			componentWillUpdate: function (nextProp, nextState){
+				this.oldStates.push(nextState);
+			},
+			previousState:function (){
+				var index = this.oldStates.length - 1;
+				return index == -1 ? {} : this.oldStates[index];
+			}
+		};
+		var MessageBox = React.createClass({
+			mixins: [stateRecordMixin],
+			getInitialState: function(){
+				return {
+					count: 0
+				}
+			},
+			doUpdate:function(){
+				this.setState({
+					count: this.state.count + 1
+				});
+				alert('上一次的计数是是：' + this.previousState().count);
+			},
+			render:function (){
+				console.log('渲染');
+				return ( 
+					<div>
+						<h1>计数：{this.state.count}</h1>
+						<button onClick={this.doUpdate}>手动更新一下组件（包括子组件）</button>
+						<Submessage count={this.state.count}/>
+					</div>
+				)
+			}
+		});
+
+		var Submessage = React.createClass({
+			mixins: [stateRecordMixin],
+			getInitialState:function(){
+				return {
+					count: 0
+				}
+			},
+			componentWillReceiveProps:function (nextProp){
+				console.log('子组件将要获得prop');
+				this.setState({
+					count: this.props.count * 2
+				});
+			},
+			shouldComponentUpdate:function (nextProp, nextState){
+				if(nextProp.count > 3){
+					return false;
+				}
+				return true;
+			},
+			render: function (){
+				console.log('上一次子组件的计数是：' + this.previousState().count);
+				return (
+					<h3>当前子组件的计数是：{this.props.count}</h3>
+				)
+			}
+		});
+
+		var messageBox = React.render(<MessageBox/>, document.getElementById('app'), function (){
+			console.log("渲染完成！");
+		});
+
+	</script>
+</body>
+</html>

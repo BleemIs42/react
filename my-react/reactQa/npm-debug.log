@@ -1,0 +1,1257 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'e:\\Program Files\\node\\node.exe',
+1 verbose cli   'e:\\Program Files\\node\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'cnpm' ]
+2 info using npm@2.11.3
+3 info using node@v0.12.7
+4 verbose install initial load of C:\Users\Shafley\AppData\Roaming\npm\package.json
+5 verbose readDependencies loading dependencies from C:\Users\Shafley\AppData\Roaming\npm\package.json
+6 silly cache add args [ 'cnpm', null ]
+7 verbose cache add spec cnpm
+8 silly cache add parsed spec { raw: 'cnpm',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'cnpm',
+8 silly cache add   rawSpec: '',
+8 silly cache add   spec: '*',
+8 silly cache add   type: 'range' }
+9 silly addNamed cnpm@*
+10 verbose addNamed "*" is a valid semver range for cnpm
+11 silly addNameRange { name: 'cnpm', range: '*', hasData: false }
+12 silly mapToRegistry name cnpm
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://registry.npmjs.org/
+15 silly mapToRegistry uri https://registry.npmjs.org/cnpm
+16 verbose addNameRange registry:https://registry.npmjs.org/cnpm not in flight; fetching
+17 verbose request uri https://registry.npmjs.org/cnpm
+18 verbose request no auth needed
+19 info attempt registry request try #1 at 16:35:24
+20 verbose request id 994c175fe9436144
+21 verbose etag "726RLVQKZZAHD1YME357QRQFZ"
+22 http request GET https://registry.npmjs.org/cnpm
+23 info retry will retry, error on last attempt: Error: read ECONNRESET
+24 info attempt registry request try #2 at 16:36:12
+25 verbose etag "726RLVQKZZAHD1YME357QRQFZ"
+26 http request GET https://registry.npmjs.org/cnpm
+27 info retry will retry, error on last attempt: Error: socket hang up
+28 info attempt registry request try #3 at 16:38:16
+29 verbose etag "726RLVQKZZAHD1YME357QRQFZ"
+30 http request GET https://registry.npmjs.org/cnpm
+31 silly get cb [ 304, undefined ]
+32 verbose etag https://registry.npmjs.org/cnpm from cache
+33 verbose get saving cnpm to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\cnpm\.cache.json
+34 silly addNameRange number 2 { name: 'cnpm', range: '*', hasData: true }
+35 silly addNameRange versions [ 'cnpm',
+35 silly addNameRange   [ '0.0.0',
+35 silly addNameRange     '0.0.1',
+35 silly addNameRange     '0.0.2',
+35 silly addNameRange     '0.0.3',
+35 silly addNameRange     '0.0.4',
+35 silly addNameRange     '0.0.5',
+35 silly addNameRange     '0.0.6',
+35 silly addNameRange     '0.0.7',
+35 silly addNameRange     '0.0.8',
+35 silly addNameRange     '0.0.9',
+35 silly addNameRange     '0.0.10',
+35 silly addNameRange     '0.0.11',
+35 silly addNameRange     '0.0.12',
+35 silly addNameRange     '0.0.13',
+35 silly addNameRange     '0.0.14',
+35 silly addNameRange     '0.0.15',
+35 silly addNameRange     '0.0.16',
+35 silly addNameRange     '0.0.17',
+35 silly addNameRange     '0.0.18',
+35 silly addNameRange     '0.0.19',
+35 silly addNameRange     '0.0.20',
+35 silly addNameRange     '0.0.21',
+35 silly addNameRange     '0.0.22',
+35 silly addNameRange     '0.0.23',
+35 silly addNameRange     '0.0.24',
+35 silly addNameRange     '0.0.25',
+35 silly addNameRange     '0.0.26',
+35 silly addNameRange     '0.0.27',
+35 silly addNameRange     '0.0.28',
+35 silly addNameRange     '0.0.29',
+35 silly addNameRange     '0.0.30',
+35 silly addNameRange     '0.0.31',
+35 silly addNameRange     '0.0.32',
+35 silly addNameRange     '0.0.33',
+35 silly addNameRange     '0.0.34',
+35 silly addNameRange     '0.0.35',
+35 silly addNameRange     '0.1.0',
+35 silly addNameRange     '0.1.1',
+35 silly addNameRange     '0.1.2',
+35 silly addNameRange     '0.1.3',
+35 silly addNameRange     '0.2.0',
+35 silly addNameRange     '0.2.1',
+35 silly addNameRange     '0.2.2',
+35 silly addNameRange     '0.3.0',
+35 silly addNameRange     '0.4.0',
+35 silly addNameRange     '0.5.0',
+35 silly addNameRange     '0.5.2',
+35 silly addNameRange     '1.0.0',
+35 silly addNameRange     '1.1.0',
+35 silly addNameRange     '1.2.0',
+35 silly addNameRange     '2.0.0',
+35 silly addNameRange     '2.0.1',
+35 silly addNameRange     '3.0.0',
+35 silly addNameRange     '3.0.1',
+35 silly addNameRange     '3.0.2',
+35 silly addNameRange     '3.1.0' ] ]
+36 silly addNamed cnpm@3.1.0
+37 verbose addNamed "3.1.0" is a plain semver version for cnpm
+38 silly cache afterAdd cnpm@3.1.0
+39 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\cnpm\3.1.0\package\package.json not in flight; writing
+40 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\cnpm\3.1.0\package\package.json written
+41 silly install resolved [ { name: 'cnpm',
+41 silly install resolved     version: '3.1.0',
+41 silly install resolved     description: 'cnpm: npm client for cnpmjs.org',
+41 silly install resolved     main: 'bin/cnpm',
+41 silly install resolved     scripts:
+41 silly install resolved      { test: 'mocha test/*.test.js --timeout 60000',
+41 silly install resolved        cnpm: 'npm i --registry=http://registry.npm.taobao.org' },
+41 silly install resolved     preferGlobal: true,
+41 silly install resolved     bin:
+41 silly install resolved      { cnpm: './bin/cnpm',
+41 silly install resolved        'cnpm-check': './bin/cnpm-check',
+41 silly install resolved        'cnpm-sync': './bin/cnpm-sync',
+41 silly install resolved        'cnpm-web': './bin/cnpm-web',
+41 silly install resolved        'cnpm-user': './bin/cnpm-user',
+41 silly install resolved        'cnpm-doc': './bin/cnpm-doc',
+41 silly install resolved        'cnpm-search': './bin/cnpm-search' },
+41 silly install resolved     dependencies:
+41 silly install resolved      { 'auto-correct': '~1.0.0',
+41 silly install resolved        bagpipe: '~0.3.5',
+41 silly install resolved        colors: '~1.0.3',
+41 silly install resolved        commander: '~2.7.1',
+41 silly install resolved        'cross-spawn': '~0.2.8',
+41 silly install resolved        debug: '~2.1.3',
+41 silly install resolved        giturl: '~0.0.3',
+41 silly install resolved        npm: '~2.13.2',
+41 silly install resolved        'npm-request': '~0.0.4',
+41 silly install resolved        open: '~0.0.5',
+41 silly install resolved        pangyp: '~2.1.0',
+41 silly install resolved        urllib: '~2.3.3' },
+41 silly install resolved     devDependencies:
+41 silly install resolved      { autod: '*',
+41 silly install resolved        'fs-extra': '~0.18.0',
+41 silly install resolved        jshint: '~2.6.3',
+41 silly install resolved        mocha: '~2.2.1',
+41 silly install resolved        should: '~5.2.0' },
+41 silly install resolved     homepage: 'https://github.com/cnpm/cnpm',
+41 silly install resolved     repository:
+41 silly install resolved      { type: 'git',
+41 silly install resolved        url: 'git://github.com/cnpm/cnpm.git',
+41 silly install resolved        web: 'https://github.com/cnpm/cnpm' },
+41 silly install resolved     bugs:
+41 silly install resolved      { url: 'https://github.com/cnpm/cnpm/issues',
+41 silly install resolved        email: 'm@fengmk2.com' },
+41 silly install resolved     keywords: [ 'cnpm' ],
+41 silly install resolved     engines: { node: '>= 0.10.0' },
+41 silly install resolved     author:
+41 silly install resolved      { name: 'fengmk2',
+41 silly install resolved        email: 'm@fengmk2.com',
+41 silly install resolved        url: 'http://fengmk2.com' },
+41 silly install resolved     license: 'MIT',
+41 silly install resolved     contributors: [ [Object], [Object], [Object], [Object], [Object] ],
+41 silly install resolved     gitHead: '9193876da65ad5f02a4308ac79261a1fe045adcd',
+41 silly install resolved     _id: 'cnpm@3.1.0',
+41 silly install resolved     _shasum: '3e2b7d688bc583290bd4364803324895eac9095c',
+41 silly install resolved     _from: 'cnpm@*',
+41 silly install resolved     _npmVersion: '2.12.0',
+41 silly install resolved     _nodeVersion: '0.12.6',
+41 silly install resolved     _npmUser: { name: 'dead_horse', email: 'dead_horse@qq.com' },
+41 silly install resolved     maintainers: [ [Object], [Object] ],
+41 silly install resolved     dist:
+41 silly install resolved      { shasum: '3e2b7d688bc583290bd4364803324895eac9095c',
+41 silly install resolved        tarball: 'http://registry.npmjs.org/cnpm/-/cnpm-3.1.0.tgz' },
+41 silly install resolved     directories: {},
+41 silly install resolved     _resolved: 'https://registry.npmjs.org/cnpm/-/cnpm-3.1.0.tgz',
+41 silly install resolved     readme: 'ERROR: No README data found!' } ]
+42 info install cnpm@3.1.0 into C:\Users\Shafley\AppData\Roaming\npm
+43 info installOne cnpm@3.1.0
+44 verbose installOne of cnpm to C:\Users\Shafley\AppData\Roaming\npm not in flight; installing
+45 verbose lock using C:\Users\Shafley\AppData\Roaming\npm-cache\_locks\cnpm-9cfae262ceecd7e3.lock for C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm
+46 silly install write writing cnpm 3.1.0 to C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm
+47 verbose unbuild node_modules\cnpm
+48 info preuninstall cnpm@3.1.0
+49 info uninstall cnpm@3.1.0
+50 verbose unbuild rmStuff cnpm@3.1.0 from C:\Users\Shafley\AppData\Roaming\npm\node_modules
+51 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm.cmd is being gently removed
+52 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+53 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-check.cmd is being gently removed
+54 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+55 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync.cmd is being gently removed
+56 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+57 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-web.cmd is being gently removed
+58 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+59 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-user.cmd is being gently removed
+60 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+61 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc.cmd is being gently removed
+62 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+63 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-search.cmd is being gently removed
+64 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+65 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+66 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+67 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+68 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+69 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-check.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+70 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-check.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+71 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+72 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+73 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+74 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+75 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-web.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+76 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-web.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+77 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+78 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-user.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+79 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-user.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+80 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+81 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+82 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+83 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+84 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-search.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+85 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-search.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+86 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm is being gently removed
+87 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+88 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+89 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm is under C:\Users\Shafley\AppData\Roaming\npm
+90 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm up to C:\Users\Shafley\AppData\Roaming\npm
+91 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-check is being gently removed
+92 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+93 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+94 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-check is under C:\Users\Shafley\AppData\Roaming\npm
+95 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-check up to C:\Users\Shafley\AppData\Roaming\npm
+96 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync is being gently removed
+97 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+98 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+99 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync is under C:\Users\Shafley\AppData\Roaming\npm
+100 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync up to C:\Users\Shafley\AppData\Roaming\npm
+101 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-web is being gently removed
+102 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+103 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+104 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-web is under C:\Users\Shafley\AppData\Roaming\npm
+105 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-web up to C:\Users\Shafley\AppData\Roaming\npm
+106 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-user is being gently removed
+107 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+108 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+109 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-user is under C:\Users\Shafley\AppData\Roaming\npm
+110 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-user up to C:\Users\Shafley\AppData\Roaming\npm
+111 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc is being gently removed
+112 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+113 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+114 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc is under C:\Users\Shafley\AppData\Roaming\npm
+115 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc up to C:\Users\Shafley\AppData\Roaming\npm
+116 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-search is being gently removed
+117 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+118 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+119 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-search is under C:\Users\Shafley\AppData\Roaming\npm
+120 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-search up to C:\Users\Shafley\AppData\Roaming\npm
+121 info postuninstall cnpm@3.1.0
+122 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm is being purged from base C:\Users\Shafley\AppData\Roaming\npm
+123 verbose gentlyRm don't care about contents; nuking C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm
+124 silly vacuum-fs purging C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm
+125 silly vacuum-fs quitting because other entries in C:\Users\Shafley\AppData\Roaming\npm\node_modules
+126 verbose tar unpack C:\Users\Shafley\AppData\Roaming\npm-cache\cnpm\3.1.0\package.tgz
+127 verbose tar unpacking to C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm
+128 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm is being purged
+129 verbose gentlyRm don't care about contents; nuking C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm
+130 silly gunzTarPerm modes [ '777', '666' ]
+131 silly gunzTarPerm extractEntry package.json
+132 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+133 silly gunzTarPerm extractEntry .npmignore
+134 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+135 silly gunzTarPerm extractEntry README.md
+136 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+137 silly gunzTarPerm extractEntry utils.js
+138 silly gunzTarPerm modified mode [ 'utils.js', 420, 438 ]
+139 silly gunzTarPerm extractEntry config.js
+140 silly gunzTarPerm modified mode [ 'config.js', 420, 438 ]
+141 silly gunzTarPerm extractEntry help.js
+142 silly gunzTarPerm modified mode [ 'help.js', 420, 438 ]
+143 silly gunzTarPerm extractEntry origin_npm.js
+144 silly gunzTarPerm modified mode [ 'origin_npm.js', 420, 438 ]
+145 silly gunzTarPerm extractEntry parse_argv.js
+146 silly gunzTarPerm modified mode [ 'parse_argv.js', 420, 438 ]
+147 silly gunzTarPerm extractEntry bin/cnpm
+148 silly gunzTarPerm modified mode [ 'bin/cnpm', 493, 511 ]
+149 silly gunzTarPerm extractEntry bin/cnpm-check
+150 silly gunzTarPerm modified mode [ 'bin/cnpm-check', 493, 511 ]
+151 silly gunzTarPerm extractEntry bin/cnpm-doc
+152 silly gunzTarPerm modified mode [ 'bin/cnpm-doc', 493, 511 ]
+153 silly gunzTarPerm extractEntry bin/cnpm-search
+154 silly gunzTarPerm modified mode [ 'bin/cnpm-search', 493, 511 ]
+155 silly gunzTarPerm extractEntry bin/cnpm-sync
+156 silly gunzTarPerm modified mode [ 'bin/cnpm-sync', 493, 511 ]
+157 silly gunzTarPerm extractEntry bin/cnpm-user
+158 silly gunzTarPerm modified mode [ 'bin/cnpm-user', 493, 511 ]
+159 silly gunzTarPerm extractEntry bin/cnpm-web
+160 silly gunzTarPerm modified mode [ 'bin/cnpm-web', 493, 511 ]
+161 silly gunzTarPerm extractEntry AUTHORS
+162 silly gunzTarPerm modified mode [ 'AUTHORS', 420, 438 ]
+163 silly gunzTarPerm extractEntry History.md
+164 silly gunzTarPerm modified mode [ 'History.md', 420, 438 ]
+165 silly gunzTarPerm extractEntry LICENSE.txt
+166 silly gunzTarPerm modified mode [ 'LICENSE.txt', 420, 438 ]
+167 silly gunzTarPerm extractEntry appveyor.yml
+168 silly gunzTarPerm modified mode [ 'appveyor.yml', 420, 438 ]
+169 verbose write writing to C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm\package.json
+170 info preinstall cnpm@3.1.0
+171 verbose readDependencies loading dependencies from C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm\package.json
+172 silly prepareForInstallMany adding auto-correct@~1.0.0 from cnpm dependencies
+173 silly prepareForInstallMany adding bagpipe@~0.3.5 from cnpm dependencies
+174 silly prepareForInstallMany adding colors@~1.0.3 from cnpm dependencies
+175 silly prepareForInstallMany adding commander@~2.7.1 from cnpm dependencies
+176 silly prepareForInstallMany adding cross-spawn@~0.2.8 from cnpm dependencies
+177 silly prepareForInstallMany adding debug@~2.1.3 from cnpm dependencies
+178 silly prepareForInstallMany adding giturl@~0.0.3 from cnpm dependencies
+179 silly prepareForInstallMany adding npm@~2.13.2 from cnpm dependencies
+180 silly prepareForInstallMany adding npm-request@~0.0.4 from cnpm dependencies
+181 silly prepareForInstallMany adding open@~0.0.5 from cnpm dependencies
+182 silly prepareForInstallMany adding pangyp@~2.1.0 from cnpm dependencies
+183 silly prepareForInstallMany adding urllib@~2.3.3 from cnpm dependencies
+184 verbose readDependencies loading dependencies from C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm\package.json
+185 silly cache add args [ 'auto-correct@~1.0.0', null ]
+186 verbose cache add spec auto-correct@~1.0.0
+187 silly cache add args [ 'bagpipe@~0.3.5', null ]
+188 verbose cache add spec bagpipe@~0.3.5
+189 silly cache add parsed spec { raw: 'auto-correct@~1.0.0',
+189 silly cache add   scope: null,
+189 silly cache add   name: 'auto-correct',
+189 silly cache add   rawSpec: '~1.0.0',
+189 silly cache add   spec: '>=1.0.0 <1.1.0',
+189 silly cache add   type: 'range' }
+190 silly addNamed auto-correct@>=1.0.0 <1.1.0
+191 verbose addNamed ">=1.0.0 <1.1.0" is a valid semver range for auto-correct
+192 silly addNameRange { name: 'auto-correct', range: '>=1.0.0 <1.1.0', hasData: false }
+193 silly mapToRegistry name auto-correct
+194 silly mapToRegistry using default registry
+195 silly mapToRegistry registry https://registry.npmjs.org/
+196 silly mapToRegistry uri https://registry.npmjs.org/auto-correct
+197 verbose addNameRange registry:https://registry.npmjs.org/auto-correct not in flight; fetching
+198 silly cache add parsed spec { raw: 'bagpipe@~0.3.5',
+198 silly cache add   scope: null,
+198 silly cache add   name: 'bagpipe',
+198 silly cache add   rawSpec: '~0.3.5',
+198 silly cache add   spec: '>=0.3.5 <0.4.0',
+198 silly cache add   type: 'range' }
+199 silly addNamed bagpipe@>=0.3.5 <0.4.0
+200 verbose addNamed ">=0.3.5 <0.4.0" is a valid semver range for bagpipe
+201 silly addNameRange { name: 'bagpipe', range: '>=0.3.5 <0.4.0', hasData: false }
+202 silly mapToRegistry name bagpipe
+203 silly mapToRegistry using default registry
+204 silly mapToRegistry registry https://registry.npmjs.org/
+205 silly mapToRegistry uri https://registry.npmjs.org/bagpipe
+206 verbose addNameRange registry:https://registry.npmjs.org/bagpipe not in flight; fetching
+207 silly cache add args [ 'colors@~1.0.3', null ]
+208 verbose cache add spec colors@~1.0.3
+209 silly cache add parsed spec { raw: 'colors@~1.0.3',
+209 silly cache add   scope: null,
+209 silly cache add   name: 'colors',
+209 silly cache add   rawSpec: '~1.0.3',
+209 silly cache add   spec: '>=1.0.3 <1.1.0',
+209 silly cache add   type: 'range' }
+210 silly addNamed colors@>=1.0.3 <1.1.0
+211 verbose addNamed ">=1.0.3 <1.1.0" is a valid semver range for colors
+212 silly addNameRange { name: 'colors', range: '>=1.0.3 <1.1.0', hasData: false }
+213 silly mapToRegistry name colors
+214 silly mapToRegistry using default registry
+215 silly mapToRegistry registry https://registry.npmjs.org/
+216 silly mapToRegistry uri https://registry.npmjs.org/colors
+217 verbose addNameRange registry:https://registry.npmjs.org/colors not in flight; fetching
+218 silly cache add args [ 'commander@~2.7.1', null ]
+219 verbose cache add spec commander@~2.7.1
+220 silly cache add parsed spec { raw: 'commander@~2.7.1',
+220 silly cache add   scope: null,
+220 silly cache add   name: 'commander',
+220 silly cache add   rawSpec: '~2.7.1',
+220 silly cache add   spec: '>=2.7.1 <2.8.0',
+220 silly cache add   type: 'range' }
+221 silly addNamed commander@>=2.7.1 <2.8.0
+222 verbose addNamed ">=2.7.1 <2.8.0" is a valid semver range for commander
+223 silly addNameRange { name: 'commander', range: '>=2.7.1 <2.8.0', hasData: false }
+224 silly mapToRegistry name commander
+225 silly mapToRegistry using default registry
+226 silly mapToRegistry registry https://registry.npmjs.org/
+227 silly mapToRegistry uri https://registry.npmjs.org/commander
+228 verbose addNameRange registry:https://registry.npmjs.org/commander not in flight; fetching
+229 silly cache add args [ 'cross-spawn@~0.2.8', null ]
+230 verbose cache add spec cross-spawn@~0.2.8
+231 silly cache add parsed spec { raw: 'cross-spawn@~0.2.8',
+231 silly cache add   scope: null,
+231 silly cache add   name: 'cross-spawn',
+231 silly cache add   rawSpec: '~0.2.8',
+231 silly cache add   spec: '>=0.2.8 <0.3.0',
+231 silly cache add   type: 'range' }
+232 silly addNamed cross-spawn@>=0.2.8 <0.3.0
+233 verbose addNamed ">=0.2.8 <0.3.0" is a valid semver range for cross-spawn
+234 silly addNameRange { name: 'cross-spawn', range: '>=0.2.8 <0.3.0', hasData: false }
+235 silly mapToRegistry name cross-spawn
+236 silly mapToRegistry using default registry
+237 silly mapToRegistry registry https://registry.npmjs.org/
+238 silly mapToRegistry uri https://registry.npmjs.org/cross-spawn
+239 verbose addNameRange registry:https://registry.npmjs.org/cross-spawn not in flight; fetching
+240 silly cache add args [ 'debug@~2.1.3', null ]
+241 verbose cache add spec debug@~2.1.3
+242 silly cache add parsed spec { raw: 'debug@~2.1.3',
+242 silly cache add   scope: null,
+242 silly cache add   name: 'debug',
+242 silly cache add   rawSpec: '~2.1.3',
+242 silly cache add   spec: '>=2.1.3 <2.2.0',
+242 silly cache add   type: 'range' }
+243 silly addNamed debug@>=2.1.3 <2.2.0
+244 verbose addNamed ">=2.1.3 <2.2.0" is a valid semver range for debug
+245 silly addNameRange { name: 'debug', range: '>=2.1.3 <2.2.0', hasData: false }
+246 silly mapToRegistry name debug
+247 silly mapToRegistry using default registry
+248 silly mapToRegistry registry https://registry.npmjs.org/
+249 silly mapToRegistry uri https://registry.npmjs.org/debug
+250 verbose addNameRange registry:https://registry.npmjs.org/debug not in flight; fetching
+251 silly cache add args [ 'giturl@~0.0.3', null ]
+252 verbose cache add spec giturl@~0.0.3
+253 silly cache add parsed spec { raw: 'giturl@~0.0.3',
+253 silly cache add   scope: null,
+253 silly cache add   name: 'giturl',
+253 silly cache add   rawSpec: '~0.0.3',
+253 silly cache add   spec: '>=0.0.3 <0.1.0',
+253 silly cache add   type: 'range' }
+254 silly addNamed giturl@>=0.0.3 <0.1.0
+255 verbose addNamed ">=0.0.3 <0.1.0" is a valid semver range for giturl
+256 silly addNameRange { name: 'giturl', range: '>=0.0.3 <0.1.0', hasData: false }
+257 silly mapToRegistry name giturl
+258 silly mapToRegistry using default registry
+259 silly mapToRegistry registry https://registry.npmjs.org/
+260 silly mapToRegistry uri https://registry.npmjs.org/giturl
+261 verbose addNameRange registry:https://registry.npmjs.org/giturl not in flight; fetching
+262 silly cache add args [ 'npm@~2.13.2', null ]
+263 verbose cache add spec npm@~2.13.2
+264 silly cache add parsed spec { raw: 'npm@~2.13.2',
+264 silly cache add   scope: null,
+264 silly cache add   name: 'npm',
+264 silly cache add   rawSpec: '~2.13.2',
+264 silly cache add   spec: '>=2.13.2 <2.14.0',
+264 silly cache add   type: 'range' }
+265 silly addNamed npm@>=2.13.2 <2.14.0
+266 verbose addNamed ">=2.13.2 <2.14.0" is a valid semver range for npm
+267 silly addNameRange { name: 'npm', range: '>=2.13.2 <2.14.0', hasData: false }
+268 silly mapToRegistry name npm
+269 silly mapToRegistry using default registry
+270 silly mapToRegistry registry https://registry.npmjs.org/
+271 silly mapToRegistry uri https://registry.npmjs.org/npm
+272 verbose addNameRange registry:https://registry.npmjs.org/npm not in flight; fetching
+273 silly cache add args [ 'npm-request@~0.0.4', null ]
+274 verbose cache add spec npm-request@~0.0.4
+275 silly cache add parsed spec { raw: 'npm-request@~0.0.4',
+275 silly cache add   scope: null,
+275 silly cache add   name: 'npm-request',
+275 silly cache add   rawSpec: '~0.0.4',
+275 silly cache add   spec: '>=0.0.4 <0.1.0',
+275 silly cache add   type: 'range' }
+276 silly addNamed npm-request@>=0.0.4 <0.1.0
+277 verbose addNamed ">=0.0.4 <0.1.0" is a valid semver range for npm-request
+278 silly addNameRange { name: 'npm-request', range: '>=0.0.4 <0.1.0', hasData: false }
+279 silly mapToRegistry name npm-request
+280 silly mapToRegistry using default registry
+281 silly mapToRegistry registry https://registry.npmjs.org/
+282 silly mapToRegistry uri https://registry.npmjs.org/npm-request
+283 verbose addNameRange registry:https://registry.npmjs.org/npm-request not in flight; fetching
+284 silly cache add args [ 'open@~0.0.5', null ]
+285 verbose cache add spec open@~0.0.5
+286 silly cache add parsed spec { raw: 'open@~0.0.5',
+286 silly cache add   scope: null,
+286 silly cache add   name: 'open',
+286 silly cache add   rawSpec: '~0.0.5',
+286 silly cache add   spec: '>=0.0.5 <0.1.0',
+286 silly cache add   type: 'range' }
+287 silly addNamed open@>=0.0.5 <0.1.0
+288 verbose addNamed ">=0.0.5 <0.1.0" is a valid semver range for open
+289 silly addNameRange { name: 'open', range: '>=0.0.5 <0.1.0', hasData: false }
+290 silly mapToRegistry name open
+291 silly mapToRegistry using default registry
+292 silly mapToRegistry registry https://registry.npmjs.org/
+293 silly mapToRegistry uri https://registry.npmjs.org/open
+294 verbose addNameRange registry:https://registry.npmjs.org/open not in flight; fetching
+295 silly cache add args [ 'pangyp@~2.1.0', null ]
+296 verbose cache add spec pangyp@~2.1.0
+297 silly cache add parsed spec { raw: 'pangyp@~2.1.0',
+297 silly cache add   scope: null,
+297 silly cache add   name: 'pangyp',
+297 silly cache add   rawSpec: '~2.1.0',
+297 silly cache add   spec: '>=2.1.0 <2.2.0',
+297 silly cache add   type: 'range' }
+298 silly addNamed pangyp@>=2.1.0 <2.2.0
+299 verbose addNamed ">=2.1.0 <2.2.0" is a valid semver range for pangyp
+300 silly addNameRange { name: 'pangyp', range: '>=2.1.0 <2.2.0', hasData: false }
+301 silly mapToRegistry name pangyp
+302 silly mapToRegistry using default registry
+303 silly mapToRegistry registry https://registry.npmjs.org/
+304 silly mapToRegistry uri https://registry.npmjs.org/pangyp
+305 verbose addNameRange registry:https://registry.npmjs.org/pangyp not in flight; fetching
+306 silly cache add args [ 'urllib@~2.3.3', null ]
+307 verbose cache add spec urllib@~2.3.3
+308 silly cache add parsed spec { raw: 'urllib@~2.3.3',
+308 silly cache add   scope: null,
+308 silly cache add   name: 'urllib',
+308 silly cache add   rawSpec: '~2.3.3',
+308 silly cache add   spec: '>=2.3.3 <2.4.0',
+308 silly cache add   type: 'range' }
+309 silly addNamed urllib@>=2.3.3 <2.4.0
+310 verbose addNamed ">=2.3.3 <2.4.0" is a valid semver range for urllib
+311 silly addNameRange { name: 'urllib', range: '>=2.3.3 <2.4.0', hasData: false }
+312 silly mapToRegistry name urllib
+313 silly mapToRegistry using default registry
+314 silly mapToRegistry registry https://registry.npmjs.org/
+315 silly mapToRegistry uri https://registry.npmjs.org/urllib
+316 verbose addNameRange registry:https://registry.npmjs.org/urllib not in flight; fetching
+317 verbose request uri https://registry.npmjs.org/bagpipe
+318 verbose request no auth needed
+319 info attempt registry request try #1 at 16:39:28
+320 verbose etag "4QZWSFVSHZM2S5OB1E3GHAWK4"
+321 http request GET https://registry.npmjs.org/bagpipe
+322 verbose request uri https://registry.npmjs.org/commander
+323 verbose request no auth needed
+324 info attempt registry request try #1 at 16:39:28
+325 verbose etag "9YXWJ1M53BQ7UPJSLLV5MBPHC"
+326 http request GET https://registry.npmjs.org/commander
+327 verbose request uri https://registry.npmjs.org/auto-correct
+328 verbose request no auth needed
+329 info attempt registry request try #1 at 16:39:28
+330 verbose etag "5G2DE9VJCGYQ6K5436V1WJNRW"
+331 http request GET https://registry.npmjs.org/auto-correct
+332 verbose request uri https://registry.npmjs.org/colors
+333 verbose request no auth needed
+334 info attempt registry request try #1 at 16:39:28
+335 verbose etag "9ET8ZYGRAQD6JL4IIQ9MC0XZZ"
+336 http request GET https://registry.npmjs.org/colors
+337 verbose request uri https://registry.npmjs.org/cross-spawn
+338 verbose request no auth needed
+339 info attempt registry request try #1 at 16:39:28
+340 verbose etag "33L4Y9CZMCQK1WD5HM3A75P4K"
+341 http request GET https://registry.npmjs.org/cross-spawn
+342 verbose request uri https://registry.npmjs.org/giturl
+343 verbose request no auth needed
+344 info attempt registry request try #1 at 16:39:28
+345 verbose etag "8AIWYDOEJVFITRBKK18ENN7K"
+346 http request GET https://registry.npmjs.org/giturl
+347 verbose request uri https://registry.npmjs.org/debug
+348 verbose request no auth needed
+349 info attempt registry request try #1 at 16:39:28
+350 verbose etag "5DHV3MV9VAYZWU0002EEV0OF3"
+351 http request GET https://registry.npmjs.org/debug
+352 verbose request uri https://registry.npmjs.org/pangyp
+353 verbose request no auth needed
+354 info attempt registry request try #1 at 16:39:28
+355 verbose etag "76Q7RNTIB75NSZEH18700O92T"
+356 http request GET https://registry.npmjs.org/pangyp
+357 verbose request uri https://registry.npmjs.org/open
+358 verbose request no auth needed
+359 info attempt registry request try #1 at 16:39:29
+360 verbose etag "1UC02CI1ACDBVIEQFXRD2OK8E"
+361 http request GET https://registry.npmjs.org/open
+362 verbose request uri https://registry.npmjs.org/npm
+363 verbose request no auth needed
+364 info attempt registry request try #1 at 16:39:29
+365 verbose etag "D4ZA0EXPB7NSSJPZU4XMVKEE2"
+366 http request GET https://registry.npmjs.org/npm
+367 verbose request uri https://registry.npmjs.org/npm-request
+368 verbose request no auth needed
+369 info attempt registry request try #1 at 16:39:29
+370 verbose etag "D8IZWIZY3PZEFPJ0B9V36MV8T"
+371 http request GET https://registry.npmjs.org/npm-request
+372 verbose request uri https://registry.npmjs.org/urllib
+373 verbose request no auth needed
+374 info attempt registry request try #1 at 16:39:29
+375 verbose etag "CFJENJNNU28540G06VEOX1GLN"
+376 http request GET https://registry.npmjs.org/urllib
+377 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+378 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+379 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+380 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+381 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+382 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+383 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+384 info attempt registry request try #2 at 16:40:00
+385 verbose etag "5DHV3MV9VAYZWU0002EEV0OF3"
+386 http request GET https://registry.npmjs.org/debug
+387 info attempt registry request try #2 at 16:40:00
+388 verbose etag "8AIWYDOEJVFITRBKK18ENN7K"
+389 http request GET https://registry.npmjs.org/giturl
+390 info attempt registry request try #2 at 16:40:00
+391 verbose etag "33L4Y9CZMCQK1WD5HM3A75P4K"
+392 http request GET https://registry.npmjs.org/cross-spawn
+393 info attempt registry request try #2 at 16:40:00
+394 verbose etag "9ET8ZYGRAQD6JL4IIQ9MC0XZZ"
+395 http request GET https://registry.npmjs.org/colors
+396 info attempt registry request try #2 at 16:40:00
+397 verbose etag "5G2DE9VJCGYQ6K5436V1WJNRW"
+398 http request GET https://registry.npmjs.org/auto-correct
+399 info attempt registry request try #2 at 16:40:00
+400 verbose etag "4QZWSFVSHZM2S5OB1E3GHAWK4"
+401 http request GET https://registry.npmjs.org/bagpipe
+402 info attempt registry request try #2 at 16:40:00
+403 verbose etag "9YXWJ1M53BQ7UPJSLLV5MBPHC"
+404 http request GET https://registry.npmjs.org/commander
+405 info retry will retry, error on last attempt: Error: read ECONNRESET
+406 info retry will retry, error on last attempt: Error: read ECONNRESET
+407 info retry will retry, error on last attempt: Error: read ECONNRESET
+408 info retry will retry, error on last attempt: Error: read ECONNRESET
+409 info retry will retry, error on last attempt: Error: read ECONNRESET
+410 info attempt registry request try #2 at 16:40:10
+411 verbose etag "D8IZWIZY3PZEFPJ0B9V36MV8T"
+412 http request GET https://registry.npmjs.org/npm-request
+413 info attempt registry request try #2 at 16:40:11
+414 verbose etag "CFJENJNNU28540G06VEOX1GLN"
+415 http request GET https://registry.npmjs.org/urllib
+416 info attempt registry request try #2 at 16:40:11
+417 verbose etag "1UC02CI1ACDBVIEQFXRD2OK8E"
+418 http request GET https://registry.npmjs.org/open
+419 info attempt registry request try #2 at 16:40:14
+420 verbose etag "76Q7RNTIB75NSZEH18700O92T"
+421 http request GET https://registry.npmjs.org/pangyp
+422 info attempt registry request try #2 at 16:40:17
+423 verbose etag "D4ZA0EXPB7NSSJPZU4XMVKEE2"
+424 http request GET https://registry.npmjs.org/npm
+425 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+426 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+427 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+428 info retry will retry, error on last attempt: Error: read ECONNRESET
+429 info retry will retry, error on last attempt: Error: read ECONNRESET
+430 info retry will retry, error on last attempt: Error: socket hang up
+431 info retry will retry, error on last attempt: Error: socket hang up
+432 info retry will retry, error on last attempt: Error: socket hang up
+433 info retry will retry, error on last attempt: Error: socket hang up
+434 info retry will retry, error on last attempt: Error: socket hang up
+435 info retry will retry, error on last attempt: Error: socket hang up
+436 info retry will retry, error on last attempt: Error: socket hang up
+437 info attempt registry request try #3 at 16:41:31
+438 verbose etag "D8IZWIZY3PZEFPJ0B9V36MV8T"
+439 http request GET https://registry.npmjs.org/npm-request
+440 info attempt registry request try #3 at 16:41:32
+441 verbose etag "CFJENJNNU28540G06VEOX1GLN"
+442 http request GET https://registry.npmjs.org/urllib
+443 info attempt registry request try #3 at 16:41:32
+444 verbose etag "1UC02CI1ACDBVIEQFXRD2OK8E"
+445 http request GET https://registry.npmjs.org/open
+446 info attempt registry request try #3 at 16:41:45
+447 verbose etag "76Q7RNTIB75NSZEH18700O92T"
+448 http request GET https://registry.npmjs.org/pangyp
+449 info attempt registry request try #3 at 16:41:46
+450 verbose etag "D4ZA0EXPB7NSSJPZU4XMVKEE2"
+451 http request GET https://registry.npmjs.org/npm
+452 silly get cb [ 304, undefined ]
+453 verbose etag https://registry.npmjs.org/npm-request from cache
+454 verbose get saving npm-request to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\npm-request\.cache.json
+455 silly get cb [ 304, undefined ]
+456 verbose etag https://registry.npmjs.org/urllib from cache
+457 verbose get saving urllib to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\urllib\.cache.json
+458 silly addNameRange number 2 { name: 'npm-request', range: '>=0.0.4 <0.1.0', hasData: true }
+459 silly addNameRange versions [ 'npm-request', [ '0.0.1', '0.0.3', '0.0.4' ] ]
+460 silly addNamed npm-request@0.0.4
+461 verbose addNamed "0.0.4" is a plain semver version for npm-request
+462 silly addNameRange number 2 { name: 'urllib', range: '>=2.3.3 <2.4.0', hasData: true }
+463 silly addNameRange versions [ 'urllib',
+463 silly addNameRange   [ '0.0.1',
+463 silly addNameRange     '0.1.0',
+463 silly addNameRange     '0.2.0',
+463 silly addNameRange     '0.2.1',
+463 silly addNameRange     '0.2.2',
+463 silly addNameRange     '0.2.3',
+463 silly addNameRange     '0.2.4',
+463 silly addNameRange     '0.2.5',
+463 silly addNameRange     '0.2.6',
+463 silly addNameRange     '0.2.7',
+463 silly addNameRange     '0.2.8',
+463 silly addNameRange     '0.2.9',
+463 silly addNameRange     '0.3.0',
+463 silly addNameRange     '0.3.1',
+463 silly addNameRange     '0.3.2',
+463 silly addNameRange     '0.3.3',
+463 silly addNameRange     '0.3.4',
+463 silly addNameRange     '0.3.5',
+463 silly addNameRange     '0.3.6',
+463 silly addNameRange     '0.3.7',
+463 silly addNameRange     '0.3.8',
+463 silly addNameRange     '0.4.0',
+463 silly addNameRange     '0.4.1',
+463 silly addNameRange     '0.4.2',
+463 silly addNameRange     '0.4.3',
+463 silly addNameRange     '0.4.4',
+463 silly addNameRange     '0.5.0',
+463 silly addNameRange     '0.5.1',
+463 silly addNameRange     '0.5.2',
+463 silly addNameRange     '0.5.3',
+463 silly addNameRange     '0.5.4',
+463 silly addNameRange     '0.5.5',
+463 silly addNameRange     '0.5.6',
+463 silly addNameRange     '0.5.8',
+463 silly addNameRange     '0.5.9',
+463 silly addNameRange     '0.5.10',
+463 silly addNameRange     '0.5.11',
+463 silly addNameRange     '0.5.12',
+463 silly addNameRange     '0.5.13',
+463 silly addNameRange     '0.5.14',
+463 silly addNameRange     '0.5.15',
+463 silly addNameRange     '0.5.16',
+463 silly addNameRange     '0.5.17',
+463 silly addNameRange     '1.0.0',
+463 silly addNameRange     '1.1.0',
+463 silly addNameRange     '1.2.0',
+463 silly addNameRange     '1.2.1',
+463 silly addNameRange     '1.3.0',
+463 silly addNameRange     '1.3.1',
+463 silly addNameRange     '1.4.0',
+463 silly addNameRange     '1.4.1',
+463 silly addNameRange     '1.5.0',
+463 silly addNameRange     '1.5.1',
+463 silly addNameRange     '1.5.2',
+463 silly addNameRange     '0.5.18',
+463 silly addNameRange     '2.0.0',
+463 silly addNameRange     '2.0.1',
+463 silly addNameRange     '2.0.2',
+463 silly addNameRange     '2.1.0',
+463 silly addNameRange     '2.2.0',
+463 silly addNameRange     '2.2.1',
+463 silly addNameRange     '2.2.2',
+463 silly addNameRange     '2.3.0',
+463 silly addNameRange     '2.0.3',
+463 silly addNameRange     '2.3.1',
+463 silly addNameRange     '2.3.2',
+463 silly addNameRange     '2.3.3',
+463 silly addNameRange     '2.3.4',
+463 silly addNameRange     '2.3.5',
+463 silly addNameRange     '2.3.6',
+463 silly addNameRange     '2.3.7',
+463 silly addNameRange     '2.3.8',
+463 silly addNameRange     '2.3.9' ] ]
+464 silly addNamed urllib@2.3.9
+465 verbose addNamed "2.3.9" is a plain semver version for urllib
+466 silly get cb [ 304, undefined ]
+467 verbose etag https://registry.npmjs.org/open from cache
+468 verbose get saving open to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\open\.cache.json
+469 silly addNameRange number 2 { name: 'open', range: '>=0.0.5 <0.1.0', hasData: true }
+470 silly addNameRange versions [ 'open', [ '0.0.0', '0.0.2', '0.0.3', '0.0.4', '0.0.5' ] ]
+471 silly addNamed open@0.0.5
+472 verbose addNamed "0.0.5" is a plain semver version for open
+473 silly cache afterAdd npm-request@0.0.4
+474 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\npm-request\0.0.4\package\package.json not in flight; writing
+475 silly cache afterAdd urllib@2.3.9
+476 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\urllib\2.3.9\package\package.json not in flight; writing
+477 silly cache afterAdd open@0.0.5
+478 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\open\0.0.5\package\package.json not in flight; writing
+479 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\npm-request\0.0.4\package\package.json written
+480 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\urllib\2.3.9\package\package.json written
+481 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\open\0.0.5\package\package.json written
+482 info attempt registry request try #3 at 16:42:05
+483 verbose etag "33L4Y9CZMCQK1WD5HM3A75P4K"
+484 http request GET https://registry.npmjs.org/cross-spawn
+485 info attempt registry request try #3 at 16:42:05
+486 verbose etag "9YXWJ1M53BQ7UPJSLLV5MBPHC"
+487 http request GET https://registry.npmjs.org/commander
+488 info attempt registry request try #3 at 16:42:05
+489 verbose etag "5DHV3MV9VAYZWU0002EEV0OF3"
+490 http request GET https://registry.npmjs.org/debug
+491 info attempt registry request try #3 at 16:42:05
+492 verbose etag "9ET8ZYGRAQD6JL4IIQ9MC0XZZ"
+493 http request GET https://registry.npmjs.org/colors
+494 info attempt registry request try #3 at 16:42:06
+495 verbose etag "8AIWYDOEJVFITRBKK18ENN7K"
+496 http request GET https://registry.npmjs.org/giturl
+497 info attempt registry request try #3 at 16:42:06
+498 verbose etag "5G2DE9VJCGYQ6K5436V1WJNRW"
+499 http request GET https://registry.npmjs.org/auto-correct
+500 info attempt registry request try #3 at 16:42:06
+501 verbose etag "4QZWSFVSHZM2S5OB1E3GHAWK4"
+502 http request GET https://registry.npmjs.org/bagpipe
+503 silly get cb [ 304, undefined ]
+504 verbose etag https://registry.npmjs.org/pangyp from cache
+505 verbose get saving pangyp to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\pangyp\.cache.json
+506 silly addNameRange number 2 { name: 'pangyp', range: '>=2.1.0 <2.2.0', hasData: true }
+507 silly addNameRange versions [ 'pangyp',
+507 silly addNameRange   [ '2.0.0', '2.0.1', '2.0.2', '2.1.0', '2.2.0', '2.2.1' ] ]
+508 silly addNamed pangyp@2.1.0
+509 verbose addNamed "2.1.0" is a plain semver version for pangyp
+510 silly cache afterAdd pangyp@2.1.0
+511 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\pangyp\2.1.0\package\package.json not in flight; writing
+512 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\pangyp\2.1.0\package\package.json written
+513 silly get cb [ 304, undefined ]
+514 verbose etag https://registry.npmjs.org/cross-spawn from cache
+515 verbose get saving cross-spawn to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\cross-spawn\.cache.json
+516 silly get cb [ 304, undefined ]
+517 verbose etag https://registry.npmjs.org/debug from cache
+518 verbose get saving debug to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\debug\.cache.json
+519 silly get cb [ 304, undefined ]
+520 verbose etag https://registry.npmjs.org/commander from cache
+521 verbose get saving commander to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\commander\.cache.json
+522 silly addNameRange number 2 { name: 'debug', range: '>=2.1.3 <2.2.0', hasData: true }
+523 silly addNameRange versions [ 'debug',
+523 silly addNameRange   [ '0.0.1',
+523 silly addNameRange     '0.1.0',
+523 silly addNameRange     '0.2.0',
+523 silly addNameRange     '0.3.0',
+523 silly addNameRange     '0.4.0',
+523 silly addNameRange     '0.4.1',
+523 silly addNameRange     '0.5.0',
+523 silly addNameRange     '0.6.0',
+523 silly addNameRange     '0.7.0',
+523 silly addNameRange     '0.7.1',
+523 silly addNameRange     '0.7.2',
+523 silly addNameRange     '0.7.3',
+523 silly addNameRange     '0.7.4',
+523 silly addNameRange     '0.8.0',
+523 silly addNameRange     '0.8.1',
+523 silly addNameRange     '1.0.0',
+523 silly addNameRange     '1.0.1',
+523 silly addNameRange     '1.0.2',
+523 silly addNameRange     '1.0.3',
+523 silly addNameRange     '1.0.4',
+523 silly addNameRange     '2.0.0',
+523 silly addNameRange     '2.1.0',
+523 silly addNameRange     '2.1.1',
+523 silly addNameRange     '2.1.2',
+523 silly addNameRange     '2.1.3',
+523 silly addNameRange     '2.2.0' ] ]
+524 silly addNamed debug@2.1.3
+525 verbose addNamed "2.1.3" is a plain semver version for debug
+526 silly addNameRange number 2 { name: 'cross-spawn', range: '>=0.2.8 <0.3.0', hasData: true }
+527 silly addNameRange versions [ 'cross-spawn',
+527 silly addNameRange   [ '0.1.0',
+527 silly addNameRange     '0.1.1',
+527 silly addNameRange     '0.1.2',
+527 silly addNameRange     '0.1.3',
+527 silly addNameRange     '0.1.4',
+527 silly addNameRange     '0.1.5',
+527 silly addNameRange     '0.1.6',
+527 silly addNameRange     '0.1.7',
+527 silly addNameRange     '0.2.0',
+527 silly addNameRange     '0.2.1',
+527 silly addNameRange     '0.2.2',
+527 silly addNameRange     '0.2.3',
+527 silly addNameRange     '0.2.4',
+527 silly addNameRange     '0.2.5',
+527 silly addNameRange     '0.2.6',
+527 silly addNameRange     '0.2.7',
+527 silly addNameRange     '0.2.8',
+527 silly addNameRange     '0.2.9',
+527 silly addNameRange     '0.3.0',
+527 silly addNameRange     '0.4.0',
+527 silly addNameRange     '0.4.1',
+527 silly addNameRange     '1.0.0',
+527 silly addNameRange     '1.0.1',
+527 silly addNameRange     '1.0.2',
+527 silly addNameRange     '1.0.3',
+527 silly addNameRange     '1.0.4',
+527 silly addNameRange     '2.0.0' ] ]
+528 silly addNamed cross-spawn@0.2.9
+529 verbose addNamed "0.2.9" is a plain semver version for cross-spawn
+530 silly addNameRange number 2 { name: 'commander', range: '>=2.7.1 <2.8.0', hasData: true }
+531 silly addNameRange versions [ 'commander',
+531 silly addNameRange   [ '0.0.1',
+531 silly addNameRange     '0.0.3',
+531 silly addNameRange     '0.0.4',
+531 silly addNameRange     '0.0.5',
+531 silly addNameRange     '0.1.0',
+531 silly addNameRange     '0.2.0',
+531 silly addNameRange     '0.2.1',
+531 silly addNameRange     '0.3.0',
+531 silly addNameRange     '0.3.1',
+531 silly addNameRange     '0.3.2',
+531 silly addNameRange     '0.3.3',
+531 silly addNameRange     '0.4.0',
+531 silly addNameRange     '0.4.1',
+531 silly addNameRange     '0.4.2',
+531 silly addNameRange     '0.4.3',
+531 silly addNameRange     '0.5.0',
+531 silly addNameRange     '0.5.1',
+531 silly addNameRange     '0.6.0',
+531 silly addNameRange     '0.6.1',
+531 silly addNameRange     '0.5.2',
+531 silly addNameRange     '1.0.0',
+531 silly addNameRange     '1.0.1',
+531 silly addNameRange     '1.0.2',
+531 silly addNameRange     '1.0.3',
+531 silly addNameRange     '1.0.4',
+531 silly addNameRange     '1.0.5',
+531 silly addNameRange     '1.1.0',
+531 silly addNameRange     '1.1.1',
+531 silly addNameRange     '1.2.0',
+531 silly addNameRange     '1.3.0',
+531 silly addNameRange     '1.3.1',
+531 silly addNameRange     '1.3.2',
+531 silly addNameRange     '2.0.0',
+531 silly addNameRange     '2.1.0',
+531 silly addNameRange     '2.2.0',
+531 silly addNameRange     '2.3.0',
+531 silly addNameRange     '2.4.0',
+531 silly addNameRange     '2.5.0',
+531 silly addNameRange     '2.5.1',
+531 silly addNameRange     '2.6.0',
+531 silly addNameRange     '2.7.0',
+531 silly addNameRange     '2.7.1',
+531 silly addNameRange     '2.8.0',
+531 silly addNameRange     '2.8.1' ] ]
+532 silly addNamed commander@2.7.1
+533 verbose addNamed "2.7.1" is a plain semver version for commander
+534 silly cache afterAdd debug@2.1.3
+535 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\debug\2.1.3\package\package.json not in flight; writing
+536 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\debug\2.1.3\package\package.json written
+537 silly cache afterAdd commander@2.7.1
+538 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\commander\2.7.1\package\package.json not in flight; writing
+539 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\commander\2.7.1\package\package.json written
+540 silly cache afterAdd cross-spawn@0.2.9
+541 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\cross-spawn\0.2.9\package\package.json not in flight; writing
+542 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\cross-spawn\0.2.9\package\package.json written
+543 silly get cb [ 304, undefined ]
+544 verbose etag https://registry.npmjs.org/giturl from cache
+545 verbose get saving giturl to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\giturl\.cache.json
+546 silly addNameRange number 2 { name: 'giturl', range: '>=0.0.3 <0.1.0', hasData: true }
+547 silly addNameRange versions [ 'giturl', [ '0.0.1', '0.0.2', '0.0.3' ] ]
+548 silly addNamed giturl@0.0.3
+549 verbose addNamed "0.0.3" is a plain semver version for giturl
+550 silly cache afterAdd giturl@0.0.3
+551 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\giturl\0.0.3\package\package.json not in flight; writing
+552 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\giturl\0.0.3\package\package.json written
+553 silly get cb [ 304, undefined ]
+554 verbose etag https://registry.npmjs.org/auto-correct from cache
+555 verbose get saving auto-correct to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\auto-correct\.cache.json
+556 silly addNameRange number 2 { name: 'auto-correct', range: '>=1.0.0 <1.1.0', hasData: true }
+557 silly addNameRange versions [ 'auto-correct', [ '1.0.0' ] ]
+558 silly addNamed auto-correct@1.0.0
+559 verbose addNamed "1.0.0" is a plain semver version for auto-correct
+560 silly get cb [ 304, undefined ]
+561 verbose etag https://registry.npmjs.org/bagpipe from cache
+562 verbose get saving bagpipe to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\bagpipe\.cache.json
+563 silly addNameRange number 2 { name: 'bagpipe', range: '>=0.3.5 <0.4.0', hasData: true }
+564 silly addNameRange versions [ 'bagpipe',
+564 silly addNameRange   [ '0.0.1',
+564 silly addNameRange     '0.2.0',
+564 silly addNameRange     '0.3.0',
+564 silly addNameRange     '0.3.1',
+564 silly addNameRange     '0.3.2',
+564 silly addNameRange     '0.3.3',
+564 silly addNameRange     '0.3.4',
+564 silly addNameRange     '0.3.5' ] ]
+565 silly addNamed bagpipe@0.3.5
+566 verbose addNamed "0.3.5" is a plain semver version for bagpipe
+567 silly cache afterAdd auto-correct@1.0.0
+568 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\auto-correct\1.0.0\package\package.json not in flight; writing
+569 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\auto-correct\1.0.0\package\package.json written
+570 silly cache afterAdd bagpipe@0.3.5
+571 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\bagpipe\0.3.5\package\package.json not in flight; writing
+572 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\bagpipe\0.3.5\package\package.json written
+573 silly get cb [ 304, undefined ]
+574 verbose etag https://registry.npmjs.org/npm from cache
+575 verbose get saving npm to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\npm\.cache.json
+576 silly addNameRange number 2 { name: 'npm', range: '>=2.13.2 <2.14.0', hasData: true }
+577 silly addNameRange versions [ 'npm',
+577 silly addNameRange   [ '1.1.25',
+577 silly addNameRange     '1.2.32',
+577 silly addNameRange     '1.3.2',
+577 silly addNameRange     '1.3.4',
+577 silly addNameRange     '1.2.20',
+577 silly addNameRange     '1.2.21',
+577 silly addNameRange     '1.2.22',
+577 silly addNameRange     '1.2.23',
+577 silly addNameRange     '1.2.24',
+577 silly addNameRange     '1.2.25',
+577 silly addNameRange     '1.2.27',
+577 silly addNameRange     '1.2.28',
+577 silly addNameRange     '1.2.30',
+577 silly addNameRange     '1.2.31',
+577 silly addNameRange     '1.3.0',
+577 silly addNameRange     '1.3.1',
+577 silly addNameRange     '1.2.19',
+577 silly addNameRange     '1.1.70',
+577 silly addNameRange     '1.1.71',
+577 silly addNameRange     '1.3.5',
+577 silly addNameRange     '1.3.6',
+577 silly addNameRange     '1.3.7',
+577 silly addNameRange     '1.3.8',
+577 silly addNameRange     '1.3.9',
+577 silly addNameRange     '1.3.10',
+577 silly addNameRange     '1.3.11',
+577 silly addNameRange     '1.3.12',
+577 silly addNameRange     '1.3.13',
+577 silly addNameRange     '1.3.14',
+577 silly addNameRange     '1.3.15',
+577 silly addNameRange     '1.3.16',
+577 silly addNameRange     '1.3.17',
+577 silly addNameRange     '1.3.18',
+577 silly addNameRange     '1.3.20',
+577 silly addNameRange     '1.3.21',
+577 silly addNameRange     '1.3.22',
+577 silly addNameRange     '1.3.23',
+577 silly addNameRange     '1.3.24',
+577 silly addNameRange     '1.3.25',
+577 silly addNameRange     '1.3.26',
+577 silly addNameRange     '1.4.0',
+577 silly addNameRange     '1.4.1',
+577 silly addNameRange     '1.4.2',
+577 silly addNameRange     '1.4.3',
+577 silly addNameRange     '1.4.4',
+577 silly addNameRange     '1.4.5',
+577 silly addNameRange     '1.4.6',
+577 silly addNameRange     '1.4.7',
+577 silly addNameRange     '1.4.8',
+577 silly addNameRange     '1.4.9',
+577 silly addNameRange     '1.4.10',
+577 silly addNameRange     '1.4.11',
+577 silly addNameRange     '1.4.12',
+577 silly addNameRange     '1.4.13',
+577 silly addNameRange     '1.4.14',
+577 silly addNameRange     '1.4.15',
+577 silly addNameRange     '1.4.16',
+577 silly addNameRange     '1.2.8000',
+577 silly addNameRange     '1.4.17',
+577 silly addNameRange     '1.4.18',
+577 silly addNameRange     '1.4.19',
+577 silly addNameRange     '1.5.0-alpha-0',
+577 silly addNameRange     '1.5.0-alpha-1',
+577 silly addNameRange     '1.4.20',
+577 silly addNameRange     '1.5.0-alpha-2',
+577 silly addNameRange     '1.4.21',
+577 silly addNameRange     '1.5.0-alpha-3',
+577 silly addNameRange     '1.5.0-alpha-4',
+577 silly addNameRange     '2.0.0-alpha-5',
+577 silly addNameRange     '1.4.22',
+577 silly addNameRange     '1.4.23',
+577 silly addNameRange     '2.0.0-alpha.6.0',
+577 silly addNameRange     '1.4.24',
+577 silly addNameRange     '2.0.0-alpha.6',
+577 silly addNameRange     '2.0.0-alpha.7',
+577 silly addNameRange     '2.0.0-beta.0',
+577 silly addNameRange     '1.4.25',
+577 silly addNameRange     '2.0.0-beta.1',
+577 silly addNameRange     '1.4.26',
+577 silly addNameRange     '2.0.0-beta.2',
+577 silly addNameRange     '1.4.27',
+577 silly addNameRange     '2.0.0-beta.3',
+577 silly addNameRange     '1.4.28',
+577 silly addNameRange     '2.0.0',
+577 silly addNameRange     '2.0.1',
+577 silly addNameRange     '2.0.2',
+577 silly addNameRange     '2.1.0',
+577 silly addNameRange     '2.1.1',
+577 silly addNameRange     '2.1.2',
+577 silly addNameRange     '2.1.3',
+577 silly addNameRange     '2.1.4',
+577 silly addNameRange     '2.1.5',
+577 silly addNameRange     '2.1.6',
+577 silly addNameRange     '2.1.7',
+577 silly addNameRange     '2.1.8',
+577 silly addNameRange     '2.1.9',
+577 silly addNameRange     '2.1.10',
+577 silly addNameRange     '2.1.11',
+577 silly addNameRange     '2.1.12',
+577 silly addNameRange     '2.1.13',
+577 silly addNameRange     '2.1.14',
+577 silly addNameRange     '2.1.15',
+577 silly addNameRange     '2.1.16',
+577 silly addNameRange     '2.1.17',
+577 silly addNameRange     '2.1.18',
+577 silly addNameRange     '2.2.0',
+577 silly addNameRange     '2.3.0',
+577 silly addNameRange     '2.4.0',
+577 silly addNameRange     '2.4.1',
+577 silly addNameRange     '2.5.0',
+577 silly addNameRange     '2.5.1',
+577 silly addNameRange     '2.6.0',
+577 silly addNameRange     '2.6.1',
+577 silly addNameRange     '2.7.0',
+577 silly addNameRange     '2.7.1',
+577 silly addNameRange     '2.7.2',
+577 silly addNameRange     '2.7.3',
+577 silly addNameRange     '2.7.4',
+577 silly addNameRange     '2.7.5',
+577 silly addNameRange     '2.7.6',
+577 silly addNameRange     '2.8.0',
+577 silly addNameRange     '2.8.1',
+577 silly addNameRange     '2.8.2',
+577 silly addNameRange     '2.8.3',
+577 silly addNameRange     '2.8.4',
+577 silly addNameRange     '2.9.0',
+577 silly addNameRange     '2.9.1',
+577 silly addNameRange     '2.10.0',
+577 silly addNameRange     '2.10.1',
+577 silly addNameRange     '2.11.0',
+577 silly addNameRange     '2.11.1',
+577 silly addNameRange     '2.11.2',
+577 silly addNameRange     '2.11.3',
+577 silly addNameRange     '2.12.0',
+577 silly addNameRange     '3.0.0',
+577 silly addNameRange     '2.12.1',
+577 silly addNameRange     '2.13.0',
+577 silly addNameRange     '3.1.0',
+577 silly addNameRange     '2.13.1',
+577 silly addNameRange     '3.1.1',
+577 silly addNameRange     '3.1.2',
+577 silly addNameRange     '2.13.2',
+577 silly addNameRange     '3.1.3',
+577 silly addNameRange     '2.13.3',
+577 silly addNameRange     '3.2.0',
+577 silly addNameRange     '2.13.4' ] ]
+578 silly addNamed npm@2.13.3
+579 verbose addNamed "2.13.3" is a plain semver version for npm
+580 silly mapToRegistry name npm
+581 silly mapToRegistry using default registry
+582 silly mapToRegistry registry https://registry.npmjs.org/
+583 silly mapToRegistry uri https://registry.npmjs.org/npm
+584 verbose addRemoteTarball https://registry.npmjs.org/npm/-/npm-2.13.3.tgz not in flight; adding
+585 verbose addRemoteTarball [ 'https://registry.npmjs.org/npm/-/npm-2.13.3.tgz',
+585 verbose addRemoteTarball   'a72c6be4067229b5b47e19244531d186d6103b78' ]
+586 info retry fetch attempt 1 at 16:42:51
+587 info attempt registry request try #1 at 16:42:51
+588 http fetch GET https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+589 silly get cb [ 304, undefined ]
+590 verbose etag https://registry.npmjs.org/colors from cache
+591 verbose get saving colors to C:\Users\Shafley\AppData\Roaming\npm-cache\registry.npmjs.org\colors\.cache.json
+592 silly addNameRange number 2 { name: 'colors', range: '>=1.0.3 <1.1.0', hasData: true }
+593 silly addNameRange versions [ 'colors',
+593 silly addNameRange   [ '0.3.0',
+593 silly addNameRange     '0.5.0',
+593 silly addNameRange     '0.5.1',
+593 silly addNameRange     '0.6.0',
+593 silly addNameRange     '0.6.0-1',
+593 silly addNameRange     '0.6.1',
+593 silly addNameRange     '0.6.2',
+593 silly addNameRange     '1.0.0',
+593 silly addNameRange     '1.0.1',
+593 silly addNameRange     '1.0.2',
+593 silly addNameRange     '1.0.3',
+593 silly addNameRange     '1.1.0',
+593 silly addNameRange     '1.1.1',
+593 silly addNameRange     '1.1.2' ] ]
+594 silly addNamed colors@1.0.3
+595 verbose addNamed "1.0.3" is a plain semver version for colors
+596 silly cache afterAdd colors@1.0.3
+597 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\colors\1.0.3\package\package.json not in flight; writing
+598 verbose afterAdd C:\Users\Shafley\AppData\Roaming\npm-cache\colors\1.0.3\package\package.json written
+599 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+600 info attempt registry request try #2 at 16:43:22
+601 http fetch GET https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+602 info retry will retry, error on last attempt: Error: read ECONNRESET
+603 info attempt registry request try #3 at 16:44:53
+604 http fetch GET https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+605 error fetch failed https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+606 warn retry will retry, error on last attempt: Error: socket hang up
+607 info retry fetch attempt 2 at 16:46:12
+608 info attempt registry request try #1 at 16:46:12
+609 http fetch GET https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+610 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+611 info attempt registry request try #2 at 16:46:43
+612 http fetch GET https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+613 info retry will retry, error on last attempt: Error: socket hang up
+614 info attempt registry request try #3 at 16:48:49
+615 http fetch GET https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+616 error fetch failed https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+617 warn retry will retry, error on last attempt: Error: socket hang up
+618 info retry fetch attempt 3 at 16:50:58
+619 info attempt registry request try #1 at 16:50:58
+620 http fetch GET https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+621 info retry will retry, error on last attempt: Error: read ECONNRESET
+622 info attempt registry request try #2 at 16:51:46
+623 http fetch GET https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+624 info retry will retry, error on last attempt: Error: read ECONNRESET
+625 info attempt registry request try #3 at 16:53:15
+626 http fetch GET https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+627 error fetch failed https://registry.npmjs.org/npm/-/npm-2.13.3.tgz
+628 verbose about to build C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm
+629 verbose unlock done using C:\Users\Shafley\AppData\Roaming\npm-cache\_locks\cnpm-9cfae262ceecd7e3.lock for C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm
+630 verbose stack Error: connect ETIMEDOUT
+630 verbose stack     at exports._errnoException (util.js:746:11)
+630 verbose stack     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1010:19)
+631 verbose cwd E:\WebProject\Learn\react\my-react\reactQa
+632 error Windows_NT 6.3.9600
+633 error argv "e:\\Program Files\\node\\node.exe" "e:\\Program Files\\node\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g" "cnpm"
+634 error node v0.12.7
+635 error npm  v2.11.3
+636 error code ETIMEDOUT
+637 error errno ETIMEDOUT
+638 error syscall connect
+639 error network connect ETIMEDOUT
+639 error network This is most likely not a problem with npm itself
+639 error network and is related to network connectivity.
+639 error network In most cases you are behind a proxy or have bad network settings.
+639 error network
+639 error network If you are behind a proxy, please make sure that the
+639 error network 'proxy' config is set properly.  See: 'npm help config'
+640 verbose exit [ 1, true ]
+641 verbose unbuild node_modules\cnpm
+642 info preuninstall cnpm@3.1.0
+643 info uninstall cnpm@3.1.0
+644 verbose unbuild rmStuff cnpm@3.1.0 from C:\Users\Shafley\AppData\Roaming\npm\node_modules
+645 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm.cmd is being gently removed
+646 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+647 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-check.cmd is being gently removed
+648 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+649 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync.cmd is being gently removed
+650 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+651 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-web.cmd is being gently removed
+652 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+653 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-user.cmd is being gently removed
+654 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+655 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc.cmd is being gently removed
+656 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+657 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-search.cmd is being gently removed
+658 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+659 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+660 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+661 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+662 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+663 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-check.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+664 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-check.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+665 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+666 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+667 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+668 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+669 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-web.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+670 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-web.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+671 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+672 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-user.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+673 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-user.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+674 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+675 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+676 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+677 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+678 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-search.cmd is under C:\Users\Shafley\AppData\Roaming\npm
+679 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-search.cmd up to C:\Users\Shafley\AppData\Roaming\npm
+680 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm is being gently removed
+681 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+682 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+683 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm is under C:\Users\Shafley\AppData\Roaming\npm
+684 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm up to C:\Users\Shafley\AppData\Roaming\npm
+685 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-check is being gently removed
+686 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+687 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+688 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-check is under C:\Users\Shafley\AppData\Roaming\npm
+689 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-check up to C:\Users\Shafley\AppData\Roaming\npm
+690 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync is being gently removed
+691 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+692 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+693 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync is under C:\Users\Shafley\AppData\Roaming\npm
+694 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-sync up to C:\Users\Shafley\AppData\Roaming\npm
+695 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-web is being gently removed
+696 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+697 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+698 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-web is under C:\Users\Shafley\AppData\Roaming\npm
+699 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-web up to C:\Users\Shafley\AppData\Roaming\npm
+700 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-user is being gently removed
+701 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+702 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+703 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-user is under C:\Users\Shafley\AppData\Roaming\npm
+704 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-user up to C:\Users\Shafley\AppData\Roaming\npm
+705 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc is being gently removed
+706 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+707 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+708 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc is under C:\Users\Shafley\AppData\Roaming\npm
+709 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-doc up to C:\Users\Shafley\AppData\Roaming\npm
+710 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\cnpm-search is being gently removed
+711 silly gentlyRm verifying C:\Users\Shafley\AppData\Roaming\npm is an npm working directory
+712 silly gentlyRm containing path C:\Users\Shafley\AppData\Roaming\npm is under npm's control, in C:\Users\Shafley\AppData\Roaming\npm
+713 silly gentlyRm deletion target C:\Users\Shafley\AppData\Roaming\npm\cnpm-search is under C:\Users\Shafley\AppData\Roaming\npm
+714 verbose gentlyRm vacuuming from C:\Users\Shafley\AppData\Roaming\npm\cnpm-search up to C:\Users\Shafley\AppData\Roaming\npm
+715 info postuninstall cnpm@3.1.0
+716 silly gentlyRm C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm is being purged from base C:\Users\Shafley\AppData\Roaming\npm
+717 verbose gentlyRm don't care about contents; nuking C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm
+718 silly vacuum-fs purging C:\Users\Shafley\AppData\Roaming\npm\node_modules\cnpm
+719 silly vacuum-fs quitting because other entries in C:\Users\Shafley\AppData\Roaming\npm\node_modules

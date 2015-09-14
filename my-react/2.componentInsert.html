@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zn">
+<head>
+    <meta charset="UTF-8">
+    <title>Component Insert</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="react.min.js"></script>
+	<script src="JSXTransformer.js"></script>
+	<script type="text/jsx">
+		var MessageBox = React.createClass({
+			render:function (){
+				var submessage = [];
+				for(var i=0; i<10; i++){
+					submessage.push(<Submessage key={i }/>);
+				}
+				return ( 
+					<div>
+						<h1>Hello World!</h1>
+						{submessage}
+					</div>
+				)
+			}
+		});
+
+		var Submessage = React.createClass({
+			render: function (){
+				return (
+					<div>
+						<h3>写代码很有意思</h3>
+						<Footer/>
+					</div>
+				)
+			}
+		});
+
+		var Footer = React.createClass({
+			render: function (){
+				return (
+					<small>因为我们再用代码创造</small>
+				)
+			}
+		});
+
+		React.render(<MessageBox/>, document.getElementById('app'), function (){
+			console.log("渲染完成！");
+		});
+
+
+	</script>
+</body>
+</html>
+	
