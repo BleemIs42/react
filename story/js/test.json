@@ -1,0 +1,47 @@
+{
+	"succ": true,
+	"code": 0,
+	"data": {
+		"story": {
+			"name": "all",
+			"user": "\u7d2b\u590f\u98ce\u7075",
+			"url": "http:\/\/inimg01.jiuyan.info\/in\/2016\/04\/22\/C5DF771A-A9A0-03C6-518C-24B4D364AA9C-1xPBqynA.jpg?imageMogr2\/format\/jpg\/thumbnail\/720x%3E\/quality\/90!",
+			"desc": "",
+			"year": "2006",
+			"month": "Aug",
+			"day": "06",
+			"width": "1920",
+			"height": "1200"
+		},
+		"group": [
+			{
+				"time": "2006.08.06",
+				"location": "",
+				"desc": "",
+				"photos": [{
+					"url": "http:\/\/inimg01.jiuyan.info\/in\/2016\/04\/22\/C5DF771A-A9A0-03C6-518C-24B4D364AA9C-1xPBqynA.jpg?imageMogr2\/format\/jpg\/thumbnail\/240x%3E\/quality\/90!",
+					"width": "1920",
+					"height": "1200",
+					"lx": "0.0",
+					"ly": "0.0",
+					"rx": "0.0",
+					"ry": "0.0"
+				}]
+			}, 
+			{
+				"time": "2015.10.06",
+				"location": "",
+				"desc": "",
+				"photos": [{
+					"url": "http:\/\/inimg02.jiuyan.info\/in\/2016\/04\/22\/73AE4AB9-44B9-41C0-784F-DEF9FBF79B55-1xPBqynA.jpg?imageMogr2\/format\/jpg\/thumbnail\/240x%3E\/quality\/90!",
+					"width": "640",
+					"height": "857",
+					"lx": "0.0",
+					"ly": "0.0",
+					"rx": "0.0",
+					"ry": "0.0"
+				}]
+			}
+		]
+	}
+}

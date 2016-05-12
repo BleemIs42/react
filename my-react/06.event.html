@@ -1,4 +1,4 @@
-aaaaa<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zn">
 <head>
     <meta charset="UTF-8">
@@ -44,7 +44,7 @@ aaaaa<!DOCTYPE html>
 				var checkValues = this.state.checkValues.slice();
 				var newVal = e.target.value;
 				var index = checkValues.indexOf(newVal);
-				if( index == -1){
+				if( !~index){
 					checkValues.push( newVal );
 				}else{
 					checkValues.splice(index, 1);
