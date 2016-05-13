@@ -286,11 +286,12 @@ $(function(){
 			$dom.num.text(this.getPageNumber());
 
 			var left = parseInt( $dom.btn.css('transform').split(',')[4] );
-
+			
+			this.props.setValue('isSliderMode', true);
 			this.setState({
+				active: true,
 				isSliderMode: true,
 				startX: e.touches[0].pageX,
-				active: true,
 				left: left
 			});
 		},
@@ -325,13 +326,14 @@ $(function(){
 			this.turnPage();
 
 			this.setState({
+				active: true,
 				isSliderMode: true,
 				startX: startX,
 				left: left
 			})
 		},
 		touchEnd: function(e){
-			// $('#book').turn('disable', true);
+			$('#book').turn('disable', false);
 
 			this.props.setValue('isSliderMode', false);
 			this.setState({
