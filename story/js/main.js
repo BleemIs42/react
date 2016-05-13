@@ -115,19 +115,9 @@ $(function(){
 
 			$book.turn('size', h * 2, h);
 		},
-		render: function(){
+		afterRender: function(pLen){
 			var self = this;
 			var ignore = false;
-			var pages = [];
-			var pLen = this.state.pLen;
-
-			for(var i = 0; i< pLen; i++){
-
-				pages.push(
-					<Page key={i} ref={'Page-'+i}/>
-				)
-			}
-
 			if(pLen){
 				ignore = (pLen % 2) ? true : false;
 
@@ -143,6 +133,18 @@ $(function(){
 					self.initBook();
 				}, 0)
 			}
+		},
+		render: function(){
+			var pages = [];
+			var pLen = this.state.pLen;
+
+			for(var i = 0; i< pLen; i++){
+				pages.push(
+					<Page key={i} ref={'Page-'+i}/>
+				)
+			}
+
+			this.afterRender(pLen);
 
 			return (
 				<div id='book' ref='book'>		
@@ -153,12 +155,9 @@ $(function(){
 					<FrontPage ref='FrontPage' />					
 					<div className='page hard'></div>
 					<PrefacePage ref='PrefacePage' />
-
 					{ pages }
-
 					<MessagePage />
 					<EndPage ref='EndPage' />
-
 					<div className='page hard'></div>
 					<BackCover />
 				</div>
@@ -209,11 +208,11 @@ $(function(){
 			var obj = {}
 			obj[key] = value;
 			this.setState(obj);
+
 			if(key == 'num'){
 				this.setNum(value);
 			}
 		},
-		$dom: {},
 		setNum: function(value){
 			// 翻动的次数：图片页数/2 + (封面 + 封底) + 1 + 奇数加一偶数加0;
 			var num = Math.floor(value / 2) + 2 + 1 + value % 2;
@@ -221,6 +220,7 @@ $(function(){
 				num: num
 			})
 		},
+		$dom: {},
 		componentDidMount: function(){
 			var bar = $( this.refs.bar );
 			var btn = $( this.refs.btn );
