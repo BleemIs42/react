@@ -18,7 +18,7 @@ $(function(){
 				isInit:false
 			}
 		},	
-		setValue: function(key, value){
+		setValue: function(key, value){	
 			var obj = {}
 			obj[key] = value;
 			this.setState(obj);
@@ -115,12 +115,23 @@ $(function(){
 
 			$book.turn('size', h * 2, h);
 		},
+		makePages: function(){
+			var pages = [];
+			var pLen = this.state.pLen;
+
+			for(var i = 0; i< pLen; i++){
+				pages.push(
+					<Page key={i} ref={'Page-'+i}/>
+				)
+			}
+			return pages;
+		},
 		afterRender: function(pLen){
 			var self = this;
 			var ignore = false;
+			var pLen = self.state.pLen;
 			if(pLen){
 				ignore = (pLen % 2) ? true : false;
-
 				// 异步执行,在DOM渲染后执行
 				var fontSize = this.getHeight() / 300;
 				setTimeout(function(){
@@ -135,16 +146,7 @@ $(function(){
 			}
 		},
 		render: function(){
-			var pages = [];
-			var pLen = this.state.pLen;
-
-			for(var i = 0; i< pLen; i++){
-				pages.push(
-					<Page key={i} ref={'Page-'+i}/>
-				)
-			}
-
-			this.afterRender(pLen);
+			this.afterRender();
 
 			return (
 				<div id='book' ref='book'>		
@@ -155,7 +157,7 @@ $(function(){
 					<FrontPage ref='FrontPage' />					
 					<div className='page hard'></div>
 					<PrefacePage ref='PrefacePage' />
-					{ pages }
+					{ this.makePages() }
 					<MessagePage />
 					<EndPage ref='EndPage' />
 					<div className='page hard'></div>
@@ -201,7 +203,8 @@ $(function(){
 				sliderW: 1,
 				startX: 0,
 				left: 1,
-				lastPage: 1
+				lastPage: 1,
+				active: false
 			}
 		},
 		setValue: function(key, value){
@@ -264,7 +267,9 @@ $(function(){
 			var pageNum = Math.ceil( left / sliderW * totalPage );
 			
 			if(lastPage != pageNum){
-				lastPage = pageNum;		
+				lastPage = pageNum;	
+
+				$('#book').turn('disable', false);
 				$('#book').turn('page', pageNum);
 
 				$dom.num.text(this.getPageNumber());
@@ -275,17 +280,17 @@ $(function(){
 			})
 		},
 		touchStart: function(e){
+			$('#book').turn('disable', true);
 
 			var $dom = this.$dom;
 			$dom.num.text(this.getPageNumber());
-			$dom.slider.addClass('active');
 
 			var left = parseInt( $dom.btn.css('transform').split(',')[4] );
 
-			this.props.setValue('isSliderMode', true);
 			this.setState({
 				isSliderMode: true,
 				startX: e.touches[0].pageX,
+				active: true,
 				left: left
 			});
 		},
@@ -316,9 +321,9 @@ $(function(){
 				'transform': 'translate(' + left + 'px, -50%)'
 			});
 
+			this.props.setValue('isSliderMode', true);
 			this.turnPage();
 
-			this.props.setValue('isSliderMode', true);
 			this.setState({
 				isSliderMode: true,
 				startX: startX,
@@ -326,16 +331,17 @@ $(function(){
 			})
 		},
 		touchEnd: function(e){
+			// $('#book').turn('disable', true);
+
+			this.props.setValue('isSliderMode', false);
 			this.setState({
+				active: false,
 				isSliderMode: true
 			})
-
-			// this.turnPage();
-			this.$dom.slider.removeClass('active');
 		},
 		render: function(){
 			return (
-				<div className="slider" ref='slider'>
+				<div className={'slider ' + (this.state.active ? 'active' : '')} ref='slider'>
 					<div id="slider" ref='bar'>
 						<div className="btn" ref='btn'>
 							<div className="number" ref='num'></div>
