@@ -198,7 +198,6 @@ $(function(){
 		getInitialState: function(){
 			return {
 				isSliderMode: this.props.isSliderMode,
-				// 翻动的次数：图片页数/2 + 底页(有余数) + 封面 + 封底 + 2
 				num: 0,
 				sliderW: 1,
 				startX: 0,
@@ -207,12 +206,21 @@ $(function(){
 			}
 		},
 		setValue: function(key, value){
-			var num = Math.floor(value / 2) + value % 2 + 2 + 2;
 			var obj = {}
-			obj[key] = num;
+			obj[key] = value;
 			this.setState(obj);
+			if(key == 'num'){
+				this.setNum(value);
+			}
 		},
 		$dom: {},
+		setNum: function(value){
+			// 翻动的次数：图片页数/2 + (封面 + 封底) + 1 + 奇数加一偶数加0;
+			var num = Math.floor(value / 2) + 2 + 1 + value % 2;
+			this.setState({
+				num: num
+			})
+		},
 		componentDidMount: function(){
 			var bar = $( this.refs.bar );
 			var btn = $( this.refs.btn );
@@ -252,7 +260,7 @@ $(function(){
 			var num = this.state.num;
 			var pLen = this.props.pLen;
 
-			var totalPage = ( num - 1) * 2;
+			var totalPage = num * 2;
 			var pageNum = Math.ceil( left / sliderW * totalPage );
 			
 			if(lastPage != pageNum){
