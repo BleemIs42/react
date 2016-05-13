@@ -13,14 +13,15 @@ $(function(){
 				story: {},
 				pages: {},
 				pLen: 0,
-				isSliderMode: false
+				isSliderMode: false,
+				fontSize: 0,
+				isInit:false
 			}
-		},
-		onChildChanged: function(newState){
-			var newState = this.state[newState];
-			this.setState({
-				newState: newState
-			})
+		},	
+		setValue: function(key, value){
+			var obj = {}
+			obj[key] = value;
+			this.setState(obj);
 		},
 		getPageData: function(){
 			var self = this;
@@ -42,7 +43,7 @@ $(function(){
 					pages = res.data.group;
 					pLen = pages.length;
 
-					self.refs.slider.setValue(pLen);
+					self.refs.slider.setValue('num', pLen);
 
 					self.setState({
 						pages: pages,
@@ -53,9 +54,18 @@ $(function(){
 		},
 		componentDidMount: function(){
 			this.getPageData();
+			var fontSize = this.getHeight() / 300;
+			this.refs.FrontPage.setValue('fontSize', fontSize);		
+			this.refs.PrefacePage.setValue('fontSize', fontSize);		
+			this.refs.EndPage.setValue('fontSize', fontSize);	
 		},
 		initBook: function(){
 			var self = this;
+
+			if(self.state.isInit) return;
+			self.setState({
+				isInit: true
+			})
 
 			var $book = $( this.refs.book );
 			var h = self.getHeight();
@@ -112,15 +122,24 @@ $(function(){
 			var pLen = this.state.pLen;
 
 			for(var i = 0; i< pLen; i++){
+
 				pages.push(
-					<Page key={i} />
+					<Page key={i} ref={'Page-'+i}/>
 				)
 			}
 
 			if(pLen){
 				ignore = (pLen % 2) ? true : false;
+
 				// 异步执行,在DOM渲染后执行
+				var fontSize = this.getHeight() / 300;
 				setTimeout(function(){
+					for(var j = 0; j < pLen; j++){
+						var key = 'Page-'+j;
+						self.refs[key].setValue('fontSize', fontSize);
+					}
+
+					self.refs.EndPage.setValue('ignore', ignore);
 					self.initBook();
 				}, 0)
 			}
@@ -130,15 +149,15 @@ $(function(){
 					<Guide />
 					<Slider ref='slider'
 							isSliderMode={this.props.isSliderMode}
-							callbackParent={this.onChildChanged} />
-					<FrontPage />					
+							setValue={this.setValue} />
+					<FrontPage ref='FrontPage' />					
 					<div className='page hard'></div>
-					<PrefacePage />
+					<PrefacePage ref='PrefacePage' />
 
 					{ pages }
 
 					<MessagePage />
-					<EndPage ignore={ignore} />
+					<EndPage ref='EndPage' />
 
 					<div className='page hard'></div>
 					<BackCover />
@@ -181,18 +200,17 @@ $(function(){
 				isSliderMode: this.props.isSliderMode,
 				// 翻动的次数：图片页数/2 + 底页(有余数) + 封面 + 封底 + 2
 				num: 0,
-				sliderW: 0,
+				sliderW: 1,
 				startX: 0,
 				left: 1,
 				lastPage: 1
 			}
 		},
-		setValue: function(pLen){
-			console.log(pLen)
-			var num = Math.floor(pLen / 2) + pLen % 2 + 2 + 2
-			this.setState({
-				num: num
-			})
+		setValue: function(key, value){
+			var num = Math.floor(value / 2) + value % 2 + 2 + 2;
+			var obj = {}
+			obj[key] = num;
+			this.setState(obj);
 		},
 		$dom: {},
 		componentDidMount: function(){
@@ -203,7 +221,12 @@ $(function(){
 			var slider = $( this.refs.slider );
 
 			btn.css({'transform': 'translate(1px, -50%)'});
-			slider.attr('ignore', '1');
+			slider.attr('ignore', '1');			
+
+			var sliderW = bar.width() - btn.width();
+			this.setState({
+				sliderW: sliderW
+			})
 
 			this.$dom = {
 			    bar: $( this.refs.bar ),
@@ -233,14 +256,8 @@ $(function(){
 			var pageNum = Math.ceil( left / sliderW * totalPage );
 			
 			if(lastPage != pageNum){
-				lastPage = pageNum;			
+				lastPage = pageNum;		
 				$('#book').turn('page', pageNum);
-
-				// if(pageNum % 2){
-				// 	(pageNum - 3 - 1 > pLen) ? $('.edit').hide() : $('.edit').show();
-				// }else{						
-				// 	(pageNum - 3 > pLen) ? $('.edit').hide() : $('.edit').show();
-				// }
 
 				$dom.num.text(this.getPageNumber());
 			}
@@ -255,15 +272,14 @@ $(function(){
 			$dom.num.text(this.getPageNumber());
 			$dom.slider.addClass('active');
 
-			var sliderW = $dom.bar.width() - $dom.btn.width();
 			var left = parseInt( $dom.btn.css('transform').split(',')[4] );
 
+			this.props.setValue('isSliderMode', true);
 			this.setState({
 				isSliderMode: true,
 				startX: e.touches[0].pageX,
-				sliderW: sliderW,
 				left: left
-			})
+			});
 		},
 		touchMove: function(e){
 			var $btn = this.$dom.btn;
@@ -294,6 +310,7 @@ $(function(){
 
 			this.turnPage();
 
+			this.props.setValue('isSliderMode', true);
 			this.setState({
 				isSliderMode: true,
 				startX: startX,
@@ -305,7 +322,7 @@ $(function(){
 				isSliderMode: true
 			})
 
-			this.turnPage();
+			// this.turnPage();
 			this.$dom.slider.removeClass('active');
 		},
 		render: function(){
@@ -326,17 +343,37 @@ $(function(){
 	})
 
 	var FrontPage = React.createClass({
+		getInitialState: function(){
+			return {
+				fontSize:0
+			}
+		},
+		setValue: function(key, value){
+			var obj = {}
+			obj[key] = value;
+			this.setState(obj);
+		},
 		render: function(){
 			return (					
-				<div className='page hard'></div>
+				<div className='page hard' style={{'fontSize': this.state.fontSize}}></div>
 			)
 		}
 	})
 
 	var PrefacePage = React.createClass({
+		getInitialState: function(){
+			return {
+				fontSize:0
+			}
+		},
+		setValue: function(key, value){
+			var obj = {}
+			obj[key] = value;
+			this.setState(obj);
+		},
 		render: function(){
 			return (					
-				<div className="page">
+				<div className="page" style={{'fontSize': this.state.fontSize}}>
 					<div className="preface">
 						<div className="title">/ <span id="prefacetitle">Hello, React!</span></div>
 						<div id="prefacedesc" className="desc">This is a demo for story!</div>
@@ -358,14 +395,32 @@ $(function(){
 	})
 
 	var EndPage = React.createClass({
-		componentDidMount: function(){
-			if(this.props.ignore){
-				$(this.refs.endPage).attr('ignore', '1');
+		getInitialState: function(){
+			return {
+				fontSize:0
 			}
 		},
+		setValue: function(key, value){
+			var obj = {};
+			obj[key] = value;
+			this.setState(obj);
+		},
 		render: function(){
+			var style;
+			if(this.props.ignore){
+				$(this.refs.endPage).attr('ignore', '1');
+				style = {
+					'display': 'none'
+				}
+			}else{
+				style = {
+					'fontSize': this.state.fontSize,
+				}
+
+			}
+
 			return (					
-				<div className="page" ref='endPage'>
+				<div className="page" ref='endPage' style={style}>
 					<p className="end">-&nbsp;THE END&nbsp;-</p>
 				</div>
 			)
@@ -381,11 +436,19 @@ $(function(){
 	})
 
 	var Page = React.createClass({
+		getInitialState: function(){
+			return {
+				fontSize:0
+			}
+		},
+		setValue: function(key, value){
+			var obj = {};
+			obj[key] = value;
+			this.setState(obj);
+		},
 		render: function(){
 			return (
-				<div className="page">
-
-				</div>
+				<div className="page" style={{'fontSize': this.state.fontSize}}></div>
 			)
 		}
 	})
