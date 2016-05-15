@@ -285,7 +285,7 @@ $(function(){
 			var $dom = this.$dom;
 			$dom.num.text(this.getPageNumber());
 
-			var left = parseInt( $dom.btn.css('transform').split(',')[4] );
+			var left = parseInt( $dom.btn.css('transform').split(',')[4] ) + 1;
 			
 			this.props.setValue('isSliderMode', true);
 			this.setState({
@@ -311,7 +311,7 @@ $(function(){
 				left = sliderW;
 			}
 
-			if(left <= 0){
+			if(left < 1){
 				left = 1;
 			}
 
